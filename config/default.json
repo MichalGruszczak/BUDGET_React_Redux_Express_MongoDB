@@ -1,4 +1,0 @@
-{
-  "MONGODB_URI": "mongodb+srv://Patton:Tyskie_94@pattonbudget.d448w.mongodb.net/PattonBudget?retryWrites=true&w=majority",
-  "PORT": "5000"
-}
