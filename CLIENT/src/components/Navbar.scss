@@ -1,4 +1,27 @@
+@import "../mixins.scss";
+
 .nav {
   background-color: red;
   grid-area: "navbar";
+  display: grid;
+  grid-template-columns: 15% 1fr 20% 20%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "menu" "title" "login" "register";
+  z-index: 3;
+  .nav__menu {
+    grid-area: "menu";
+    background-color: gray;
+  }
+  .nav__title {
+    grid-area: "title";
+    background-color: lightgray;
+  }
+  .nav__login {
+    grid-area: "login";
+    background-color: gray;
+  }
+  .nav__register {
+    grid-area: "register";
+    background-color: lightgray;
+  }
 }

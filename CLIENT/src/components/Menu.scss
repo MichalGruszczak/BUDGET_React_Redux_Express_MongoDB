@@ -1,0 +1,50 @@
+@import "../mixins.scss";
+
+.menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: lightcoral;
+  @include div-center;
+  .menu__btn {
+    @include nav-btn;
+  }
+  .menu__drop {
+    position: absolute;
+    width: 150%;
+    height: 50vh;
+    top: -1100%;
+    left: 0;
+    background-color: black;
+    display: grid;
+    transition: 0.5s ease;
+    grid-template-rows: 1fr 1fr 1fr 0.5fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "monthly"
+      "savings"
+      "simulator"
+      "settings";
+    color: white;
+    z-index: -1;
+    .menu__itemMonthly,
+    .menu__itemSavings,
+    .menu__itemSimulator,
+    .menu__itemSettings {
+      @include div-center;
+      cursor: pointer;
+    }
+
+    .menu__itemSettings {
+      background-color: lightblue;
+      color: black;
+    }
+    .menu__link {
+      @include link;
+    }
+  }
+
+  .menu__active {
+    top: 100%;
+  }
+}
