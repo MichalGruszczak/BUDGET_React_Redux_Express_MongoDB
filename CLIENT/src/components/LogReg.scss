@@ -1,0 +1,230 @@
+@import "../mixins.scss";
+
+.logReg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .logReg__login,
+  .logReg__register {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+
+    .logReg__btn {
+      @include nav-btn;
+    }
+
+    .logReg__loginModal {
+      position: absolute;
+      top: -880%;
+      left: 0;
+      height: 50vh;
+      background-color: black;
+      transition: 0.5s linear;
+      z-index: -1;
+      opacity: 0;
+      animation: closeLoginModal 0.5s linear 1 both;
+    }
+
+    .logReg__background {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+      opacity: 0;
+      transition: 0.3s linear 0.5s;
+      display: grid;
+      grid-template-columns: 1fr 30px;
+      grid-template-rows: 30px 1fr 60px 60px;
+      grid-template-areas:
+        "loading close"
+        "main main"
+        "button button"
+        "message message";
+
+      .logReg__modalClose {
+        background-color: red;
+        grid-area: close;
+      }
+
+      .logReg__modalLoading {
+        background-color: blue;
+        grid-area: loading;
+      }
+
+      .logReg__modalMain {
+        background-color: orange;
+        grid-area: main;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logReg__modalButton {
+        background-color: violet;
+        grid-area: button;
+        @include div-center;
+      }
+
+      .logReg__modalMessage {
+        background-color: gray;
+        grid-area: message;
+        @include div-center;
+      }
+    }
+
+    .logReg__loginModal.active {
+      animation: openLoginModal 0.5s linear 1 both;
+      opacity: 1;
+    }
+
+    .logReg__background.active {
+      opacity: 1;
+    }
+
+    .logReg__registerModal {
+      position: absolute;
+      top: 100%;
+      right: 0%;
+      transform: translateY(-105%);
+      height: 80vh;
+      background-color: black;
+      transition: 0.5s linear;
+      z-index: -1;
+      opacity: 0;
+      animation: closeRegisterModal 0.5s linear 1 both;
+    }
+
+    .logReg__registerModal.active {
+      animation: openRegisterModal 0.5s linear 1 both;
+      opacity: 1;
+    }
+  }
+
+  .logReg__register {
+    justify-content: flex-end;
+  }
+
+  .logReg__fieldContainer {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 20px 0.5fr 1fr;
+    grid-template-rows: 30% 30px 1fr;
+    grid-template-areas:
+      " . label input"
+      " . . error"
+      " . . .";
+
+    .logReg__labelContainer {
+      grid-area: label;
+      display: flex;
+      align-items: center;
+    }
+
+    .logReg__inputContainer {
+      grid-area: input;
+      display: flex;
+      align-items: center;
+    }
+
+    .logReg__errorContainer {
+      grid-area: error;
+      display: flex;
+      color: red;
+    }
+  }
+}
+
+@keyframes openLoginModal {
+  0% {
+    top: -1000%;
+    width: 0%;
+  }
+  1% {
+    top: -880%;
+    width: 0%;
+  }
+  50% {
+    top: -880%;
+    width: 100%;
+  }
+  70% {
+    top: -880%;
+    width: 100%;
+  }
+  100% {
+    top: 100%;
+    width: 100%;
+  }
+}
+
+@keyframes closeLoginModal {
+  0% {
+    top: 100%;
+    width: 100%;
+  }
+  30% {
+    top: -880%;
+    width: 100%;
+  }
+  50% {
+    top: -880%;
+    width: 100%;
+  }
+
+  99% {
+    top: -880%;
+    width: 0%;
+  }
+  100% {
+    top: -1000%;
+    width: 0%;
+  }
+}
+
+@keyframes openRegisterModal {
+  0% {
+    transform: translateY(-105%);
+    width: 0%;
+  }
+  1% {
+    transform: translateY(-99%);
+    width: 0%;
+  }
+  50% {
+    transform: translateY(-99%);
+    width: 100%;
+  }
+  70% {
+    transform: translateY(-99%);
+    width: 100%;
+  }
+  100% {
+    transform: translateY(0%);
+    width: 100%;
+  }
+}
+
+@keyframes closeRegisterModal {
+  0% {
+    transform: translateY(0%);
+    width: 100%;
+  }
+  30% {
+    transform: translateY(-99%);
+    width: 100%;
+  }
+  50% {
+    transform: translateY(-99%);
+    width: 100%;
+  }
+
+  99% {
+    transform: translateY(-99%);
+    width: 0%;
+  }
+  100% {
+    transform: translateY(-105%);
+    width: 0%;
+  }
+}

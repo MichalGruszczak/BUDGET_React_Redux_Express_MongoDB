@@ -1,6 +1,8 @@
 import React from "react";
 import "./Navbar.scss";
 import Menu from "./Menu";
+import Title from "./Title";
+import LogReg from './LogReg';
 
 const Navbar = () => {
   return (
@@ -8,9 +10,11 @@ const Navbar = () => {
       <div className="nav__menu">
         <Menu />
       </div>
-      <div className="nav__title"></div>
-      <div className="nav__login"></div>
-      <div className="nav__register"></div>
+      <div className="nav__title">
+        <Title />
+      </div>
+      <div className="nav__logReg"><LogReg/></div>
+      
     </div>
   );
 };

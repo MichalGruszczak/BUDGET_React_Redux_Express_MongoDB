@@ -4,9 +4,9 @@
   background-color: red;
   grid-area: "navbar";
   display: grid;
-  grid-template-columns: 15% 1fr 20% 20%;
+  grid-template-columns: 15% 1fr 40%;
   grid-template-rows: 1fr;
-  grid-template-areas: "menu" "title" "login" "register";
+  grid-template-areas: "menu" "title" "logReg";
   z-index: 3;
   .nav__menu {
     grid-area: "menu";
@@ -16,12 +16,8 @@
     grid-area: "title";
     background-color: lightgray;
   }
-  .nav__login {
-    grid-area: "login";
+  .nav__logReg {
+    grid-area: "logReg";
     background-color: gray;
-  }
-  .nav__register {
-    grid-area: "register";
-    background-color: lightgray;
   }
 }
