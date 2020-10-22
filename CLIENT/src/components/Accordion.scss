@@ -1,0 +1,62 @@
+@import "../mixins.scss";
+
+.accordion {
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+
+  .accordion__bar {
+    margin: 0;
+    display: block;
+    border: none;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    .accordion__title {
+      flex-basis: 60%;
+      @include div-center;
+    }
+
+    .accordion__amount {
+      flex-basis: 20%;
+      @include div-center;
+    }
+
+    .accordion__arrow {
+      @include div-center;
+      flex-basis: 20%;
+      font-size: 25px;
+
+      .accordion__icon {
+        transform-origin: 50% 50%;
+        transition: 0.2s linear;
+      }
+
+      .accordion__icon.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .accordion__content {
+    overflow: hidden;
+    width: 100%;
+    max-height: 0;
+    background-color: orange;
+    transition: 0.2s linear;
+  }
+
+  .accordion__content.active {
+    max-height: 300px;
+  }
+
+  .accordion__bar.expense {
+    background-color: red;
+  }
+}

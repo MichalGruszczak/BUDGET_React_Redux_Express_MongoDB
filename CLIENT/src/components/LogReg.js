@@ -168,7 +168,7 @@ const Register = () => {
   const memoLogin = useMemo(() => {
     return (
       <div className="logReg__login">
-        {console.log("Login rerender!")}
+        {/* {console.log("Login rerender!")} */}
         {isAuthenticated ? (
           <span className="logReg__name">{`${userName}`}</span>
         ) : (
@@ -270,7 +270,7 @@ const Register = () => {
   const memoRegister = useMemo(() => {
     return (
       <div className="logReg__register">
-        {console.log("Register rerender!")}
+        {/* {console.log("Register rerender!")} */}
         {isAuthenticated ? (
           <button onClick={logout} className="logReg__btn">
             Logout
@@ -414,7 +414,7 @@ const Register = () => {
 
   return (
     <div className="logReg">
-      {console.log("LogReg rerender")}
+      {/* {console.log("LogReg rerender")} */}
       {memoLogin}
       {memoRegister}
     </div>

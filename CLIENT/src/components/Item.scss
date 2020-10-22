@@ -1,0 +1,151 @@
+@import "../mixins.scss";
+
+.item {
+  position: relative;
+  margin: 5px auto;
+  width: 95%;
+  height: 50px;
+  background-color: aquamarine;
+  display: grid;
+  grid-template-columns: 50% 10% 10% 30%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "title amount deadline options";
+
+  .item__title {
+    grid-area: title;
+    background-color: blueviolet;
+    display: grid;
+    grid-template-columns: 5% 5% 90%;
+    grid-template-rows: 1fr;
+    grid-template-areas: " description click text";
+    cursor: pointer;
+
+    .item__titleWithoutDescr {
+      grid-area: text;
+      background-color: brown;
+      @include div-center;
+      cursor: auto;
+    }
+
+    .item__titleText {
+      grid-area: text;
+      @include div-center;
+      transition: 0.3s linear;
+
+      .item__textSpan.active {
+        animation: rotateTitleText 0.3s 1 linear both;
+      }
+    }
+
+    .item__titleText.active {
+      animation: rotateTitleDiv 0.3s 1 linear both;
+    }
+
+    .item__click {
+      grid-area: click;
+      background-color: burlywood;
+      @include div-center;
+    }
+
+    .item__description {
+      grid-area: description;
+      background-color: lightblue;
+      @include div-center;
+    }
+  }
+
+  .item__amount {
+    grid-area: amount;
+    background-color: chocolate;
+    @include div-center;
+  }
+
+  .item__deadline {
+    grid-area: deadline;
+    background-color: lightgreen;
+    @include div-center;
+  }
+
+  .item__options {
+    grid-area: options;
+    background-color: coral;
+    display: flex;
+
+    .item__btn {
+      @include div-center;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid black;
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0 2px 2px black;
+      }
+    }
+
+    .item__edit {
+      background-color: honeydew;
+      flex-basis: 33.3333%;
+      @include div-center;
+    }
+
+    .item__delete {
+      background-color: hotpink;
+      flex-basis: 33.3333%;
+      @include div-center;
+    }
+
+    .item__empty {
+      flex-basis: 33.3333%;
+      background-color: goldenrod;
+      @include div-center;
+    }
+
+    .item__done {
+      flex-basis: 33.3333%;
+      background-color: indianred;
+      @include div-center;
+    }
+  }
+}
+
+.item.income {
+  grid-template-columns: 50% 10% 40%;
+  grid-template-areas: "title amount options";
+}
+
+@keyframes rotateTitleDiv {
+  0% {
+    transform: rotateY(0deg);
+    background-color: blueviolet;
+  }
+
+  50% {
+    background-color: greenyellow;
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes rotateTitleText {
+  0% {
+    opacity: 1;
+  }
+
+  47% {
+    opacity: 0;
+  }
+
+  53% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
