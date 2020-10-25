@@ -18,6 +18,10 @@ const IncomeSchema = new Schema({
     type: Number,
     require: true,
   },
+  permanent: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = Income = mongoose.model("Income", IncomeSchema);

@@ -64,6 +64,29 @@
     grid-area: deadline;
     background-color: lightgreen;
     @include div-center;
+
+    .item__deadlineContainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: pink;
+      @include div-center;
+      cursor: pointer;
+
+      .item__clickSign {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    .item__deadlineContainer.active {
+      animation: rotateTitleDiv 0.3s 1 linear both;
+    }
+
+    .item__deadlineText.active {
+      animation: rotateTitleText 0.3s 1 linear both;
+    }
   }
 
   .item__options {

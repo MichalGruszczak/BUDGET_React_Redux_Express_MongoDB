@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
       localStorage.removeItem("email");
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: null,
         token: null,
         email: null,
         name: null,

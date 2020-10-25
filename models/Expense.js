@@ -26,6 +26,10 @@ const ExpenseSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  permanent: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = Expense = mongoose.model("Expense", ExpenseSchema);
