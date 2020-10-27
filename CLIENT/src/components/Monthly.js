@@ -16,6 +16,7 @@ const Monthly = () => {
   const userEmail = useSelector((state) => state.user.email);
   const userToken = useSelector((state) => state.user.token);
   const items = useSelector((state) => state.items.monthly);
+  const flag = useSelector((state) => state.items.flag);
 
   // FILTERING MONTHLY BUDGET ITEMS
   const permanentIncomes = items.incomes.filter((item) => item.permanent === true);
@@ -68,7 +69,7 @@ const Monthly = () => {
 
   useEffect(() => {
     getItems();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, flag]);
 
   return (
     <div className="monthly">
@@ -76,6 +77,7 @@ const Monthly = () => {
         title={"Permanently Incomes"}
         amount={permanentIncomesAmount}
         type={"income"}
+        addType={"permanently-incomes"}
         content={permanentIncomes.map((item) => (
           <Item
             type="income"
@@ -91,6 +93,7 @@ const Monthly = () => {
         title={"Temporary Incomes"}
         amount={temporaryIncomesAmount}
         type={"income"}
+        addType={"temporary-incomes"}
         content={temporaryIncomes.map((item) => (
           <Item
             type="income"
@@ -106,6 +109,7 @@ const Monthly = () => {
         title={"Permanently Expenses"}
         amount={permanentExpensesAmount}
         type={"expense"}
+        addType={"permanently-expenses"}
         content={permanentExpenses.map((item) => (
           <Item
             type="expense"
@@ -122,6 +126,7 @@ const Monthly = () => {
         title={"Temporary Expenses"}
         amount={temporaryExpensesAmount}
         type={"expense"}
+        addType={"temporary-expenses"}
         content={temporaryExpenses.map((item) => (
           <Item
             type="expense"

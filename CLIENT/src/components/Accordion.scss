@@ -28,9 +28,15 @@
       @include div-center;
     }
 
+    .accordion__add {
+      height: 100%;
+      flex-basis: 10%;
+      @include div-center;
+    }
+
     .accordion__arrow {
       @include div-center;
-      flex-basis: 20%;
+      flex-basis: 10%;
       font-size: 25px;
 
       .accordion__icon {

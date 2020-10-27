@@ -21,6 +21,7 @@ router.patch("/:userEmail/monthly/incomes/add", auth, (req, res) => {
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,
+    permanent: req.body.permanent,
   });
 
   User.updateOne(
@@ -69,6 +70,7 @@ router.patch("/:userEmail/monthly/expenses/add", auth, (req, res) => {
     description: req.body.description,
     amount: req.body.amount,
     deadline: req.body.deadline,
+    permanent: req.body.permanent,
   });
 
   User.updateOne(

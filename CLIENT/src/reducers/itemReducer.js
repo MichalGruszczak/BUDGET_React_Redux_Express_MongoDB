@@ -1,4 +1,4 @@
-import { GET_ITEMS } from "../actionTypes";
+import { GET_ITEMS, TOGGLE_MODAL, TOGGLE_FLAG } from "../actionTypes";
 
 export const initialState = {
   monthly: {
@@ -33,6 +33,9 @@ export const initialState = {
 
     expenses: [{ id: 8, title: "Car gearbox fix", amount: 2000 }],
   },
+
+  isOpenModal: false,
+  flag: false,
 };
 
 export default function (state = initialState, action) {
@@ -48,6 +51,18 @@ export default function (state = initialState, action) {
           incomes: action.payload.savings.incomes,
           expenses: action.payload.savings.expenses,
         },
+      };
+
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        isOpenModal: !state.isOpenModal,
+      };
+
+    case TOGGLE_FLAG:
+      return {
+        ...state,
+        flag: !state.flag,
       };
 
     default: {

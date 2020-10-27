@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Accordion.scss";
 import { AiOutlineDown } from "react-icons/ai";
+import Add from "./Add";
 
 const Accordion = (props) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -12,22 +13,24 @@ const Accordion = (props) => {
   return (
     <div className="accordion">
       {/* {console.log("Accordion reloaded")} */}
-      <button
-        onClick={toggleAccordion}
+      <div
         className={props.type === "income" ? "accordion__bar" : "accordion__bar expense"}
       >
-        <div className="accordion__title">
+        <div onClick={toggleAccordion} className="accordion__title">
           <span>{props.title}</span>
         </div>
-        <div className="accordion__amount">
+        <div onClick={toggleAccordion} className="accordion__amount">
           <span>{props.amount}</span>
         </div>
-        <div className="accordion__arrow">
+        <div className="accordion__add">
+          <Add type={props.addType} />
+        </div>
+        <div onClick={toggleAccordion} className="accordion__arrow">
           <AiOutlineDown
             className={isOpen ? "accordion__icon active" : "accordion__icon"}
           />
         </div>
-      </button>
+      </div>
       <div className={isOpen ? "accordion__content active" : "accordion__content"}>
         {props.content}
       </div>

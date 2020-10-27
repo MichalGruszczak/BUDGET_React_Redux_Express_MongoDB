@@ -106,14 +106,7 @@
   }
 
   .logReg__fieldContainer {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: 20px 0.5fr 1fr;
-    grid-template-rows: 30% 30px 1fr;
-    grid-template-areas:
-      " . label input"
-      " . . error"
-      " . . .";
+    @include modalFieldContainer;
 
     .logReg__labelContainer {
       grid-area: label;

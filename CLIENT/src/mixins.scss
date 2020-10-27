@@ -8,6 +8,14 @@
   cursor: pointer;
 }
 
+@mixin modal-btn {
+  width: 30%;
+  height: 50%;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
 @mixin div-center {
   display: flex;
   justify-content: center;
@@ -17,4 +25,38 @@
 @mixin link {
   text-decoration: none;
   color: white;
+}
+
+@mixin modalBasicWithoutMessage {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 300px;
+  height: 0;
+  background-color: black;
+  position: absolute;
+  z-index: 1;
+  cursor: auto;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-template-rows: 30px 1fr 60px;
+  grid-template-areas:
+    "loading close"
+    "main main"
+    "button button";
+  transition: 0.2s linear;
+}
+
+@mixin modalFieldContainer {
+  margin-top: 10px;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 20px 0.5fr 1fr;
+  grid-template-rows: 30% 30px 1fr;
+  grid-template-areas:
+    " . label input"
+    " . . error"
+    " . . .";
+  font-weight: normal;
 }
