@@ -1,7 +1,7 @@
 @import "../mixins.scss";
 
 .item {
-  position: relative;
+  // position: relative;
   margin: 5px auto;
   width: 95%;
   height: 50px;
@@ -95,18 +95,7 @@
     display: flex;
 
     .item__btn {
-      @include div-center;
-      margin: 0;
-      padding: 0;
-      font-size: 20px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid black;
-      cursor: pointer;
-      &:hover {
-        box-shadow: 0 0 2px 2px black;
-      }
+      @include item-btn;
     }
 
     .item__edit {

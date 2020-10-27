@@ -92,13 +92,13 @@ const Add = (props) => {
             setDescription("");
             setAmount("");
             setDeadline("");
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_FLAG,
+              });
+            }, 50);
           });
-        setTimeout(() => {
-          toggleOpen();
-          dispatch({
-            type: TOGGLE_FLAG,
-          });
-        }, 50);
       } else return console.log("Invalid addType");
     } else return console.log("No auth");
   };

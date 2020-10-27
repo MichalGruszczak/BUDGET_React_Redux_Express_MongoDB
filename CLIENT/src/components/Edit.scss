@@ -1,66 +1,53 @@
 @import "../mixins.scss";
 
-.add {
+.edit {
   width: 100%;
   height: 100%;
+  @include div-center;
 
-  .add__btn {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    background-color: lightgreen;
-    border: none;
-    cursor: pointer;
-    transition: 0.1s linear;
-    @include div-center;
-
-    &:hover {
-      font-size: 40px;
-    }
+  .edit__btn {
+    @include item-btn;
   }
 
-  .add__btn.active {
-    font-size: 40px;
+  .edit__btn.active {
+    box-shadow: 0 0 2px 2px black;
   }
 
-  .add__modal {
+  .edit__modal {
     @include modalBasicWithoutMessage;
 
-    .add__modalLoading {
+    .edit__modalLoading {
       grid-area: loading;
       background-color: blue;
     }
 
-    .add__modalClose {
+    .edit__modalClose {
       grid-area: close;
       background-color: red;
-
-      .add__closeBtn {
+      .edit__closeBtn {
         @include close-btn;
       }
     }
 
-    .add__modalMain {
+    .edit__modalMain {
       grid-area: main;
       background-color: orange;
       display: flex;
       flex-direction: column;
     }
 
-    .add__modalButton {
+    .edit__modalButton {
       grid-area: button;
       background-color: blueviolet;
       @include div-center;
 
-      .add__submitBtn {
+      .edit__submitBtn {
         @include modal-btn;
       }
     }
   }
 
-  .add__modal.active {
+  .edit__modal.active {
     height: 400px;
   }
 }

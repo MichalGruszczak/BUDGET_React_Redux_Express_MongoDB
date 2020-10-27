@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Item.scss";
 import { MdDescription } from "react-icons/md";
 import { HiCursorClick } from "react-icons/hi";
-import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { BiCheckCircle } from "react-icons/bi";
+import Edit from "./Edit";
 
 const Item = (props) => {
   const [isDescription, setIsDescription] = useState(false);
@@ -85,9 +85,14 @@ const Item = (props) => {
       )}
       <div className="item__options">
         <div className="item__edit">
-          <button className="item__btn edit">
-            <AiFillEdit />
-          </button>
+          <Edit
+            id={props.id}
+            title={props.title}
+            description={props.description}
+            amount={props.amount}
+            deadline={props.deadline}
+            type={props.type}
+          />
         </div>
         <div className="item__delete">
           <button className="item__btn delete">

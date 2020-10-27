@@ -1,5 +1,6 @@
 @import "./variables.scss";
 
+// Buttons in Nav
 @mixin nav-btn {
   width: 80%;
   height: 80%;
@@ -8,6 +9,7 @@
   cursor: pointer;
 }
 
+// Buttons in modals
 @mixin modal-btn {
   width: 30%;
   height: 50%;
@@ -16,17 +18,45 @@
   cursor: pointer;
 }
 
+// Buttons in item
+@mixin item-btn {
+  @include div-center;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid black;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 2px 2px black;
+  }
+}
+
+// Close modal button
+@mixin close-btn {
+  width: 100%;
+  height: 100%;
+  @include div-center;
+  cursor: pointer;
+  background-color: red;
+}
+
+// Centering by flex
 @mixin div-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+// Link decoration
 @mixin link {
   text-decoration: none;
   color: white;
 }
 
+// Modal basic
 @mixin modalBasicWithoutMessage {
   top: 50%;
   left: 50%;
@@ -48,6 +78,7 @@
   transition: 0.2s linear;
 }
 
+// Field in modal/main
 @mixin modalFieldContainer {
   margin-top: 10px;
   flex-grow: 1;

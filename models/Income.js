@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const { v4: uuidv4 } = require("uuid");
 const Schema = mongoose.Schema;
 
 const IncomeSchema = new Schema({
   id: {
     type: String,
-    default: uuidv4(),
+    default: Math.floor(Math.random() * 999999999999),
   },
   title: {
     type: String,
