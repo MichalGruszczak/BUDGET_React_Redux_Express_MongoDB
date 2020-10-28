@@ -121,6 +121,11 @@
       background-color: indianred;
       @include div-center;
     }
+
+    .item__done.done {
+      box-sizing: border-box;
+      border: 4px solid green;
+    }
   }
 }
 

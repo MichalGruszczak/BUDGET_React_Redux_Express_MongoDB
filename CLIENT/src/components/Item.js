@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "./Item.scss";
 import { MdDescription } from "react-icons/md";
 import { HiCursorClick } from "react-icons/hi";
-import { AiFillDelete } from "react-icons/ai";
-import { BiCheckCircle } from "react-icons/bi";
 import Edit from "./Edit";
+import Delete from "./Delete";
+import Done from "./Done";
+import Renew from "./Renew";
 
 const Item = (props) => {
   const [isDescription, setIsDescription] = useState(false);
@@ -95,17 +96,21 @@ const Item = (props) => {
           />
         </div>
         <div className="item__delete">
-          <button className="item__btn delete">
-            <AiFillDelete />
-          </button>
+          <Delete id={props.id} type={props.type} />
         </div>
         {props.type === "income" ? (
           <div className="item__empty"></div>
         ) : (
-          <div className="item__done">
-            <button className="item__btn done">
-              <BiCheckCircle />
-            </button>
+          <div className={props.done ? "item__done done" : "item__done"}>
+            {props.done ? (
+              props.permanent ? (
+                <Renew id={props.id} type={props.type} deadline={props.deadline} />
+              ) : (
+                ""
+              )
+            ) : (
+              <Done id={props.id} type={props.type} />
+            )}
           </div>
         )}
       </div>

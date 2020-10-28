@@ -128,6 +128,21 @@ router.patch("/:userEmail/monthly/expenses/:expenseID/done", auth, (req, res) =>
     .catch((err) => console.log(`Marking as done failed: ${err}`));
 });
 
+// Renew monthly expense for next month
+router.patch("/:userEmail/monthly/expenses/:expenseID/renew", auth, (req, res) => {
+  User.updateOne(
+    { email: req.params.userEmail, "monthly.expenses.id": req.params.expenseID },
+    {
+      $set: {
+        "monthly.expenses.$.done": false,
+        "monthly.expenses.$.deadline": req.body.deadline,
+      },
+    }
+  )
+    .then(res.json(`Expense renewed`))
+    .catch((err) => console.log(`Renewing failed: ${err}`));
+});
+
 //////////////////////// SAVINGS ///////////////////////////
 
 // Add savings income

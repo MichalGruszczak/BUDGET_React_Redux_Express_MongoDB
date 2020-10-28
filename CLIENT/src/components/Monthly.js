@@ -119,6 +119,8 @@ const Monthly = () => {
             description={item.description}
             amount={item.amount}
             deadline={item.deadline}
+            done={item.done}
+            permanent={item.permanent}
           />
         ))}
       />
@@ -136,6 +138,7 @@ const Monthly = () => {
             description={item.description}
             amount={item.amount}
             deadline={item.deadline}
+            done={item.done}
           />
         ))}
       />
