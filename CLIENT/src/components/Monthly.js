@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./Monthly.scss";
 import { GET_ITEMS } from "../actionTypes";
 import { initialState } from "../reducers/itemReducer";
@@ -7,9 +7,6 @@ import Accordion from "./Accordion";
 import Item from "./Item";
 
 const Monthly = () => {
-  {
-    // console.log("Monthly reloaded");
-  }
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   const dispatch = useDispatch();
@@ -71,79 +68,84 @@ const Monthly = () => {
     getItems();
   }, [isAuthenticated, flag]);
 
-  return (
-    <div className="monthly">
-      <Accordion
-        title={"Permanently Incomes"}
-        amount={permanentIncomesAmount}
-        type={"income"}
-        addType={"permanently-incomes"}
-        content={permanentIncomes.map((item) => (
-          <Item
-            type="income"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-          />
-        ))}
-      />
-      <Accordion
-        title={"Temporary Incomes"}
-        amount={temporaryIncomesAmount}
-        type={"income"}
-        addType={"temporary-incomes"}
-        content={temporaryIncomes.map((item) => (
-          <Item
-            type="income"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-          />
-        ))}
-      />
-      <Accordion
-        title={"Permanently Expenses"}
-        amount={permanentExpensesAmount}
-        type={"expense"}
-        addType={"permanently-expenses"}
-        content={permanentExpenses.map((item) => (
-          <Item
-            type="expense"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-            deadline={item.deadline}
-            done={item.done}
-            permanent={item.permanent}
-          />
-        ))}
-      />
-      <Accordion
-        title={"Temporary Expenses"}
-        amount={temporaryExpensesAmount}
-        type={"expense"}
-        addType={"temporary-expenses"}
-        content={temporaryExpenses.map((item) => (
-          <Item
-            type="expense"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-            deadline={item.deadline}
-            done={item.done}
-          />
-        ))}
-      />
-    </div>
-  );
+  // MEMOIZED MONTHLY COMPONENT
+  const memoMonthly = useMemo(() => {
+    return (
+      <>
+        <Accordion
+          title={"Permanently Incomes"}
+          amount={permanentIncomesAmount}
+          type={"income"}
+          addType={"permanently-incomes"}
+          content={permanentIncomes.map((item) => (
+            <Item
+              type="income"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+            />
+          ))}
+        />
+        <Accordion
+          title={"Temporary Incomes"}
+          amount={temporaryIncomesAmount}
+          type={"income"}
+          addType={"temporary-incomes"}
+          content={temporaryIncomes.map((item) => (
+            <Item
+              type="income"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+            />
+          ))}
+        />
+        <Accordion
+          title={"Permanently Expenses"}
+          amount={permanentExpensesAmount}
+          type={"expense"}
+          addType={"permanently-expenses"}
+          content={permanentExpenses.map((item) => (
+            <Item
+              type="expense"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+              deadline={item.deadline}
+              done={item.done}
+              permanent={item.permanent}
+            />
+          ))}
+        />
+        <Accordion
+          title={"Temporary Expenses"}
+          amount={temporaryExpensesAmount}
+          type={"expense"}
+          addType={"temporary-expenses"}
+          content={temporaryExpenses.map((item) => (
+            <Item
+              type="expense"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+              deadline={item.deadline}
+              done={item.done}
+            />
+          ))}
+        />
+      </>
+    );
+  }, [isAuthenticated, items, flag]);
+
+  return <div className="monthly">{memoMonthly}</div>;
 };
 
 export default Monthly;

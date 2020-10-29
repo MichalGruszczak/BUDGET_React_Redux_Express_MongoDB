@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./Renew.scss";
 import { FiRefreshCcw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,11 +19,10 @@ const Renew = (props) => {
 
     const itemToRenew = {
       done: false,
-      deadline: actualDeadline.setMonth(actualDeadlineMonth + 1),
+      deadline: props.deadline ? actualDeadline.setMonth(actualDeadlineMonth + 1) : null,
     };
 
     if (isAuthenticated) {
-      console.log(actualDeadlineMonth);
       fetch(
         `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/renew`,
         {
@@ -50,17 +49,21 @@ const Renew = (props) => {
     renewAPI();
   };
 
-  return (
-    <div className="renew">
-      <button
-        onClick={handleRenewItem}
-        disabled={isOpenModal ? true : ""}
-        className="renew__btn"
-      >
-        <FiRefreshCcw />
-      </button>
-    </div>
-  );
+  // MEMOIZED RENEW COMPONENT
+  const memoRenew = useMemo(() => {
+    return (
+      <>
+        <button
+          onClick={handleRenewItem}
+          disabled={isOpenModal ? true : ""}
+          className="renew__btn"
+        >
+          <FiRefreshCcw />
+        </button>
+      </>
+    );
+  }, [isOpenModal, props.done]);
+  return <div className="renew">{memoRenew}</div>;
 };
 
 export default Renew;

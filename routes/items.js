@@ -18,6 +18,7 @@ router.get("/:userEmail", auth, (req, res) => {
 // Add monthly income
 router.patch("/:userEmail/monthly/incomes/add", auth, (req, res) => {
   const newMonthlyIncome = new Income({
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,
@@ -66,6 +67,7 @@ router.patch("/:userEmail/monthly/incomes/:incomeID/delete", auth, (req, res) =>
 // Add monthly expense
 router.patch("/:userEmail/monthly/expenses/add", auth, (req, res) => {
   const newMonthlyExpense = new Expense({
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,
@@ -148,6 +150,7 @@ router.patch("/:userEmail/monthly/expenses/:expenseID/renew", auth, (req, res) =
 // Add savings income
 router.patch("/:userEmail/savings/incomes/add", auth, (req, res) => {
   const newSavingsIncome = new Income({
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,
@@ -195,6 +198,7 @@ router.patch("/:userEmail/savings/incomes/:incomeID/delete", auth, (req, res) =>
 // Add savings expense
 router.patch("/:userEmail/savings/expenses/add", auth, (req, res) => {
   const newSavingsExpense = new Expense({
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,

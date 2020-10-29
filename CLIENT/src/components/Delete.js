@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./Delete.scss";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
@@ -44,17 +44,22 @@ const Delete = (props) => {
     deleteAPI();
   };
 
-  return (
-    <div className="delete">
-      <button
-        disabled={isOpenModal ? true : ""}
-        onClick={handleDelete}
-        className="delete__btn"
-      >
-        <AiFillDelete />
-      </button>
-    </div>
-  );
+  // MEMOIZED DELETE COMPONENT
+  const memoDelete = useMemo(() => {
+    return (
+      <>
+        <button
+          disabled={isOpenModal ? true : ""}
+          onClick={handleDelete}
+          className="delete__btn"
+        >
+          <AiFillDelete />
+        </button>
+      </>
+    );
+  }, [isOpenModal]);
+
+  return <div className="delete">{memoDelete}</div>;
 };
 
 export default Delete;

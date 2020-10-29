@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./Done.scss";
 import { BiCheckCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,17 +44,23 @@ const Done = (props) => {
     doneAPI();
   };
 
-  return (
-    <div className="done">
-      <button
-        onClick={handleDoneData}
-        disabled={isOpenModal ? true : ""}
-        className="done__btn"
-      >
-        <BiCheckCircle />
-      </button>
-    </div>
-  );
+  // MEMOIZED DONE COMPONENT
+
+  const memoDone = useMemo(() => {
+    return (
+      <>
+        <button
+          onClick={handleDoneData}
+          disabled={isOpenModal ? true : ""}
+          className="done__btn"
+        >
+          <BiCheckCircle />
+        </button>
+      </>
+    );
+  }, [isOpenModal, props.done]);
+
+  return <div className="done">{memoDone}</div>;
 };
 
 export default Done;

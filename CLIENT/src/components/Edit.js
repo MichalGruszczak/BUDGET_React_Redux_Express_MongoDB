@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "./Edit.scss";
 import { AiFillEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const Edit = (props) => {
   // INPUT STATE
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
-  const [amount, setAmount] = useState(props.amount);
+  const [amount, setAmount] = useState(new Number(props.amount));
   const [deadline, setDeadline] = useState(props.deadline);
 
   // ERRORS STATE
@@ -109,64 +109,78 @@ const Edit = (props) => {
     }
   };
 
-  return (
-    <div className="edit">
-      <button
-        disabled={isOpenModal && !isOpen ? true : ""}
-        onClick={toggleOpen}
-        className={isOpen ? "edit__btn active" : "edit__btn"}
-      >
-        <AiFillEdit />
-      </button>
-      <div className={isOpen ? "edit__modal active" : "edit__modal"}>
-        <div className="edit__modalLoading"></div>
-        <div className="edit__modalClose">
-          <button onClick={toggleOpen} className="edit__closeBtn">
-            X
-          </button>
-        </div>
-        <div className="edit__modalMain">
-          <FieldContainer
-            title="Title"
-            type="text"
-            value={title}
-            error={titleError}
-            onChange={(e) => setTitle(e.target.value)}
-            onFocus={() => setTitleError("")}
-          />
-          <FieldContainer
-            type="textarea"
-            title="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <FieldContainer
-            title="Amount"
-            type="number"
-            value={amount}
-            error={amountError}
-            onChange={(e) => setAmount(e.target.value)}
-            onFocus={() => setAmountError("")}
-          />
-          {props.type === "expense" ? (
+  // MEMOIZED EDIT COMPONENT
+  const memoEdit = useMemo(() => {
+    return (
+      <>
+        <button
+          disabled={isOpenModal && !isOpen ? true : ""}
+          onClick={toggleOpen}
+          className={isOpen ? "edit__btn active" : "edit__btn"}
+        >
+          <AiFillEdit />
+        </button>
+        <div className={isOpen ? "edit__modal active" : "edit__modal"}>
+          <div className="edit__modalLoading"></div>
+          <div className="edit__modalClose">
+            <button onClick={toggleOpen} className="edit__closeBtn">
+              X
+            </button>
+          </div>
+          <div className="edit__modalMain">
             <FieldContainer
-              title="Deadline"
-              type="date"
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
+              title="Title"
+              type="text"
+              value={title}
+              error={titleError}
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={() => setTitleError("")}
             />
-          ) : (
-            ""
-          )}
+            <FieldContainer
+              type="textarea"
+              title="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <FieldContainer
+              title="Amount"
+              type="number"
+              value={amount}
+              error={amountError}
+              onChange={(e) => setAmount(e.target.value)}
+              onFocus={() => setAmountError("")}
+            />
+            {props.type === "expense" ? (
+              <FieldContainer
+                title="Deadline"
+                type="date"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="edit__modalButton">
+            <button onClick={handleEditData} className="edit__submitBtn">
+              Edit
+            </button>
+          </div>
         </div>
-        <div className="edit__modalButton">
-          <button onClick={handleEditData} className="edit__submitBtn">
-            Edit
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+      </>
+    );
+  }, [
+    isOpen,
+    isOpenModal,
+    title,
+    description,
+    amount,
+    deadline,
+    titleError,
+    amountError,
+  ]);
+
+  return <div className="edit">{memoEdit}</div>;
 };
 
 export default Edit;

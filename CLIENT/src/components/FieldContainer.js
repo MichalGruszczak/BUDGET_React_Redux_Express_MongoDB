@@ -16,7 +16,7 @@ const FieldContainer = (props) => {
           />
         ) : (
           <input
-            value={props.value}
+            value={props.value ? props.value : ""}
             onChange={props.onChange}
             className="field__input"
             onFocus={props.onFocus}

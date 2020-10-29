@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "./Add.scss";
 import { FiPlus } from "react-icons/fi";
 import { TOGGLE_MODAL, TOGGLE_FLAG } from "../actionTypes";
@@ -36,6 +36,7 @@ const Add = (props) => {
 
   const addDataAPI = () => {
     const incomeToAdd = {
+      id: Math.floor(Math.random() * 999999999999),
       title,
       description,
       amount,
@@ -43,6 +44,7 @@ const Add = (props) => {
     };
 
     const expenseToAdd = {
+      id: Math.floor(Math.random() * 999999999999),
       title,
       description,
       amount,
@@ -66,13 +68,13 @@ const Add = (props) => {
             setTitle("");
             setDescription("");
             setAmount("");
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_FLAG,
+              });
+            }, 50);
           });
-        setTimeout(() => {
-          toggleOpen();
-          dispatch({
-            type: TOGGLE_FLAG,
-          });
-        }, 50);
       } else if (
         props.type === "permanently-expenses" ||
         props.type === "temporary-expenses"
@@ -110,65 +112,79 @@ const Add = (props) => {
     if (title && amount && !titleError && !amountError) addDataAPI();
   };
 
-  return (
-    <div className="add">
-      <button
-        disabled={isOpenModal && !isOpen ? true : false}
-        onClick={toggleOpen}
-        className={isOpen ? "add__btn active" : "add__btn"}
-      >
-        <FiPlus />
-      </button>
-      <div className={isOpen ? "add__modal active" : "add__modal"}>
-        <div className="add__modalLoading"></div>
-        <div className="add__modalClose">
-          <button onClick={toggleOpen} className="add__closeBtn">
-            X
-          </button>
-        </div>
-        <div className="add__modalMain">
-          <FieldContainer
-            title="Title"
-            type="text"
-            value={title}
-            error={titleError}
-            onChange={(e) => setTitle(e.target.value)}
-            onFocus={() => setTitleError("")}
-          />
-          <FieldContainer
-            type="textarea"
-            title="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <FieldContainer
-            title="Amount"
-            type="number"
-            value={amount}
-            error={amountError}
-            onChange={(e) => setAmount(e.target.value)}
-            onFocus={() => setAmountError("")}
-          />
-          {props.type === "permanently-expenses" ||
-          props.type === "temporary-expenses" ? (
+  // MEMOIZED ADD COMPONENT
+  const memoAdd = useMemo(() => {
+    return (
+      <>
+        <button
+          disabled={isOpenModal && !isOpen ? true : false}
+          onClick={toggleOpen}
+          className={isOpen ? "add__btn active" : "add__btn"}
+        >
+          <FiPlus />
+        </button>
+        <div className={isOpen ? "add__modal active" : "add__modal"}>
+          <div className="add__modalLoading"></div>
+          <div className="add__modalClose">
+            <button onClick={toggleOpen} className="add__closeBtn">
+              X
+            </button>
+          </div>
+          <div className="add__modalMain">
             <FieldContainer
-              title="Deadline"
-              type="date"
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
+              title="Title"
+              type="text"
+              value={title}
+              error={titleError}
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={() => setTitleError("")}
             />
-          ) : (
-            ""
-          )}
+            <FieldContainer
+              type="textarea"
+              title="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <FieldContainer
+              title="Amount"
+              type="number"
+              value={amount}
+              error={amountError}
+              onChange={(e) => setAmount(e.target.value)}
+              onFocus={() => setAmountError("")}
+            />
+            {props.type === "permanently-expenses" ||
+            props.type === "temporary-expenses" ? (
+              <FieldContainer
+                title="Deadline"
+                type="date"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="add__modalButton">
+            <button onClick={handleAddData} className="add__submitBtn">
+              Add
+            </button>
+          </div>
         </div>
-        <div className="add__modalButton">
-          <button onClick={handleAddData} className="add__submitBtn">
-            Add
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+      </>
+    );
+  }, [
+    isOpen,
+    isOpenModal,
+    title,
+    description,
+    amount,
+    deadline,
+    titleError,
+    amountError,
+  ]);
+
+  return <div className="add">{memoAdd}</div>;
 };
 
 export default Add;

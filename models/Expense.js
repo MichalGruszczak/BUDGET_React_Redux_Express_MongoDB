@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ExpenseSchema = new Schema({
   id: {
     type: String,
-    default: Math.floor(Math.random() * 999999999999),
+    require: true,
   },
   title: {
     type: String,
