@@ -5,6 +5,7 @@ import { initialState } from "../reducers/itemReducer";
 import { useSelector, useDispatch } from "react-redux";
 import Accordion from "./Accordion";
 import Item from "./Item";
+import Footer from "./Footer";
 
 const Monthly = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -40,6 +41,10 @@ const Monthly = () => {
     .reduce((a, b) => {
       return a + b;
     }, 0);
+
+  const incomesValue = permanentIncomesAmount + temporaryIncomesAmount;
+
+  const expensesValue = permanentExpensesAmount + temporaryExpensesAmount;
 
   // GET USER BUDGET DATA
   const getItems = () => {
@@ -140,6 +145,13 @@ const Monthly = () => {
               done={item.done}
             />
           ))}
+        />
+        <Footer
+          type="budget"
+          incTitle="Incomes"
+          expTitle="Expenses"
+          incomesValue={incomesValue}
+          expensesValue={expensesValue}
         />
       </>
     );

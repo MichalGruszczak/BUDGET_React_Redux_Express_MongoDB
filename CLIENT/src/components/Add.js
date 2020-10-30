@@ -17,7 +17,7 @@ const Add = (props) => {
   // INPUT STATE
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(null);
   const [deadline, setDeadline] = useState("");
 
   // INPUT ERRORS STATE

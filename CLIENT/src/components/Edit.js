@@ -19,7 +19,7 @@ const Edit = (props) => {
   // INPUT STATE
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
-  const [amount, setAmount] = useState(new Number(props.amount));
+  const [amount, setAmount] = useState(props.amount);
   const [deadline, setDeadline] = useState(props.deadline);
 
   // ERRORS STATE
@@ -41,13 +41,13 @@ const Edit = (props) => {
     const incomeToEdit = {
       title,
       description,
-      amount,
+      amount: parseInt(amount),
     };
 
     const expenseToEdit = {
       title,
       description,
-      amount,
+      amount: parseInt(amount),
       deadline,
     };
 

@@ -1,4 +1,59 @@
+@import "../mixins.scss";
+
 .footer {
-  grid-area: "footer";
+  margin: 0 auto;
   background-color: coral;
+  z-index: 3;
+  height: 40px;
+  width: 100%;
+  max-width: 1024px;
+  position: fixed;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 70px 50px 1fr 70px 50px 1fr 70px 50px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "incomes incValue . expenses expValue . result resValue .";
+
+  .footer__incomes {
+    grid-area: incomes;
+    @include div-center;
+    color: green;
+    font-weight: bold;
+  }
+
+  .footer__incValue {
+    grid-area: incValue;
+    @include div-center;
+    font-weight: bold;
+  }
+
+  .footer__expenses {
+    grid-area: expenses;
+    @include div-center;
+    color: red;
+    font-weight: bold;
+  }
+
+  .footer__expValue {
+    grid-area: expValue;
+    @include div-center;
+    font-weight: bold;
+  }
+
+  .footer__result {
+    grid-area: result;
+    @include div-center;
+    font-weight: bold;
+  }
+
+  .footer__resValue {
+    grid-area: resValue;
+    @include div-center;
+    font-weight: bold;
+    color: green;
+  }
+
+  .footer__resValue.red {
+    color: red;
+  }
 }

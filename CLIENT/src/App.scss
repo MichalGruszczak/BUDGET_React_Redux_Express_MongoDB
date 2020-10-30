@@ -8,10 +8,9 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5% 1fr 5%;
+  grid-template-rows: 5% 1fr;
   grid-template-areas:
     "navbar"
-    "main"
-    "footer";
+    "main";
   overflow: hidden;
 }
