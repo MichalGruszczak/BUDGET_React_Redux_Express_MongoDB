@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./Delete.scss";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { TOGGLE_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
 
 const Delete = (props) => {
   const dispatch = useDispatch();
@@ -20,6 +20,10 @@ const Delete = (props) => {
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/delete`
           : props.type === "expense"
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/delete`
+          : props.type === "savings_income"
+          ? `http://localhost:5000/api/budget/${userEmail}/savings/incomes/${id}/delete`
+          : props.type === "savings_goal"
+          ? `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/delete`
           : "",
         {
           method: "PATCH",
@@ -33,7 +37,10 @@ const Delete = (props) => {
         .then((data) => {
           console.log(data);
           dispatch({
-            type: TOGGLE_FLAG,
+            type:
+              props.type === "savings_goal" || props.type === "savings_income"
+                ? TOGGLE_SAVINGS_FLAG
+                : TOGGLE_FLAG,
           });
         });
     } else console.log("no auth");

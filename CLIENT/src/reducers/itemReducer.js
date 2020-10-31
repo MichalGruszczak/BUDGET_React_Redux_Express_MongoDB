@@ -1,4 +1,9 @@
-import { GET_ITEMS, TOGGLE_MODAL, TOGGLE_FLAG } from "../actionTypes";
+import {
+  GET_ITEMS,
+  TOGGLE_MODAL,
+  TOGGLE_FLAG,
+  TOGGLE_SAVINGS_FLAG,
+} from "../actionTypes";
 
 export const initialState = {
   monthly: {
@@ -36,6 +41,7 @@ export const initialState = {
 
   isOpenModal: false,
   flag: false,
+  savingsFlag: false,
 };
 
 export default function (state = initialState, action) {
@@ -63,6 +69,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         flag: !state.flag,
+      };
+    case TOGGLE_SAVINGS_FLAG:
+      return {
+        ...state,
+        savingsFlag: !state.savingsFlag,
       };
 
     default: {

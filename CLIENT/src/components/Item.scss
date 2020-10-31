@@ -60,6 +60,52 @@
     @include div-center;
   }
 
+  .item__goalValues {
+    grid-area: values;
+    background-color: rosybrown;
+    display: flex;
+
+    .item__goalPrice {
+      flex-grow: 1;
+      background-color: forestgreen;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item__goalAmount {
+      flex-grow: 1;
+      background-color: fuchsia;
+      color: green;
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+    }
+
+    .item__goalAmountResult {
+      flex-grow: 1;
+      background-color: yellow;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item__goalTitle {
+      flex-basis: 30%;
+      background-color: gray;
+      color: black;
+      @include div-center;
+    }
+
+    .item__goalValue {
+      flex-basis: 70%;
+      background-color: hotpink;
+      @include div-center;
+    }
+  }
+
+  .item__goalValues.green {
+    color: green;
+  }
+
   .item__deadline {
     grid-area: deadline;
     background-color: lightgreen;
@@ -132,6 +178,11 @@
 .item.income {
   grid-template-columns: 50% 10% 40%;
   grid-template-areas: "title amount options";
+}
+
+.item.goal {
+  grid-template-columns: 30% 30% 10% 30%;
+  grid-template-areas: "title values deadline options";
 }
 
 @keyframes rotateTitleDiv {

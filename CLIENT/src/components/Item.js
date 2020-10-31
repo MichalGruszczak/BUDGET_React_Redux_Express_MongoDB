@@ -57,7 +57,30 @@ const Item = (props) => {
             <div className="item__titleWithoutDescr">{props.title}</div>
           )}
         </div>
-        <div className="item__amount">{props.amount}</div>
+        {props.type === "savings_goal" ? (
+          <div
+            className={
+              props.price - props.amount <= 0
+                ? "item__goalValues green"
+                : "item__goalValues"
+            }
+          >
+            <div className="item__goalPrice">
+              <div className="item__goalTitle">Price</div>
+              <div className="item__goalValue">{props.price}</div>
+            </div>
+            <div className="item__goalAmount">
+              <div className="item__goalTitle">Saved</div>
+              <div className="item__goalValue">{props.amount}</div>
+            </div>
+            <div className="item__goalAmountResult">
+              <div className="item__goalTitle">Left</div>
+              <div className="item__goalValue">{props.price - props.amount}</div>
+            </div>
+          </div>
+        ) : (
+          <div className="item__amount">{props.amount}</div>
+        )}
         {props.type === "income" ? null : (
           <div className="item__deadline">
             {props.deadline ? (
@@ -96,6 +119,7 @@ const Item = (props) => {
               amount={props.amount}
               deadline={props.deadline}
               type={props.type}
+              price={props.price}
             />
           </div>
           <div className="item__delete">
@@ -122,7 +146,17 @@ const Item = (props) => {
   }, [props, isDate, isDateAnimating, isDescription, isAnimating]);
 
   return (
-    <div className={props.type === "income" ? "item income" : "item"}>{memoItem}</div>
+    <div
+      className={
+        props.type === "income"
+          ? "item income"
+          : props.type === "savings_goal"
+          ? "item goal"
+          : "item"
+      }
+    >
+      {memoItem}
+    </div>
   );
 };
 

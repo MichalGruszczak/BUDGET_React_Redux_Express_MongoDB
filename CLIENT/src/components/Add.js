@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import "./Add.scss";
 import { FiPlus } from "react-icons/fi";
-import { TOGGLE_MODAL, TOGGLE_FLAG } from "../actionTypes";
+import { TOGGLE_MODAL, TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import FieldContainer from "./FieldContainer";
 
@@ -19,10 +19,12 @@ const Add = (props) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState(null);
   const [deadline, setDeadline] = useState("");
+  const [price, setPrice] = useState(null);
 
   // INPUT ERRORS STATE
   const [titleError, setTitleError] = useState("");
   const [amountError, setAmountError] = useState("");
+  const [priceError, setPriceError] = useState("");
 
   // OPEN / CLOSE MODAL
   const toggleOpen = () => {
@@ -48,6 +50,7 @@ const Add = (props) => {
       title,
       description,
       amount,
+      price: props.type === "savings-goals" ? price : "",
       deadline,
       permanent: props.type === "permanently-expenses" ? true : "",
     };
@@ -67,7 +70,7 @@ const Add = (props) => {
             console.log(data);
             setTitle("");
             setDescription("");
-            setAmount("");
+            setAmount(null);
             setTimeout(() => {
               toggleOpen();
               dispatch({
@@ -92,12 +95,58 @@ const Add = (props) => {
             console.log(data);
             setTitle("");
             setDescription("");
-            setAmount("");
+            setAmount(null);
             setDeadline("");
             setTimeout(() => {
               toggleOpen();
               dispatch({
                 type: TOGGLE_FLAG,
+              });
+            }, 50);
+          });
+      } else if (props.type === "savings-incomes") {
+        fetch(`http://localhost:5000/api/budget/${userEmail}/savings/incomes/add`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": `${token}`,
+          },
+          body: JSON.stringify(incomeToAdd),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setTitle("");
+            setDescription("");
+            setAmount(null);
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_SAVINGS_FLAG,
+              });
+            }, 50);
+          });
+      } else if (props.type === "savings-goals") {
+        fetch(`http://localhost:5000/api/budget/${userEmail}/savings/expenses/add`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": `${token}`,
+          },
+          body: JSON.stringify(expenseToAdd),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setTitle("");
+            setDescription("");
+            setAmount(null);
+            setPrice(null);
+            setDeadline("");
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_SAVINGS_FLAG,
               });
             }, 50);
           });
@@ -109,7 +158,16 @@ const Add = (props) => {
   const handleAddData = () => {
     if (!title) setTitleError("Empty field!");
     if (!amount) setAmountError("Empty field!");
-    if (title && amount && !titleError && !amountError) addDataAPI();
+    if (props.type === "savings-goals") {
+      if (!price) setPriceError("Empty field!");
+    }
+
+    if (props.type === "savings-goals") {
+      if (title && amount && price && !titleError && !amountError && !priceError)
+        addDataAPI();
+    } else {
+      if (title && amount && !titleError && !amountError) addDataAPI();
+    }
   };
 
   // MEMOIZED ADD COMPONENT
@@ -145,8 +203,20 @@ const Add = (props) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {props.type === "savings-goals" ? (
+              <FieldContainer
+                title="Price"
+                type="number"
+                value={price}
+                error={priceError}
+                onChange={(e) => setPrice(e.target.value)}
+                onFocus={() => setPriceError("")}
+              />
+            ) : (
+              ""
+            )}
             <FieldContainer
-              title="Amount"
+              title={props.type === "savings-goals" ? "Collected" : "Amount"}
               type="number"
               value={amount}
               error={amountError}
@@ -154,7 +224,8 @@ const Add = (props) => {
               onFocus={() => setAmountError("")}
             />
             {props.type === "permanently-expenses" ||
-            props.type === "temporary-expenses" ? (
+            props.type === "temporary-expenses" ||
+            props.type === "savings-goals" ? (
               <FieldContainer
                 title="Deadline"
                 type="date"
@@ -179,9 +250,11 @@ const Add = (props) => {
     title,
     description,
     amount,
+    price,
     deadline,
     titleError,
     amountError,
+    priceError,
   ]);
 
   return <div className="add">{memoAdd}</div>;

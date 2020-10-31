@@ -202,6 +202,7 @@ router.patch("/:userEmail/savings/expenses/add", auth, (req, res) => {
     title: req.body.title,
     description: req.body.description,
     amount: req.body.amount,
+    price: req.body.price,
     deadline: req.body.deadline,
   });
 
@@ -225,6 +226,7 @@ router.patch("/:userEmail/savings/expenses/:expenseID/edit", auth, (req, res) =>
         "savings.expenses.$.title": req.body.title,
         "savings.expenses.$.description": req.body.description,
         "savings.expenses.$.amount": req.body.amount,
+        "savings.expenses.$.price": req.body.price,
         "savings.expenses.$.deadline": req.body.deadline,
       },
     }

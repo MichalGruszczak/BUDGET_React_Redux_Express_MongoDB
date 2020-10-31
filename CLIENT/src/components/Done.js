@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./Done.scss";
 import { BiCheckCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
 
 const Done = (props) => {
   const dispatch = useDispatch();
@@ -20,6 +20,8 @@ const Done = (props) => {
       fetch(
         props.type === "expense"
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/done`
+          : props.type === "savings_goal"
+          ? `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/done`
           : "",
         {
           method: "PATCH",
@@ -33,7 +35,7 @@ const Done = (props) => {
         .then((data) => {
           console.log(data);
           dispatch({
-            type: TOGGLE_FLAG,
+            type: props.type === "savings_goal" ? TOGGLE_SAVINGS_FLAG : TOGGLE_FLAG,
           });
         });
     } else console.log("no auth");

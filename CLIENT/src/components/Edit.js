@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import "./Edit.scss";
 import { AiFillEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_MODAL, TOGGLE_FLAG } from "../actionTypes";
+import { TOGGLE_MODAL, TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
 import FieldContainer from "./FieldContainer";
 
 const Edit = (props) => {
@@ -21,11 +21,13 @@ const Edit = (props) => {
   const [description, setDescription] = useState(props.description);
   const [amount, setAmount] = useState(props.amount);
   const [deadline, setDeadline] = useState(props.deadline);
+  const [price, setPrice] = useState(props.price);
 
   // ERRORS STATE
 
   const [titleError, setTitleError] = useState("");
   const [amountError, setAmountError] = useState("");
+  const [priceError, setPriceError] = useState("");
 
   // OPEN / CLOSE MODAL
   const toggleOpen = () => {
@@ -48,6 +50,14 @@ const Edit = (props) => {
       title,
       description,
       amount: parseInt(amount),
+      deadline,
+    };
+
+    const savingsGoalToEdit = {
+      title,
+      description,
+      amount: parseInt(amount),
+      price: parseInt(price),
       deadline,
     };
 
@@ -96,6 +106,50 @@ const Edit = (props) => {
               });
             }, 50);
           });
+      } else if (props.type === "savings_income") {
+        fetch(
+          `http://localhost:5000/api/budget/${userEmail}/savings/incomes/${id}/edit`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(incomeToEdit),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_SAVINGS_FLAG,
+              });
+            }, 50);
+          });
+      } else if (props.type === "savings_goal") {
+        fetch(
+          `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/edit`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(savingsGoalToEdit),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setTimeout(() => {
+              toggleOpen();
+              dispatch({
+                type: TOGGLE_SAVINGS_FLAG,
+              });
+            }, 50);
+          });
       } else console.log("invalid type");
     } else console.log("no auth");
   };
@@ -104,8 +158,17 @@ const Edit = (props) => {
   const handleEditData = () => {
     if (!title) setTitleError("Empty field!");
     if (!amount) setAmountError("Empty field");
-    if (title && amount && !titleError && !amountError) {
-      editAPI();
+    if (props.type === "savings_goal") {
+      if (!price) setPriceError("Empty field!");
+    }
+    if (props.type === "savings_goal") {
+      if (title && amount && price && !priceError && !titleError && !amountError) {
+        editAPI();
+      }
+    } else {
+      if (title && amount && !titleError && !amountError) {
+        editAPI();
+      }
     }
   };
 
@@ -142,15 +205,27 @@ const Edit = (props) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {props.type === "savings_goal" ? (
+              <FieldContainer
+                title="Price"
+                type="number"
+                value={price}
+                error={priceError}
+                onChange={(e) => setPrice(e.target.value)}
+                onFocus={() => setPriceError("")}
+              />
+            ) : (
+              ""
+            )}
             <FieldContainer
-              title="Amount"
+              title={props.type === "savings_goal" ? "Collected" : "Amount"}
               type="number"
               value={amount}
               error={amountError}
               onChange={(e) => setAmount(e.target.value)}
               onFocus={() => setAmountError("")}
             />
-            {props.type === "expense" ? (
+            {props.type === "expense" || props.type === "savings_goal" ? (
               <FieldContainer
                 title="Deadline"
                 type="date"
@@ -175,9 +250,11 @@ const Edit = (props) => {
     title,
     description,
     amount,
+    price,
     deadline,
     titleError,
     amountError,
+    priceError,
   ]);
 
   return <div className="edit">{memoEdit}</div>;
