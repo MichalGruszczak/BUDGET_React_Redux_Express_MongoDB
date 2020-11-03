@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./Savings.scss";
 import { initialState } from "../reducers/itemReducer";
 import { GET_ITEMS } from "../actionTypes";
@@ -53,52 +53,57 @@ const Savings = () => {
     getData();
   }, [isAuthenticated, savingsFlag]);
 
-  return (
-    <div className="savings">
-      <Accordion
-        type="income"
-        title="Savings"
-        amount={savingsAmount}
-        addType={"savings-incomes"}
-        content={items.incomes.map((item) => (
-          <Item
-            type="savings_income"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-          />
-        ))}
-      />
-      <Accordion
-        type="expense"
-        title="Savings Goals"
-        amount={savingsGoalsAmount}
-        addType={"savings-goals"}
-        content={items.expenses.map((item) => (
-          <Item
-            type="savings_goal"
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            amount={item.amount}
-            price={item.price}
-            deadline={item.deadline}
-            done={item.done}
-          />
-        ))}
-      />
-      <Footer
-        type="budget"
-        incTitle="Savings"
-        expTitle="Collected for goals"
-        incomesValue={savingsAmount}
-        expensesValue={savingsGoalsAmount}
-      />
-    </div>
-  );
+  // MEMOIZED SAVINGS COMPONENT
+  const memoSavings = useMemo(() => {
+    return (
+      <>
+        <Accordion
+          type="income"
+          title="Savings"
+          amount={savingsAmount}
+          addType={"savings-incomes"}
+          content={items.incomes.map((item) => (
+            <Item
+              type="savings_income"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+            />
+          ))}
+        />
+        <Accordion
+          type="expense"
+          title="Savings Goals"
+          amount={savingsGoalsAmount}
+          addType={"savings-goals"}
+          content={items.expenses.map((item) => (
+            <Item
+              type="savings_goal"
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              amount={item.amount}
+              price={item.price}
+              deadline={item.deadline}
+              done={item.done}
+            />
+          ))}
+        />
+        <Footer
+          type="budget"
+          incTitle="Savings"
+          expTitle="Collected for goals"
+          incomesValue={savingsAmount}
+          expensesValue={savingsGoalsAmount}
+        />
+      </>
+    );
+  }, [isAuthenticated, items, savingsFlag]);
+
+  return <div className="savings">{memoSavings}</div>;
 };
 
 export default Savings;

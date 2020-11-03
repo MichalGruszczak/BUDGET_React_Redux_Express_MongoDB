@@ -81,9 +81,9 @@ const Item = (props) => {
         ) : (
           <div className="item__amount">{props.amount}</div>
         )}
-        {props.type === "income" ? null : (
+        {props.type === "income" || props.type === "income-sim" ? null : (
           <div className="item__deadline">
-            {props.deadline ? (
+            {props.done ? null : props.deadline ? (
               <div
                 onClick={toggleDate}
                 className={
@@ -125,7 +125,7 @@ const Item = (props) => {
           <div className="item__delete">
             <Delete id={props.id} type={props.type} />
           </div>
-          {props.type === "income" ? (
+          {props.type === "income" || props.type === "income-sim" ? (
             <div className="item__empty"></div>
           ) : (
             <div className={props.done ? "item__done done" : "item__done"}>
@@ -148,7 +148,7 @@ const Item = (props) => {
   return (
     <div
       className={
-        props.type === "income"
+        props.type === "income" || props.type === "income-sim"
           ? "item income"
           : props.type === "savings_goal"
           ? "item goal"

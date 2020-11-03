@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./Renew.scss";
 import { FiRefreshCcw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { TOGGLE_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
 
 const Renew = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +22,25 @@ const Renew = (props) => {
       deadline: props.deadline ? actualDeadline.setMonth(actualDeadlineMonth + 1) : null,
     };
 
-    if (isAuthenticated) {
+    // CASE
+    // SIMULATOR
+
+    const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
+
+    if (props.type === "expense-sim") {
+      let selectedExpense = simExpenses.find((item) => item.id === props.id);
+      selectedExpense.done = false;
+      // deadline !!!!!!!!!!!!!!!
+      localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setTimeout(() => {
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    }
+
+    // USER - PERSONAL
+    else if (isAuthenticated) {
       fetch(
         `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/renew`,
         {

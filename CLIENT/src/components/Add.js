@@ -1,7 +1,12 @@
 import React, { useState, useMemo } from "react";
 import "./Add.scss";
 import { FiPlus } from "react-icons/fi";
-import { TOGGLE_MODAL, TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
+import {
+  TOGGLE_MODAL,
+  TOGGLE_FLAG,
+  TOGGLE_SAVINGS_FLAG,
+  TOGGLE_SIM_FLAG,
+} from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import FieldContainer from "./FieldContainer";
 
@@ -41,21 +46,75 @@ const Add = (props) => {
       id: Math.floor(Math.random() * 999999999999),
       title,
       description,
-      amount,
-      permanent: props.type === "permanently-incomes" ? true : "",
+      amount: parseInt(amount),
+      permanent:
+        props.type === "permanently-incomes" || props.type === "permanently-incomes-sim"
+          ? true
+          : "",
     };
 
     const expenseToAdd = {
       id: Math.floor(Math.random() * 999999999999),
       title,
       description,
-      amount,
+      amount: parseInt(amount),
       price: props.type === "savings-goals" ? price : "",
       deadline,
-      permanent: props.type === "permanently-expenses" ? true : "",
+      permanent:
+        props.type === "permanently-expenses" || props.type === "permanently-expenses-sim"
+          ? true
+          : "",
     };
 
-    if (isAuthenticated) {
+    // INIT LOCAL STORAGE
+    if (!localStorage.getItem("simIncomes")) {
+      localStorage.setItem("simIncomes", JSON.stringify([]));
+    }
+    if (!localStorage.getItem("simExpenses")) {
+      localStorage.setItem("simExpenses", JSON.stringify([]));
+    }
+
+    const simIncomes = JSON.parse(localStorage.getItem("simIncomes"));
+    const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
+
+    // CASES
+    // SIMULATOR
+    if (
+      props.type === "permanently-incomes-sim" ||
+      props.type === "temporary-incomes-sim"
+    ) {
+      simIncomes.push(incomeToAdd);
+      localStorage.setItem("simIncomes", JSON.stringify(simIncomes));
+      setTitle("");
+      setDescription("");
+      setAmount(null);
+      setPrice(null);
+      setDeadline("");
+      setTimeout(() => {
+        toggleOpen();
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    } else if (
+      props.type === "permanently-expenses-sim" ||
+      props.type === "temporary-expenses-sim"
+    ) {
+      simExpenses.push(expenseToAdd);
+      localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setTitle("");
+      setDescription("");
+      setAmount(null);
+      setPrice(null);
+      setDeadline("");
+      setTimeout(() => {
+        toggleOpen();
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+      // USER - PERSONAL
+    } else if (isAuthenticated) {
       if (props.type === "permanently-incomes" || props.type === "temporary-incomes") {
         fetch(`http://localhost:5000/api/budget/${userEmail}/monthly/incomes/add`, {
           method: "PATCH",
@@ -225,7 +284,9 @@ const Add = (props) => {
             />
             {props.type === "permanently-expenses" ||
             props.type === "temporary-expenses" ||
-            props.type === "savings-goals" ? (
+            props.type === "savings-goals" ||
+            props.type === "permanently-expenses-sim" ||
+            props.type === "temporary-expenses-sim" ? (
               <FieldContainer
                 title="Deadline"
                 type="date"

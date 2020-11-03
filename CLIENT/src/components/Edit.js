@@ -2,7 +2,12 @@ import React, { useState, useMemo } from "react";
 import "./Edit.scss";
 import { AiFillEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_MODAL, TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
+import {
+  TOGGLE_MODAL,
+  TOGGLE_FLAG,
+  TOGGLE_SAVINGS_FLAG,
+  TOGGLE_SIM_FLAG,
+} from "../actionTypes";
 import FieldContainer from "./FieldContainer";
 
 const Edit = (props) => {
@@ -61,7 +66,39 @@ const Edit = (props) => {
       deadline,
     };
 
-    if (isAuthenticated) {
+    const simIncomes = JSON.parse(localStorage.getItem("simIncomes"));
+    const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
+
+    // CASES
+    // SIMULATOR
+    if (props.type === "income-sim") {
+      let selectedIncome = simIncomes.find((item) => item.id === props.id);
+      selectedIncome.title = title;
+      selectedIncome.description = description;
+      selectedIncome.amount = parseInt(amount);
+      localStorage.setItem("simIncomes", JSON.stringify(simIncomes));
+
+      setTimeout(() => {
+        toggleOpen();
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    } else if (props.type === "expense-sim") {
+      let selectedExpense = simExpenses.find((item) => item.id === props.id);
+      selectedExpense.title = title;
+      selectedExpense.description = description;
+      selectedExpense.amount = parseInt(amount);
+      selectedExpense.deadline = deadline;
+      localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setTimeout(() => {
+        toggleOpen();
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+      // USER - PERSONAL
+    } else if (isAuthenticated) {
       if (props.type === "income") {
         fetch(
           `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/edit`,
@@ -225,7 +262,9 @@ const Edit = (props) => {
               onChange={(e) => setAmount(e.target.value)}
               onFocus={() => setAmountError("")}
             />
-            {props.type === "expense" || props.type === "savings_goal" ? (
+            {props.type === "expense" ||
+            props.type === "savings_goal" ||
+            props.type === "expense-sim" ? (
               <FieldContainer
                 title="Deadline"
                 type="date"

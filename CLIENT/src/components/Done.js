@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./Done.scss";
 import { BiCheckCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
 
 const Done = (props) => {
   const dispatch = useDispatch();
@@ -16,7 +16,23 @@ const Done = (props) => {
   // DONE REST API function
 
   const doneAPI = () => {
-    if (isAuthenticated) {
+    const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
+
+    // CASE
+    // SIMULATOR
+
+    if (props.type === "expense-sim") {
+      let selectedExpense = simExpenses.find((item) => item.id === props.id);
+      selectedExpense.done = true;
+      localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setTimeout(() => {
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    }
+    // USER - PERSONAL
+    else if (isAuthenticated) {
       fetch(
         props.type === "expense"
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/done`

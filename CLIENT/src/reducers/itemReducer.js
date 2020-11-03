@@ -3,6 +3,7 @@ import {
   TOGGLE_MODAL,
   TOGGLE_FLAG,
   TOGGLE_SAVINGS_FLAG,
+  TOGGLE_SIM_FLAG,
 } from "../actionTypes";
 
 export const initialState = {
@@ -27,9 +28,16 @@ export const initialState = {
         amount: 2000,
         deadline: "2020,11,06",
         permanent: true,
+        done: false,
       },
-      { id: 5, title: "Car fuel", amount: 200, permanent: true },
-      { id: 6, title: "Wife birthday", amount: 100000, deadline: "2020,12,23" },
+      { id: 5, title: "Car fuel", amount: 200, permanent: true, done: true },
+      {
+        id: 6,
+        title: "Wife birthday",
+        amount: 100000,
+        deadline: "2020,12,23",
+        done: false,
+      },
     ],
   },
 
@@ -42,6 +50,7 @@ export const initialState = {
   isOpenModal: false,
   flag: false,
   savingsFlag: false,
+  simFlag: false,
 };
 
 export default function (state = initialState, action) {
@@ -74,6 +83,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         savingsFlag: !state.savingsFlag,
+      };
+    case TOGGLE_SIM_FLAG:
+      return {
+        ...state,
+        simFlag: !state.simFlag,
       };
 
     default: {

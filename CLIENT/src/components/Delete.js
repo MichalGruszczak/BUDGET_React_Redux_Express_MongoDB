@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./Delete.scss";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
 
 const Delete = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +14,37 @@ const Delete = (props) => {
 
   // FETCH API DELETE
   const deleteAPI = () => {
-    if (isAuthenticated) {
+    const simIncomes = JSON.parse(localStorage.getItem("simIncomes"));
+    const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
+
+    // CASE
+    // SIMULATOR
+
+    if (props.type === "income-sim") {
+      let selectedIncome = simIncomes.findIndex((item) => item.id === props.id);
+      simIncomes.splice(selectedIncome, 1);
+
+      localStorage.setItem("simIncomes", JSON.stringify(simIncomes));
+
+      setTimeout(() => {
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    } else if (props.type === "expense-sim") {
+      let selectedExpense = simExpenses.findIndex((item) => item.id === props.id);
+      simExpenses.splice(selectedExpense, 1);
+
+      localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setTimeout(() => {
+        dispatch({
+          type: TOGGLE_SIM_FLAG,
+        });
+      }, 50);
+    }
+
+    // USER - PERSONAL
+    else if (isAuthenticated) {
       fetch(
         props.type === "income"
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/delete`
