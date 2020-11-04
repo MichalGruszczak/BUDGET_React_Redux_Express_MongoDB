@@ -1,0 +1,18 @@
+@import "../mixins.scss";
+
+.settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: lightblue;
+  width: 100%;
+  height: 100%;
+
+  .settings__container {
+    width: 80%;
+    height: 20%;
+    margin: 0 auto;
+    background-color: lightsalmon;
+    margin-top: 30px;
+  }
+}

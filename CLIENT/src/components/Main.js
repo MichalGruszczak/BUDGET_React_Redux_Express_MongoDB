@@ -6,6 +6,7 @@ import { Switch, Route } from "react-router-dom";
 const Main = () => {
   const Savings = React.lazy(() => import("./Savings"));
   const Simulator = React.lazy(() => import("./Simulator"));
+  const Settings = React.lazy(() => import("./Settings"));
   return (
     <div className="main">
       <Switch>
@@ -13,6 +14,7 @@ const Main = () => {
         <Suspense fallback={<span>LOADING ...</span>}>
           <Route path="/savings" component={Savings} />
           <Route path="/simulator" component={Simulator} />
+          <Route path="/settings" component={Settings} />
         </Suspense>
       </Switch>
     </div>

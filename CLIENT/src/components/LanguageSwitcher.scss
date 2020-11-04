@@ -1,0 +1,36 @@
+@import "../mixins.scss";
+
+.language {
+  width: 100%;
+  height: 100%;
+  background-color: lightcoral;
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "title opt1 opt2";
+
+  .language__btn {
+    @include settings-btn;
+    background-color: darkgray;
+
+    .language__flag {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .language__title {
+    @include div-center;
+    grid-area: title;
+  }
+
+  .language__opt1 {
+    @include div-center;
+    grid-area: opt1;
+  }
+
+  .language__opt2 {
+    @include div-center;
+    grid-area: opt2;
+  }
+}

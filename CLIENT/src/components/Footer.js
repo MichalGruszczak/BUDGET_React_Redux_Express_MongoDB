@@ -16,8 +16,9 @@ const Footer = (props) => {
       </div>
     </div>
   ) : (
-    // Styling !!!
-    ""
+    <div className="footer__info">
+      <span>All rights reserved</span>
+    </div>
   );
 };
 

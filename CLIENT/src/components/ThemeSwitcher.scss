@@ -1,0 +1,37 @@
+@import "../mixins.scss";
+
+.theme {
+  width: 100%;
+  height: 100%;
+  background-color: lightseagreen;
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "title opt1 opt2";
+
+  .theme__btn {
+    @include settings-btn;
+  }
+
+  .theme__btn.dark {
+    background-color: black;
+  }
+
+  .theme__btn.light {
+    background-color: lightblue;
+  }
+  .theme__title {
+    @include div-center;
+    grid-area: title;
+  }
+
+  .theme__opt1 {
+    @include div-center;
+    grid-area: opt1;
+  }
+
+  .theme__opt2 {
+    @include div-center;
+    grid-area: opt2;
+  }
+}

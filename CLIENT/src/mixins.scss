@@ -34,6 +34,13 @@
   }
 }
 
+// Buttons in settings
+@mixin settings-btn {
+  width: 70%;
+  height: 40%;
+  cursor: pointer;
+}
+
 // Close modal button
 @mixin close-btn {
   width: 100%;
