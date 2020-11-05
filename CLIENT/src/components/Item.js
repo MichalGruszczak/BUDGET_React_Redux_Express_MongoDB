@@ -6,12 +6,16 @@ import Edit from "./Edit";
 import Delete from "./Delete";
 import Done from "./Done";
 import Renew from "./Renew";
+import { useTranslation } from "react-i18next";
 
 const Item = (props) => {
   const [isDescription, setIsDescription] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDate, setIsDate] = useState(false);
   const [isDateAnimating, setIsDateAnimating] = useState(false);
+
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
 
   // Run text change and div animation synchronized
   const toggleDescription = () => {
@@ -66,15 +70,15 @@ const Item = (props) => {
             }
           >
             <div className="item__goalPrice">
-              <div className="item__goalTitle">Price</div>
+              <div className="item__goalTitle">{t("Common.ModalPrice")}</div>
               <div className="item__goalValue">{props.price}</div>
             </div>
             <div className="item__goalAmount">
-              <div className="item__goalTitle">Saved</div>
+              <div className="item__goalTitle">{t("Common.ModalCollected")}</div>
               <div className="item__goalValue">{props.amount}</div>
             </div>
             <div className="item__goalAmountResult">
-              <div className="item__goalTitle">Left</div>
+              <div className="item__goalTitle">{t("Item.Left")}</div>
               <div className="item__goalValue">{props.price - props.amount}</div>
             </div>
           </div>
@@ -143,7 +147,7 @@ const Item = (props) => {
         </div>
       </>
     );
-  }, [props, isDate, isDateAnimating, isDescription, isAnimating]);
+  }, [props, isDate, isDateAnimating, isDescription, isAnimating, language]);
 
   return (
     <div

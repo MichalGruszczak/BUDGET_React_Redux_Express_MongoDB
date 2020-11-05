@@ -4,8 +4,11 @@ import Accordion from "./Accordion";
 import Item from "./Item";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Simulator = () => {
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
   const simFlag = useSelector((state) => state.items.simFlag);
 
   // PARSE JSON  TO OBJECT
@@ -65,7 +68,7 @@ const Simulator = () => {
     return (
       <>
         <Accordion
-          title={"Permanently Incomes"}
+          title={t("Accordions.PermanentlyIncomes")}
           amount={permanentIncomesAmount}
           type={"income"}
           addType={"permanently-incomes-sim"}
@@ -81,7 +84,7 @@ const Simulator = () => {
           ))}
         />
         <Accordion
-          title={"Temporary Incomes"}
+          title={t("Accordions.TemporaryIncomes")}
           amount={temporaryIncomesAmount}
           type={"income"}
           addType={"temporary-incomes-sim"}
@@ -97,7 +100,7 @@ const Simulator = () => {
           ))}
         />
         <Accordion
-          title={"Permanently Expenses"}
+          title={t("Accordions.PermanentlyExpenses")}
           amount={permanentExpensesAmount}
           type={"expense"}
           addType={"permanently-expenses-sim"}
@@ -116,7 +119,7 @@ const Simulator = () => {
           ))}
         />
         <Accordion
-          title={"Temporary Expenses"}
+          title={t("Accordions.TemporaryExpenses")}
           amount={temporaryExpensesAmount}
           type={"expense"}
           addType={"temporary-expenses-sim"}
@@ -135,8 +138,8 @@ const Simulator = () => {
         />
         <Footer
           type="budget"
-          incTitle="Incomes"
-          expTitle="Expenses"
+          incTitle={t("Footer.Incomes")}
+          expTitle={t("Footer.Expenses")}
           incomesValue={incomesValue}
           expensesValue={expensesValue}
         />

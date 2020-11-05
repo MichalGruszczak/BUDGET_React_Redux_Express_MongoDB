@@ -6,8 +6,12 @@ import Accordion from "./Accordion";
 import Item from "./Item";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Savings = () => {
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
+
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userEmail = useSelector((state) => state.user.email);
@@ -59,7 +63,7 @@ const Savings = () => {
       <>
         <Accordion
           type="income"
-          title="Savings"
+          title={t("Accordions.Savings")}
           amount={savingsAmount}
           addType={"savings-incomes"}
           content={items.incomes.map((item) => (
@@ -75,7 +79,7 @@ const Savings = () => {
         />
         <Accordion
           type="expense"
-          title="Savings Goals"
+          title={t("Accordions.SavingsGoals")}
           amount={savingsGoalsAmount}
           addType={"savings-goals"}
           content={items.expenses.map((item) => (
@@ -94,14 +98,14 @@ const Savings = () => {
         />
         <Footer
           type="budget"
-          incTitle="Savings"
-          expTitle="Collected for goals"
+          incTitle={t("Footer.Savings")}
+          expTitle={t("Footer.CollectedForGoals")}
           incomesValue={savingsAmount}
           expensesValue={savingsGoalsAmount}
         />
       </>
     );
-  }, [isAuthenticated, items, savingsFlag]);
+  }, [isAuthenticated, items, savingsFlag, language]);
 
   return <div className="savings">{memoSavings}</div>;
 };

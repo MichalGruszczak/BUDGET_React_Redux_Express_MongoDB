@@ -6,8 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import Accordion from "./Accordion";
 import Item from "./Item";
 import Footer from "./Footer";
+import { useTranslation } from "react-i18next";
 
 const Monthly = () => {
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   const dispatch = useDispatch();
@@ -78,7 +81,7 @@ const Monthly = () => {
     return (
       <>
         <Accordion
-          title={"Permanently Incomes"}
+          title={t("Accordions.PermanentlyIncomes")}
           amount={permanentIncomesAmount}
           type={"income"}
           addType={"permanently-incomes"}
@@ -94,7 +97,7 @@ const Monthly = () => {
           ))}
         />
         <Accordion
-          title={"Temporary Incomes"}
+          title={t("Accordions.TemporaryIncomes")}
           amount={temporaryIncomesAmount}
           type={"income"}
           addType={"temporary-incomes"}
@@ -110,7 +113,7 @@ const Monthly = () => {
           ))}
         />
         <Accordion
-          title={"Permanently Expenses"}
+          title={t("Accordions.PermanentlyExpenses")}
           amount={permanentExpensesAmount}
           type={"expense"}
           addType={"permanently-expenses"}
@@ -129,7 +132,7 @@ const Monthly = () => {
           ))}
         />
         <Accordion
-          title={"Temporary Expenses"}
+          title={t("Accordions.TemporaryExpenses")}
           amount={temporaryExpensesAmount}
           type={"expense"}
           addType={"temporary-expenses"}
@@ -148,14 +151,14 @@ const Monthly = () => {
         />
         <Footer
           type="budget"
-          incTitle="Incomes"
-          expTitle="Expenses"
+          incTitle={t("Footer.Incomes")}
+          expTitle={t("Footer.Expenses")}
           incomesValue={incomesValue}
           expensesValue={expensesValue}
         />
       </>
     );
-  }, [isAuthenticated, items, flag]);
+  }, [isAuthenticated, items, flag, language]);
 
   return <div className="monthly">{memoMonthly}</div>;
 };

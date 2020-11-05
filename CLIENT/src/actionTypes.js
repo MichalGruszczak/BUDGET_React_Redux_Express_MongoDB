@@ -10,6 +10,3 @@ export const GET_ITEMS = "GET_ITEMS";
 
 export const THEME_DARK = "THEME_DARK";
 export const THEME_LIGHT = "THEME_LIGHT";
-
-export const LANG_PL = "LANG_PL";
-export const LANG_ENG = "LANG_ENG";

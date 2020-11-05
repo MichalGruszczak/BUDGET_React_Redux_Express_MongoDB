@@ -2,8 +2,12 @@ import React, { useState, useMemo } from "react";
 import "./LogReg.scss";
 import { USER_LOGIN, USER_LOGOUT } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
@@ -122,9 +126,9 @@ const Register = () => {
   // MAIN FUNCTION TO LOGIN USER
   const loginUser = (e) => {
     e.preventDefault();
-    if (!loginPassword) setLoginPasswordError("Empty field!");
-    if (!loginEmail.includes("@")) setLoginEmailError("Incorrect email adress!");
-    if (!loginEmail) setLoginEmailError("Empty field!");
+    if (!loginPassword) setLoginPasswordError(t("Common.EmptyError"));
+    if (!loginEmail.includes("@")) setLoginEmailError(t("Common.EmailError"));
+    if (!loginEmail) setLoginEmailError(t("Common.EmptyError"));
 
     if (
       loginEmail &&
@@ -141,12 +145,12 @@ const Register = () => {
   const registerUser = (e) => {
     e.preventDefault();
     if (registerPassword !== registerConfirmPassword)
-      setRegisterConfirmPasswordError("Passwords are not the same");
-    if (!registerName) setRegisterNameError("empty field!");
+      setRegisterConfirmPasswordError(t("Common.ConfirmError"));
+    if (!registerName) setRegisterNameError(t("Common.EmptyError"));
     if (!registerEmail.includes("@")) setRegisterEmailError("Incorrect email adress");
-    if (!registerEmail) setRegisterEmailError("empty field!");
-    if (!registerPassword) setRegisterPasswordError("empty field!");
-    if (!registerConfirmPassword) setRegisterConfirmPasswordError("empty field!");
+    if (!registerEmail) setRegisterEmailError(t("Common.EmptyError"));
+    if (!registerPassword) setRegisterPasswordError(t("Common.EmptyError"));
+    if (!registerConfirmPassword) setRegisterConfirmPasswordError(t("Common.EmptyError"));
 
     if (
       registerName &&
@@ -168,12 +172,11 @@ const Register = () => {
   const memoLogin = useMemo(() => {
     return (
       <div className="logReg__login">
-        {/* {console.log("Login rerender!")} */}
         {isAuthenticated ? (
           <span className="logReg__name">{`${userName}`}</span>
         ) : (
           <button onClick={toggleLogin} className="logReg__btn">
-            Login
+            {t("LogReg.NavLogin")}
           </button>
         )}
         <div className={isLoginOpen ? "logReg__loginModal active" : "logReg__loginModal"}>
@@ -194,7 +197,7 @@ const Register = () => {
               <div className="logReg__fieldContainer">
                 {/* Email */}
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Email</label>
+                  <label className="logReg__label">{t("LogReg.Email")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -215,7 +218,7 @@ const Register = () => {
               {/* Password */}
               <div className="logReg__fieldContainer">
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Password</label>
+                  <label className="logReg__label">{t("LogReg.Password")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -238,16 +241,18 @@ const Register = () => {
                 onClick={loginUser}
                 className="logReg__btn"
               >
-                Sign In
+                {t("LogReg.LoginBtn")}
               </button>
             </div>
             {/* Message */}
             <div className="logReg__modalMessage">
               <h3>
                 {acceptedLoginProcessing
-                  ? `Hello ${userName}`
-                  : loginFailed
-                  ? `${loginFailed}`
+                  ? `${t("LogReg.Hello")} ${userName}`
+                  : loginFailed === "User does not exist"
+                  ? t("LogReg.UserNotExist")
+                  : loginFailed === "Invalid password"
+                  ? t("LogReg.InvalidPassword")
                   : ""}
               </h3>
             </div>
@@ -264,20 +269,20 @@ const Register = () => {
     acceptedLoginProcessing,
     loginFailed,
     isAuthenticated,
+    language,
   ]);
 
   // REGISTER
   const memoRegister = useMemo(() => {
     return (
       <div className="logReg__register">
-        {/* {console.log("Register rerender!")} */}
         {isAuthenticated ? (
           <button onClick={logout} className="logReg__btn">
-            Logout
+            {t("LogReg.Logout")}
           </button>
         ) : (
           <button onClick={toggleRegister} className="logReg__btn">
-            Register
+            {t("LogReg.NavRegister")}
           </button>
         )}
         <div
@@ -299,7 +304,7 @@ const Register = () => {
               {/* Name */}
               <div className="logReg__fieldContainer">
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Name</label>
+                  <label className="logReg__label">{t("LogReg.Name")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -317,7 +322,7 @@ const Register = () => {
               {/* Email */}
               <div className="logReg__fieldContainer">
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Email</label>
+                  <label className="logReg__label">{t("LogReg.Email")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -338,7 +343,7 @@ const Register = () => {
               {/* Password */}
               <div className="logReg__fieldContainer">
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Password</label>
+                  <label className="logReg__label">{t("LogReg.Password")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -356,7 +361,7 @@ const Register = () => {
               {/* Confirm password */}
               <div className="logReg__fieldContainer">
                 <div className="logReg__labelContainer">
-                  <label className="logReg__label">Confirm password</label>
+                  <label className="logReg__label">{t("LogReg.ConfirmPassword")}</label>
                 </div>
                 <div className="logReg__inputContainer">
                   <input
@@ -379,16 +384,18 @@ const Register = () => {
                 onClick={registerUser}
                 className="logReg__btn"
               >
-                Register
+                {t("LogReg.RegisterBtn")}
               </button>
             </div>
             {/* Message */}
             <div className="logReg__modalMessage">
               <h3>
                 {acceptedRegisterProcessing
-                  ? "User registered!"
+                  ? t("LogReg.UserRegistered")
                   : registerFailed
-                  ? `${registerFailed}`
+                  ? registerFailed === "User already exists"
+                    ? t("LogReg.UserExists")
+                    : ""
                   : ""}
               </h3>
             </div>
@@ -410,11 +417,11 @@ const Register = () => {
     acceptedRegisterProcessing,
     registerFailed,
     isAuthenticated,
+    language,
   ]);
 
   return (
     <div className="logReg">
-      {/* {console.log("LogReg rerender")} */}
       {memoLogin}
       {memoRegister}
     </div>

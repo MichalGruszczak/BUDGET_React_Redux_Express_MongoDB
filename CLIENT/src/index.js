@@ -4,6 +4,8 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import "./i18next";
+
 ReactDOM.render(
   <Suspense fallback={"loading ..."}>
     <React.StrictMode>

@@ -1,0 +1,67 @@
+{
+
+    "Common": {
+        "EmptyError": "To pole nie może być puste!",
+        "EmailError": "Błędny adres email!",
+        "ConfirmError": "Hasła nie są takie same!",
+        "ModalTitle": "Tytuł",
+        "ModalDescription": "Opis",
+        "ModalPrice": "Cena",
+        "ModalCollected": "Odłożone",
+        "ModalAmount": "Kwota",
+        "ModalDeadline": "Termin",
+        "ModalAddBtn": "Dodaj",
+        "ModalEditBtn": "Edytuj"
+   },
+
+    "Settings": {
+        "Language": "Język",
+        "Theme": "Motyw"
+    },
+
+    "Footer": {
+        "Result": "Wynik",
+        "Rights": "Wszystkie prawa zastrzeżone",
+        "Incomes": "Przychody",
+        "Expenses": "Wydatki",
+        "Savings": "Oszczędności",
+        "CollectedForGoals": "Odłożone na Cele"
+    },
+
+    "Item": {
+        "Left": "Pozostało"
+    },
+
+    "LogReg": {
+        "NavLogin": "Logowanie",
+        "NavRegister": "Rejestracja",
+        "Email": "Email",
+        "Password": "Hasło",
+        "LoginBtn": "Zaloguj",
+        "Hello": "Cześć",
+        "UserNotExist": "Taki użytkownik nie istnieje",
+        "InvalidPassword": "Błędne hasło",
+        "Logout": "Wyloguj",
+        "Name": "Imię",
+        "ConfirmPassword": "Potwierdź hasło",
+        "RegisterBtn": "Zarejestruj",
+        "UserRegistered": "Użytkownik zarejestrowany",
+        "UserExists": "Użytkownik już istnieje"
+    },
+
+    "Menu": {
+        "Monthly": "Budżet miesięczny",
+        "Savings": "Oszczędności",
+        "Simulator": "Symulator",
+        "Settings": "Ustawienia"
+    },
+
+    "Accordions": {
+        "PermanentlyIncomes": "Przychody stałe",
+        "TemporaryIncomes": "Przychody tymczasowe",
+        "PermanentlyExpenses": "Wydatki stałe",
+        "TemporaryExpenses": "Wydatki tymczasowe",
+        "Savings": "Oszczędności",
+        "SavingsGoals": "Cele oszczędnościowe"
+    }
+}

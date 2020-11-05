@@ -9,6 +9,7 @@ import {
 } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import FieldContainer from "./FieldContainer";
+import { useTranslation } from "react-i18next";
 
 const Add = (props) => {
   const dispatch = useDispatch();
@@ -16,6 +17,9 @@ const Add = (props) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
+
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -215,10 +219,10 @@ const Add = (props) => {
 
   // MAIN FUNCTION TO ADD DATA
   const handleAddData = () => {
-    if (!title) setTitleError("Empty field!");
-    if (!amount) setAmountError("Empty field!");
+    if (!title) setTitleError(t("Common.EmptyError"));
+    if (!amount) setAmountError(t("Common.EmptyError"));
     if (props.type === "savings-goals") {
-      if (!price) setPriceError("Empty field!");
+      if (!price) setPriceError(t("Common.EmptyError"));
     }
 
     if (props.type === "savings-goals") {
@@ -249,7 +253,7 @@ const Add = (props) => {
           </div>
           <div className="add__modalMain">
             <FieldContainer
-              title="Title"
+              title={t("Common.ModalTitle")}
               type="text"
               value={title}
               error={titleError}
@@ -258,13 +262,13 @@ const Add = (props) => {
             />
             <FieldContainer
               type="textarea"
-              title="Description"
+              title={t("Common.ModalDescription")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             {props.type === "savings-goals" ? (
               <FieldContainer
-                title="Price"
+                title={t("Common.ModalPrice")}
                 type="number"
                 value={price}
                 error={priceError}
@@ -275,7 +279,11 @@ const Add = (props) => {
               ""
             )}
             <FieldContainer
-              title={props.type === "savings-goals" ? "Collected" : "Amount"}
+              title={
+                props.type === "savings-goals"
+                  ? t("Common.ModalCollected")
+                  : t("Common.ModalAmount")
+              }
               type="number"
               value={amount}
               error={amountError}
@@ -288,7 +296,7 @@ const Add = (props) => {
             props.type === "permanently-expenses-sim" ||
             props.type === "temporary-expenses-sim" ? (
               <FieldContainer
-                title="Deadline"
+                title={t("Common.ModalDeadline")}
                 type="date"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
@@ -299,7 +307,7 @@ const Add = (props) => {
           </div>
           <div className="add__modalButton">
             <button onClick={handleAddData} className="add__submitBtn">
-              Add
+              {t("Common.ModalAddBtn")}
             </button>
           </div>
         </div>
@@ -316,6 +324,7 @@ const Add = (props) => {
     titleError,
     amountError,
     priceError,
+    language,
   ]);
 
   return <div className="add">{memoAdd}</div>;

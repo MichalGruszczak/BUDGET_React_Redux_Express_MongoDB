@@ -9,9 +9,12 @@ import {
   TOGGLE_SIM_FLAG,
 } from "../actionTypes";
 import FieldContainer from "./FieldContainer";
+import { useTranslation } from "react-i18next";
 
 const Edit = (props) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const language = localStorage.getItem("i18nextLng");
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -193,10 +196,10 @@ const Edit = (props) => {
 
   // MAIN FUNCTION TO EDIT DATA
   const handleEditData = () => {
-    if (!title) setTitleError("Empty field!");
-    if (!amount) setAmountError("Empty field");
+    if (!title) setTitleError(t("Common.EmptyError"));
+    if (!amount) setAmountError(t("Common.EmptyError"));
     if (props.type === "savings_goal") {
-      if (!price) setPriceError("Empty field!");
+      if (!price) setPriceError(t("Common.EmptyError"));
     }
     if (props.type === "savings_goal") {
       if (title && amount && price && !priceError && !titleError && !amountError) {
@@ -229,7 +232,7 @@ const Edit = (props) => {
           </div>
           <div className="edit__modalMain">
             <FieldContainer
-              title="Title"
+              title={t("Common.ModalTitle")}
               type="text"
               value={title}
               error={titleError}
@@ -238,13 +241,13 @@ const Edit = (props) => {
             />
             <FieldContainer
               type="textarea"
-              title="Description"
+              title={t("Common.ModalDescription")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             {props.type === "savings_goal" ? (
               <FieldContainer
-                title="Price"
+                title={t("Common.ModalPrice")}
                 type="number"
                 value={price}
                 error={priceError}
@@ -255,7 +258,11 @@ const Edit = (props) => {
               ""
             )}
             <FieldContainer
-              title={props.type === "savings_goal" ? "Collected" : "Amount"}
+              title={
+                props.type === "savings_goal"
+                  ? t("Common.ModalCollected")
+                  : t("Common.ModalAmount")
+              }
               type="number"
               value={amount}
               error={amountError}
@@ -266,7 +273,7 @@ const Edit = (props) => {
             props.type === "savings_goal" ||
             props.type === "expense-sim" ? (
               <FieldContainer
-                title="Deadline"
+                title={t("Common.ModalDeadline")}
                 type="date"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
@@ -277,7 +284,7 @@ const Edit = (props) => {
           </div>
           <div className="edit__modalButton">
             <button onClick={handleEditData} className="edit__submitBtn">
-              Edit
+              {t("Common.ModalEditBtn")}
             </button>
           </div>
         </div>
@@ -294,6 +301,7 @@ const Edit = (props) => {
     titleError,
     amountError,
     priceError,
+    language,
   ]);
 
   return <div className="edit">{memoEdit}</div>;

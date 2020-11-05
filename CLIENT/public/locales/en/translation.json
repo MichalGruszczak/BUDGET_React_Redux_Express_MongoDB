@@ -1,0 +1,69 @@
+{
+    "Common": {
+         "EmptyError": "This field cannot be empty!",
+         "EmailError": "Incorrect email adress!",
+         "ConfirmError": "Passwords are not the same!",
+         "ModalTitle": "Title",
+         "ModalDescription": "Description",
+         "ModalPrice": "Price",
+         "ModalCollected": "Collected",
+         "ModalAmount": "Amount",
+         "ModalDeadline": "Deadline",
+         "ModalAddBtn": "Add",
+         "ModalEditBtn": "Edit"
+         
+    },
+
+    "Settings": {
+        "Language": "Language",
+        "Theme": "Theme"
+    },
+
+    "Footer": {
+        "Result": "Result",
+        "Rights": "All rights reserved",
+        "Incomes": "Incomes",
+        "Expenses": "Expenses",
+        "Savings": "Savings",
+        "CollectedForGoals": "Collected for Goals"
+    },
+
+    "Item": {
+        "Left": "Left"
+    },
+
+    "LogReg": {
+        "NavLogin": "Login",
+        "NavRegister": "Register",
+        "Email": "Email",
+        "Password": "Password",
+        "LoginBtn": "Sign In",
+        "Hello": "Hello",
+        "UserNotExist": "User does not exist",
+        "InvalidPassword": "Invalid password",
+        "Logout": "Logout",
+        "Name": "Name",
+        "ConfirmPassword": "Confirm password",
+        "RegisterBtn": "Register",
+        "UserRegistered": "User registered",
+        "UserExists": "User already exists"
+    },
+
+    "Menu": {
+        "Monthly": "Monthly budget",
+        "Savings": "Savings",
+        "Simulator": "Simulator",
+        "Settings": "Settings"
+    },
+
+    "Accordions": {
+        "PermanentlyIncomes": "Permanently Incomes",
+        "TemporaryIncomes": "Temporary Incomes",
+        "PermanentlyExpenses": "Permanently Expenses",
+        "TemporaryExpenses": "Temporary Expenses",
+        "Savings": "Savings",
+        "SavingsGoals": "Savings Goals"
+    }
+
+    
+}
