@@ -33,7 +33,7 @@ const Item = (props) => {
   const deadline = new Date(props.deadline);
   const now = new Date();
   const dateDiff = deadline.getTime() - now.getTime();
-  const daysToDeadline = Math.floor(dateDiff / (1000 * 60 * 60 * 24));
+  const daysToDeadline = 1 + Math.floor(dateDiff / (1000 * 60 * 60 * 24));
 
   // MEMOIZED ITEM COMPONENT
 
@@ -54,7 +54,9 @@ const Item = (props) => {
                 <HiCursorClick />
               </div>
               <div className="item__description">
-                <MdDescription />
+                <MdDescription
+                  className={isDescription ? "item__descriptionIcon active" : ""}
+                />
               </div>
             </>
           ) : (
@@ -85,8 +87,20 @@ const Item = (props) => {
         ) : (
           <div className="item__amount">{props.amount}</div>
         )}
-        {props.type === "income" || props.type === "income-sim" ? null : (
-          <div className="item__deadline">
+        {props.type === "income" ||
+        props.type === "income-sim" ||
+        props.type === "savings_income" ? null : (
+          <div
+            className={
+              props.deadline
+                ? daysToDeadline < 0 && !props.done
+                  ? "item__deadline expired"
+                  : daysToDeadline >= 0 && daysToDeadline <= 3 && !props.done
+                  ? "item__deadline close"
+                  : "item__deadline"
+                : "item__deadline"
+            }
+          >
             {props.done ? null : props.deadline ? (
               <div
                 onClick={toggleDate}
@@ -116,20 +130,27 @@ const Item = (props) => {
         )}
         <div className="item__options">
           <div className="item__edit">
-            <Edit
-              id={props.id}
-              title={props.title}
-              description={props.description}
-              amount={props.amount}
-              deadline={props.deadline}
-              type={props.type}
-              price={props.price}
-            />
+            {props.done ? (
+              ""
+            ) : (
+              <Edit
+                id={props.id}
+                title={props.title}
+                description={props.description}
+                amount={props.amount}
+                deadline={props.deadline}
+                type={props.type}
+                price={props.price}
+                done={props.done}
+              />
+            )}
           </div>
           <div className="item__delete">
             <Delete id={props.id} type={props.type} />
           </div>
-          {props.type === "income" || props.type === "income-sim" ? (
+          {props.type === "income" ||
+          props.type === "income-sim" ||
+          props.type === "savings_income" ? (
             <div className="item__empty"></div>
           ) : (
             <div className={props.done ? "item__done done" : "item__done"}>
@@ -152,7 +173,9 @@ const Item = (props) => {
   return (
     <div
       className={
-        props.type === "income" || props.type === "income-sim"
+        props.type === "income" ||
+        props.type === "income-sim" ||
+        props.type === "savings_income"
           ? "item income"
           : props.type === "savings_goal"
           ? "item goal"

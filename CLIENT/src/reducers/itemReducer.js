@@ -8,43 +8,15 @@ import {
 
 export const initialState = {
   monthly: {
-    incomes: [
-      {
-        id: 1,
-        title: "Work",
-        description: "With benefits",
-        amount: 1000,
-        permanent: true,
-      },
-      { id: 2, title: "Interest", amount: 200, permanent: true },
-      { id: 3, title: "Other", amount: 10000 },
-    ],
+    incomes: [],
 
-    expenses: [
-      {
-        id: 4,
-        title: "Rent",
-        description: "Last month",
-        amount: 2000,
-        deadline: "2020,11,06",
-        permanent: true,
-        done: false,
-      },
-      { id: 5, title: "Car fuel", amount: 200, permanent: true, done: true },
-      {
-        id: 6,
-        title: "Wife birthday",
-        amount: 100000,
-        deadline: "2020,12,23",
-        done: false,
-      },
-    ],
+    expenses: [],
   },
 
   savings: {
-    incomes: [{ id: 7, title: "Account", amount: 10000 }],
+    incomes: [],
 
-    expenses: [{ id: 8, title: "Car gearbox fix", amount: 2000 }],
+    expenses: [],
   },
 
   isOpenModal: false,

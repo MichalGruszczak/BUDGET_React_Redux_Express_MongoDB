@@ -145,7 +145,7 @@ const Simulator = () => {
         />
       </>
     );
-  }, [simIncomes, simExpenses, simFlag]);
+  }, [simIncomes, simExpenses, simFlag, language]);
 
   return <div className="simulator">{memoSimulator}</div>;
 };

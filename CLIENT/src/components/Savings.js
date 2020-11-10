@@ -61,41 +61,51 @@ const Savings = () => {
   const memoSavings = useMemo(() => {
     return (
       <>
-        <Accordion
-          type="income"
-          title={t("Accordions.Savings")}
-          amount={savingsAmount}
-          addType={"savings-incomes"}
-          content={items.incomes.map((item) => (
-            <Item
-              type="savings_income"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
+        {isAuthenticated ? (
+          <>
+            <Accordion
+              type="income"
+              title={t("Accordions.Savings")}
+              amount={savingsAmount}
+              addType={"savings-incomes"}
+              content={items.incomes.map((item) => (
+                <Item
+                  type="savings_income"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                />
+              ))}
             />
-          ))}
-        />
-        <Accordion
-          type="expense"
-          title={t("Accordions.SavingsGoals")}
-          amount={savingsGoalsAmount}
-          addType={"savings-goals"}
-          content={items.expenses.map((item) => (
-            <Item
-              type="savings_goal"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
-              price={item.price}
-              deadline={item.deadline}
-              done={item.done}
+            <Accordion
+              type="expense"
+              title={t("Accordions.SavingsGoals")}
+              amount={savingsGoalsAmount}
+              addType={"savings-goals"}
+              content={items.expenses.map((item) => (
+                <Item
+                  type="savings_goal"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                  price={item.price}
+                  deadline={item.deadline}
+                  done={item.done}
+                />
+              ))}
             />
-          ))}
-        />
+          </>
+        ) : (
+          <span className="savings__noAuthMessage">
+            {t("NoAuth.Main1")}
+            <br />
+            {t("NoAuth.Main2")}
+          </span>
+        )}
         <Footer
           type="budget"
           incTitle={t("Footer.Savings")}

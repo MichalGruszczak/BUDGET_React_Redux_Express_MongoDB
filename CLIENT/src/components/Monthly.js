@@ -80,75 +80,85 @@ const Monthly = () => {
   const memoMonthly = useMemo(() => {
     return (
       <>
-        <Accordion
-          title={t("Accordions.PermanentlyIncomes")}
-          amount={permanentIncomesAmount}
-          type={"income"}
-          addType={"permanently-incomes"}
-          content={permanentIncomes.map((item) => (
-            <Item
-              type="income"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
+        {isAuthenticated ? (
+          <>
+            <Accordion
+              title={t("Accordions.PermanentlyIncomes")}
+              amount={permanentIncomesAmount}
+              type={"income"}
+              addType={"permanently-incomes"}
+              content={permanentIncomes.map((item) => (
+                <Item
+                  type="income"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                />
+              ))}
             />
-          ))}
-        />
-        <Accordion
-          title={t("Accordions.TemporaryIncomes")}
-          amount={temporaryIncomesAmount}
-          type={"income"}
-          addType={"temporary-incomes"}
-          content={temporaryIncomes.map((item) => (
-            <Item
-              type="income"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
+            <Accordion
+              title={t("Accordions.TemporaryIncomes")}
+              amount={temporaryIncomesAmount}
+              type={"income"}
+              addType={"temporary-incomes"}
+              content={temporaryIncomes.map((item) => (
+                <Item
+                  type="income"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                />
+              ))}
             />
-          ))}
-        />
-        <Accordion
-          title={t("Accordions.PermanentlyExpenses")}
-          amount={permanentExpensesAmount}
-          type={"expense"}
-          addType={"permanently-expenses"}
-          content={permanentExpenses.map((item) => (
-            <Item
-              type="expense"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
-              deadline={item.deadline}
-              done={item.done}
-              permanent={item.permanent}
+            <Accordion
+              title={t("Accordions.PermanentlyExpenses")}
+              amount={permanentExpensesAmount}
+              type={"expense"}
+              addType={"permanently-expenses"}
+              content={permanentExpenses.map((item) => (
+                <Item
+                  type="expense"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                  deadline={item.deadline}
+                  done={item.done}
+                  permanent={item.permanent}
+                />
+              ))}
             />
-          ))}
-        />
-        <Accordion
-          title={t("Accordions.TemporaryExpenses")}
-          amount={temporaryExpensesAmount}
-          type={"expense"}
-          addType={"temporary-expenses"}
-          content={temporaryExpenses.map((item) => (
-            <Item
-              type="expense"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
-              deadline={item.deadline}
-              done={item.done}
+            <Accordion
+              title={t("Accordions.TemporaryExpenses")}
+              amount={temporaryExpensesAmount}
+              type={"expense"}
+              addType={"temporary-expenses"}
+              content={temporaryExpenses.map((item) => (
+                <Item
+                  type="expense"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  amount={item.amount}
+                  deadline={item.deadline}
+                  done={item.done}
+                />
+              ))}
             />
-          ))}
-        />
+          </>
+        ) : (
+          <span className="monthly__noAuthMessage">
+            {t("NoAuth.Main1")}
+            <br />
+            {t("NoAuth.Main2")}
+          </span>
+        )}
         <Footer
           type="budget"
           incTitle={t("Footer.Incomes")}

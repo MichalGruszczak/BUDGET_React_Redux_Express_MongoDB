@@ -8,6 +8,27 @@
   @include div-center;
   .menu__btn {
     @include nav-btn;
+    display: flex;
+    align-items: center;
+
+    .menu__btnText {
+      flex-basis: 70%;
+      @include div-center;
+    }
+
+    .menu__btnArrow {
+      flex-basis: 30%;
+      @include div-center;
+
+      .menu__icon {
+        font-size: 25px;
+        transition: 0.2s linear;
+      }
+
+      .menu__icon.active {
+        transform: rotate(180deg);
+      }
+    }
   }
   .menu__drop {
     position: absolute;
@@ -33,6 +54,7 @@
     .menu__itemSettings {
       @include div-center;
       cursor: pointer;
+      box-shadow: 0 0 30px 10px black;
     }
 
     .menu__itemSettings {

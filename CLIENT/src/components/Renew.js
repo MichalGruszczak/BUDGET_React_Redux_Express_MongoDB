@@ -19,7 +19,7 @@ const Renew = (props) => {
 
     const itemToRenew = {
       done: false,
-      deadline: props.deadline ? actualDeadline.setMonth(actualDeadlineMonth + 1) : null,
+      deadline: props.deadline ? actualDeadline.setMonth(actualDeadlineMonth + 1) : "",
     };
 
     // CASE
@@ -30,7 +30,14 @@ const Renew = (props) => {
     if (props.type === "expense-sim") {
       let selectedExpense = simExpenses.find((item) => item.id === props.id);
       selectedExpense.done = false;
-      // deadline !!!!!!!!!!!!!!!
+
+      let selectedExpenseDeadline = new Date(selectedExpense.deadline);
+      let selectedExpenseDeadlineMonth = new Date(selectedExpense.deadline).getMonth();
+
+      selectedExpense.deadline = selectedExpenseDeadline.setMonth(
+        selectedExpenseDeadlineMonth + 1
+      );
+
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
       setTimeout(() => {
         dispatch({

@@ -12,20 +12,30 @@
     display: flex;
     align-items: center;
 
+    .logReg__name {
+      margin: 0 auto;
+    }
+
     .logReg__btn {
       @include nav-btn;
     }
 
     .logReg__loginModal {
       position: absolute;
-      top: -880%;
-      left: 0;
+      top: 100%;
+      left: 0%;
+      transform: translateY(-105%);
+      width: 100%;
       height: 50vh;
       background-color: black;
-      transition: 0.5s linear;
+      transition: 0.2s linear;
       z-index: -1;
-      opacity: 0;
-      animation: closeLoginModal 0.5s linear 1 both;
+      overflow: hidden;
+    }
+
+    .logReg__loginModal.active {
+      transform: translateY(0);
+      box-shadow: 0 0 30px 10px black;
     }
 
     .logReg__background {
@@ -33,7 +43,7 @@
       height: 100%;
       background-color: red;
       opacity: 0;
-      transition: 0.3s linear 0.5s;
+      transition: 0.3s linear 0.2s;
       display: grid;
       grid-template-columns: 1fr 30px;
       grid-template-rows: 30px 1fr 60px 60px;
@@ -44,7 +54,7 @@
         "message message";
 
       .logReg__modalClose {
-        background-color: red;
+        @include close-btn;
         grid-area: close;
       }
 
@@ -73,11 +83,6 @@
       }
     }
 
-    .logReg__loginModal.active {
-      animation: openLoginModal 0.5s linear 1 both;
-      opacity: 1;
-    }
-
     .logReg__background.active {
       opacity: 1;
     }
@@ -88,16 +93,15 @@
       right: 0%;
       transform: translateY(-105%);
       height: 80vh;
+      width: 100%;
       background-color: black;
-      transition: 0.5s linear;
+      transition: 0.3s linear;
       z-index: -1;
-      opacity: 0;
-      animation: closeRegisterModal 0.5s linear 1 both;
     }
 
     .logReg__registerModal.active {
-      animation: openRegisterModal 0.5s linear 1 both;
-      opacity: 1;
+      transform: translateY(0);
+      box-shadow: 0 0 30px 10px black;
     }
   }
 
@@ -125,99 +129,5 @@
       display: flex;
       color: red;
     }
-  }
-}
-
-@keyframes openLoginModal {
-  0% {
-    top: -1000%;
-    width: 0%;
-  }
-  1% {
-    top: -880%;
-    width: 0%;
-  }
-  50% {
-    top: -880%;
-    width: 100%;
-  }
-  70% {
-    top: -880%;
-    width: 100%;
-  }
-  100% {
-    top: 100%;
-    width: 100%;
-  }
-}
-
-@keyframes closeLoginModal {
-  0% {
-    top: 100%;
-    width: 100%;
-  }
-  30% {
-    top: -880%;
-    width: 100%;
-  }
-  50% {
-    top: -880%;
-    width: 100%;
-  }
-
-  99% {
-    top: -880%;
-    width: 0%;
-  }
-  100% {
-    top: -1000%;
-    width: 0%;
-  }
-}
-
-@keyframes openRegisterModal {
-  0% {
-    transform: translateY(-105%);
-    width: 0%;
-  }
-  1% {
-    transform: translateY(-99%);
-    width: 0%;
-  }
-  50% {
-    transform: translateY(-99%);
-    width: 100%;
-  }
-  70% {
-    transform: translateY(-99%);
-    width: 100%;
-  }
-  100% {
-    transform: translateY(0%);
-    width: 100%;
-  }
-}
-
-@keyframes closeRegisterModal {
-  0% {
-    transform: translateY(0%);
-    width: 100%;
-  }
-  30% {
-    transform: translateY(-99%);
-    width: 100%;
-  }
-  50% {
-    transform: translateY(-99%);
-    width: 100%;
-  }
-
-  99% {
-    transform: translateY(-99%);
-    width: 0%;
-  }
-  100% {
-    transform: translateY(-105%);
-    width: 0%;
   }
 }

@@ -217,7 +217,7 @@ const Edit = (props) => {
     return (
       <>
         <button
-          disabled={isOpenModal && !isOpen ? true : ""}
+          disabled={(isOpenModal && !isOpen) || props.done === true ? true : ""}
           onClick={toggleOpen}
           className={isOpen ? "edit__btn active" : "edit__btn"}
         >
@@ -275,7 +275,7 @@ const Edit = (props) => {
               <FieldContainer
                 title={t("Common.ModalDeadline")}
                 type="date"
-                value={deadline}
+                value={deadline ? new Date(deadline).toISOString().slice(0, 10) : ""}
                 onChange={(e) => setDeadline(e.target.value)}
               />
             ) : (
@@ -302,6 +302,7 @@ const Edit = (props) => {
     amountError,
     priceError,
     language,
+    props.done,
   ]);
 
   return <div className="edit">{memoEdit}</div>;

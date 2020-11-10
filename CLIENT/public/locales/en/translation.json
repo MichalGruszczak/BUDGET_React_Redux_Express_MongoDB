@@ -63,6 +63,11 @@
         "TemporaryExpenses": "Temporary Expenses",
         "Savings": "Savings",
         "SavingsGoals": "Savings Goals"
+    },
+
+    "NoAuth": {
+        "Main1": "This mode is available only for logged users.",
+        "Main2": "Log in or try the Simulator."
     }
 
     

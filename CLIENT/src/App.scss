@@ -8,9 +8,10 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5% 1fr;
+  // grid-template-rows: 6% 1fr;
+  grid-template-rows: 1fr;
   grid-template-areas:
-    "navbar"
+    // "navbar"
     "main";
   overflow: hidden;
 }

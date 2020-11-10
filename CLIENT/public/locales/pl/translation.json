@@ -63,5 +63,12 @@
         "TemporaryExpenses": "Wydatki tymczasowe",
         "Savings": "Oszczędności",
         "SavingsGoals": "Cele oszczędnościowe"
+    },
+
+    "NoAuth": {
+        "Main1": "Ten tryb dostępny jest wyłącznie dla zalogowanych użytkowników.",
+        "Main2": "Zaloguj się lub skorzystaj z symulatora."
     }
+
+
 }
