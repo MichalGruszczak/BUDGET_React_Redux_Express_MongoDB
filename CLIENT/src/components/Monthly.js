@@ -49,6 +49,16 @@ const Monthly = () => {
 
   const expensesValue = permanentExpensesAmount + temporaryExpensesAmount;
 
+  const undoneTemporaryExpenses = temporaryExpenses.filter((item) => item.done === false);
+
+  const doneTemporaryExpenses = temporaryExpenses.filter((item) => item.done === true);
+
+  const undonePermanentlyExpenses = permanentExpenses.filter(
+    (item) => item.done === false
+  );
+
+  const donePermanentlyExpenses = permanentExpenses.filter((item) => item.done === true);
+
   // GET USER BUDGET DATA
   const getItems = () => {
     if (isAuthenticated) {
@@ -119,37 +129,66 @@ const Monthly = () => {
               amount={permanentExpensesAmount}
               type={"expense"}
               addType={"permanently-expenses"}
-              content={permanentExpenses.map((item) => (
-                <Item
-                  type="expense"
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  description={item.description}
-                  amount={item.amount}
-                  deadline={item.deadline}
-                  done={item.done}
-                  permanent={item.permanent}
-                />
-              ))}
+              content={[
+                undonePermanentlyExpenses.map((item) => (
+                  <Item
+                    type="expense"
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                    amount={item.amount}
+                    deadline={item.deadline}
+                    done={item.done}
+                    permanent={item.permanent}
+                  />
+                )),
+                donePermanentlyExpenses.map((item) => (
+                  <Item
+                    type="expense"
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                    amount={item.amount}
+                    deadline={item.deadline}
+                    done={item.done}
+                    permanent={item.permanent}
+                  />
+                )),
+              ]}
             />
             <Accordion
               title={t("Accordions.TemporaryExpenses")}
               amount={temporaryExpensesAmount}
               type={"expense"}
               addType={"temporary-expenses"}
-              content={temporaryExpenses.map((item) => (
-                <Item
-                  type="expense"
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  description={item.description}
-                  amount={item.amount}
-                  deadline={item.deadline}
-                  done={item.done}
-                />
-              ))}
+              content={[
+                undoneTemporaryExpenses.map((item) => (
+                  <Item
+                    type="expense"
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                    amount={item.amount}
+                    deadline={item.deadline}
+                    done={item.done}
+                  />
+                )),
+                doneTemporaryExpenses.map((item) => (
+                  <Item
+                    type="expense"
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                    amount={item.amount}
+                    deadline={item.deadline}
+                    done={item.done}
+                  />
+                )),
+              ]}
             />
           </>
         ) : (

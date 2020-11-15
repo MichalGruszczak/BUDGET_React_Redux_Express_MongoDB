@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .field {
   @include modalFieldContainer;
@@ -13,11 +14,21 @@
     grid-area: input;
     display: flex;
     align-items: center;
+
+    .field__input {
+      @include modal-input;
+    }
+
+    .field__textarea {
+      @include modal-input;
+      height: auto;
+    }
   }
 
   .field__errorContainer {
+    margin-top: 5px;
     grid-area: error;
     display: flex;
-    color: red;
+    color: $red-darken;
   }
 }

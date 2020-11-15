@@ -19,12 +19,12 @@ const Language = () => {
         </div>
         <div className="language__opt1">
           <button onClick={() => handleClick("pl")} className="language__btn">
-            <Flag className="language__flag" country={"PL"} />
+            <div className="language__btnFlag polish"></div>
           </button>
         </div>
         <div className="language__opt2">
           <button onClick={() => handleClick("en")} className="language__btn">
-            <Flag className="language__flag" country={"GB"} />
+            <div className="language__btnFlag british"></div>
           </button>
         </div>
       </>

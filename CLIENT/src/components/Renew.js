@@ -31,12 +31,14 @@ const Renew = (props) => {
       let selectedExpense = simExpenses.find((item) => item.id === props.id);
       selectedExpense.done = false;
 
-      let selectedExpenseDeadline = new Date(selectedExpense.deadline);
-      let selectedExpenseDeadlineMonth = new Date(selectedExpense.deadline).getMonth();
+      if (props.deadline) {
+        let selectedExpenseDeadline = new Date(selectedExpense.deadline);
+        let selectedExpenseDeadlineMonth = new Date(selectedExpense.deadline).getMonth();
 
-      selectedExpense.deadline = selectedExpenseDeadline.setMonth(
-        selectedExpenseDeadlineMonth + 1
-      );
+        selectedExpense.deadline = selectedExpenseDeadline.setMonth(
+          selectedExpenseDeadlineMonth + 1
+        );
+      }
 
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
       setTimeout(() => {

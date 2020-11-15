@@ -64,13 +64,7 @@ const Item = (props) => {
           )}
         </div>
         {props.type === "savings_goal" ? (
-          <div
-            className={
-              props.price - props.amount <= 0
-                ? "item__goalValues green"
-                : "item__goalValues"
-            }
-          >
+          <div className={"item__goalValues"}>
             <div className="item__goalPrice">
               <div className="item__goalTitle">{t("Common.ModalPrice")}</div>
               <div className="item__goalValue">{props.price}</div>
@@ -90,17 +84,7 @@ const Item = (props) => {
         {props.type === "income" ||
         props.type === "income-sim" ||
         props.type === "savings_income" ? null : (
-          <div
-            className={
-              props.deadline
-                ? daysToDeadline < 0 && !props.done
-                  ? "item__deadline expired"
-                  : daysToDeadline >= 0 && daysToDeadline <= 3 && !props.done
-                  ? "item__deadline close"
-                  : "item__deadline"
-                : "item__deadline"
-            }
-          >
+          <div className={"item__deadline"}>
             {props.done ? null : props.deadline ? (
               <div
                 onClick={toggleDate}
@@ -153,7 +137,7 @@ const Item = (props) => {
           props.type === "savings_income" ? (
             <div className="item__empty"></div>
           ) : (
-            <div className={props.done ? "item__done done" : "item__done"}>
+            <div className={"item__done"}>
               {props.done ? (
                 props.permanent ? (
                   <Renew id={props.id} type={props.type} deadline={props.deadline} />
@@ -178,7 +162,19 @@ const Item = (props) => {
         props.type === "savings_income"
           ? "item income"
           : props.type === "savings_goal"
-          ? "item goal"
+          ? props.done
+            ? "item goal finished"
+            : daysToDeadline < 0 && props.deadline
+            ? "item goal expired"
+            : daysToDeadline >= 0 && daysToDeadline <= 3 && props.deadline
+            ? "item goal close"
+            : "item goal"
+          : props.done
+          ? "item finished"
+          : daysToDeadline < 0 && props.deadline
+          ? "item expired"
+          : daysToDeadline >= 0 && daysToDeadline <= 3 && props.deadline
+          ? "item close"
           : "item"
       }
     >

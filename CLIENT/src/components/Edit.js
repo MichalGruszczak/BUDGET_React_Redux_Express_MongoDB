@@ -10,6 +10,7 @@ import {
 } from "../actionTypes";
 import FieldContainer from "./FieldContainer";
 import { useTranslation } from "react-i18next";
+import { GrClose } from "react-icons/gr";
 
 const Edit = (props) => {
   const dispatch = useDispatch();
@@ -227,7 +228,7 @@ const Edit = (props) => {
           <div className="edit__modalLoading"></div>
           <div className="edit__modalClose">
             <button onClick={toggleOpen} className="edit__closeBtn">
-              X
+              <GrClose />
             </button>
           </div>
           <div className="edit__modalMain">

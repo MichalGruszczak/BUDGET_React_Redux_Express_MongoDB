@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .add {
   width: 100%;
@@ -10,14 +11,19 @@
     width: 100%;
     height: 100%;
     font-size: 30px;
-    background-color: lightgreen;
-    border: none;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
     cursor: pointer;
     transition: 0.1s linear;
     @include div-center;
 
     &:hover {
       font-size: 40px;
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
   }
 
@@ -30,12 +36,10 @@
 
     .add__modalLoading {
       grid-area: loading;
-      background-color: blue;
     }
 
     .add__modalClose {
       grid-area: close;
-      background-color: red;
 
       .add__closeBtn {
         @include close-btn;
@@ -43,25 +47,26 @@
     }
 
     .add__modalMain {
+      margin-top: 10px;
       grid-area: main;
-      background-color: orange;
       display: flex;
       flex-direction: column;
+      margin-top: 10px;
     }
 
     .add__modalButton {
       grid-area: button;
-      background-color: blueviolet;
       @include div-center;
 
       .add__submitBtn {
         @include modal-btn;
+        margin-bottom: 30px;
       }
     }
   }
 
   .add__modal.active {
-    height: 400px;
-    box-shadow: 0 0 50px 30px black;
+    height: 500px;
+    box-shadow: 0 0 5px 1px $light-gray-darken, 0 0 50px 30px black;
   }
 }

@@ -11,8 +11,9 @@ const FieldContainer = (props) => {
         {props.type === "textarea" ? (
           <textarea
             value={props.value}
+            rows={3}
             onChange={props.onChange}
-            className="field__input"
+            className="field__textarea"
           />
         ) : (
           <input

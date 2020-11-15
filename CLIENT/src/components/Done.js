@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import "./Done.scss";
-import { BiCheckCircle } from "react-icons/bi";
+import { GoCheck } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
 
@@ -72,7 +72,7 @@ const Done = (props) => {
           disabled={isOpenModal ? true : ""}
           className="done__btn"
         >
-          <BiCheckCircle />
+          <GoCheck />
         </button>
       </>
     );

@@ -41,7 +41,7 @@ const Menu = () => {
             to="/"
             exact
           >
-            {t("Menu.Monthly")}
+            {t("Menu.MonthlyLong")}
           </NavLink>
         </div>
         <div className="menu__itemSavings">

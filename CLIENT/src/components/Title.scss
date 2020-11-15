@@ -2,19 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
 .title {
-  background-color: red;
+  // background-color: red;
   width: 100%;
   height: 100%;
   @include div-center;
   .title__icon {
-    background-color: sandybrown;
+    // background-color: sandybrown;
     margin-right: 5px;
     font-size: 30px;
     @include div-center;
   }
 
   .title__verticalBar {
-    background-color: seashell;
+    // background-color: seashell;
     .title__barInside {
       background-color: black;
       width: 5px;
@@ -23,7 +23,7 @@
   }
 
   .title__text {
-    background-color: skyblue;
+    // background-color: skyblue;
     margin-left: 5px;
     font-size: 20px;
     .title__mg {

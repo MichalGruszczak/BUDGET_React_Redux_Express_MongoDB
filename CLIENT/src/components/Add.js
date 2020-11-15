@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import FieldContainer from "./FieldContainer";
 import { useTranslation } from "react-i18next";
+import { GrClose } from "react-icons/gr";
 
 const Add = (props) => {
   const dispatch = useDispatch();
@@ -248,7 +249,7 @@ const Add = (props) => {
           <div className="add__modalLoading"></div>
           <div className="add__modalClose">
             <button onClick={toggleOpen} className="add__closeBtn">
-              X
+              <GrClose />
             </button>
           </div>
           <div className="add__modalMain">

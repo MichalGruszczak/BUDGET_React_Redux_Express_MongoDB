@@ -1,9 +1,9 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .theme {
   width: 100%;
   height: 100%;
-  background-color: lightseagreen;
   display: grid;
   grid-template-columns: 50% 25% 25%;
   grid-template-rows: 1fr;
@@ -11,14 +11,30 @@
 
   .theme__btn {
     @include settings-btn;
+    border: 2px solid black;
+    transition: 0.1s linear;
   }
 
   .theme__btn.dark {
     background-color: black;
+
+    &:hover {
+      box-shadow: 0 0 3px 1px white;
+    }
   }
 
   .theme__btn.light {
-    background-color: lightblue;
+    background: rgb(103, 103, 103);
+    background: linear-gradient(
+      45deg,
+      rgba(103, 103, 103, 1) 0%,
+      rgba(205, 205, 205, 1) 100%
+    );
+    border: 2px solid white;
+
+    &:hover {
+      box-shadow: 0 0 3px 1px $light-gray-darken;
+    }
   }
   .theme__title {
     @include div-center;

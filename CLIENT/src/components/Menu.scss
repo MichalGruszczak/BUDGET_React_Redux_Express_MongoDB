@@ -1,17 +1,19 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .menu {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: lightcoral;
   @include div-center;
   .menu__btn {
     @include nav-btn;
+    padding: 5px 0;
     display: flex;
     align-items: center;
 
     .menu__btnText {
+      margin-left: 5px;
       flex-basis: 70%;
       @include div-center;
     }
@@ -34,39 +36,56 @@
     position: absolute;
     width: 150%;
     height: 50vh;
-    top: -1100%;
+    top: 100%;
     left: 0;
-    background-color: black;
+    transform-origin: 50% 0;
+    transform: scale(0);
+    @include light-gray-bgc;
     display: grid;
-    transition: 0.5s ease;
-    grid-template-rows: 1fr 1fr 1fr 0.5fr;
+    transition: 0.3s ease;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr;
     grid-template-areas:
       "monthly"
       "savings"
       "simulator"
       "settings";
-    color: white;
+    box-shadow: 0 0 30px 10px $light-gray-darken;
     z-index: -1;
+    border-left: 2px solid $light-gray-darken;
+    border-right: 2px solid $light-gray-darken;
+
     .menu__itemMonthly,
     .menu__itemSavings,
     .menu__itemSimulator,
     .menu__itemSettings {
       @include div-center;
+      text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 0 30px 10px black;
     }
 
     .menu__itemSettings {
-      background-color: lightblue;
-      color: black;
+      border-bottom: 2px solid $light-gray-darken;
     }
+
     .menu__link {
       @include link;
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include div-center;
+      color: black;
+      font-weight: bold;
+      border-top: 2px solid $light-gray-darken;
+      transition: 0.1s linear;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
   .menu__active {
-    top: 100%;
+    transform: scale(1);
   }
 }

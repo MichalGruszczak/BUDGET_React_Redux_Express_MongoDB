@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .renew {
   width: 100%;
@@ -7,5 +8,10 @@
 
   .renew__btn {
     @include item-btn;
+    background-color: #ffcf40;
+    box-shadow: 0 0 2px 0px #ffcf40;
+    &:hover {
+      box-shadow: 0 0 3px 0.5px #ffcf40;
+    }
   }
 }

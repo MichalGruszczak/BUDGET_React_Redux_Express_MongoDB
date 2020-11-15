@@ -1,12 +1,12 @@
 @import "../mixins.scss";
 
 .savings {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: lightgray;
+  // background-color: lightgray;
   margin-top: 50px;
 
   .savings__noAuthMessage {

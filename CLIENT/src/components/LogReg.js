@@ -3,6 +3,7 @@ import "./LogReg.scss";
 import { USER_LOGIN, USER_LOGOUT } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { GrClose } from "react-icons/gr";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -184,11 +185,11 @@ const Register = () => {
             className={isLoginOpen ? "logReg__background active" : "logReg__background"}
           >
             <button onClick={toggleLogin} className="logReg__modalClose">
-              X
+              <GrClose />
             </button>
             <div className="logReg__modalLoading">
               {acceptedLoginProcessing ? (
-                <span className="logReg__loading">LOADING!!!</span>
+                <span className="logReg__loading">LOADING .... </span>
               ) : (
                 ""
               )}
@@ -239,7 +240,7 @@ const Register = () => {
               <button
                 disabled={acceptedLoginProcessing ? true : false}
                 onClick={loginUser}
-                className="logReg__btn"
+                className="logReg__modalBtn"
               >
                 {t("LogReg.LoginBtn")}
               </button>
@@ -297,7 +298,7 @@ const Register = () => {
           >
             {/*  */}
             <button onClick={toggleRegister} className="logReg__modalClose">
-              X
+              <GrClose />
             </button>
             <div className="logReg__modalLoading"></div>
             <div className="logReg__modalMain">
@@ -382,7 +383,7 @@ const Register = () => {
               <button
                 disabled={acceptedRegisterProcessing ? true : false}
                 onClick={registerUser}
-                className="logReg__btn"
+                className="logReg__modalBtn"
               >
                 {t("LogReg.RegisterBtn")}
               </button>

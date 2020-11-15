@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .edit {
   width: 100%;
@@ -7,10 +8,16 @@
 
   .edit__btn {
     @include item-btn;
+    background-color: $light-gray-mid;
+    box-shadow: 0 0 2px 0px $light-gray-mid;
+    &:hover {
+      box-shadow: 0 0 3px 0.5px $light-gray-mid;
+    }
   }
 
   .edit__btn.active {
-    box-shadow: 0 0 2px 2px black;
+    box-shadow: 0 0 3px 1.5px $light-gray-mid;
+    font-size: 25px;
   }
 
   .edit__modal {
@@ -18,12 +25,10 @@
 
     .edit__modalLoading {
       grid-area: loading;
-      background-color: blue;
     }
 
     .edit__modalClose {
       grid-area: close;
-      background-color: red;
       .edit__closeBtn {
         @include close-btn;
       }
@@ -31,24 +36,24 @@
 
     .edit__modalMain {
       grid-area: main;
-      background-color: orange;
+      margin-top: 10px;
       display: flex;
       flex-direction: column;
     }
 
     .edit__modalButton {
       grid-area: button;
-      background-color: blueviolet;
       @include div-center;
 
       .edit__submitBtn {
         @include modal-btn;
+        margin-bottom: 30px;
       }
     }
   }
 
   .edit__modal.active {
-    height: 400px;
-    box-shadow: 0 0 50px 30px black;
+    height: 500px;
+    box-shadow: 0 0 5px 1px $light-gray-darken, 0 0 50px 30px black;
   }
 }

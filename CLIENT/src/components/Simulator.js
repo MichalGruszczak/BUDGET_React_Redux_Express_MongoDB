@@ -58,6 +58,14 @@ const Simulator = () => {
         }, 0)
     : 0;
 
+  const undoneTemporaryExpenses = temporaryExpenses.filter((item) => !item.done);
+
+  const doneTemporaryExpenses = temporaryExpenses.filter((item) => item.done);
+
+  const undonePermanentExpenses = permanentExpenses.filter((item) => !item.done);
+
+  const donePermanentExpenses = permanentExpenses.filter((item) => item.done);
+
   const incomesValue = permanentIncomesAmount + temporaryIncomesAmount;
 
   const expensesValue = permanentExpensesAmount + temporaryExpensesAmount;
@@ -104,37 +112,66 @@ const Simulator = () => {
           amount={permanentExpensesAmount}
           type={"expense"}
           addType={"permanently-expenses-sim"}
-          content={permanentExpenses.map((item) => (
-            <Item
-              type="expense-sim"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
-              deadline={item.deadline}
-              done={item.done}
-              permanent={item.permanent}
-            />
-          ))}
+          content={[
+            undonePermanentExpenses.map((item) => (
+              <Item
+                type="expense-sim"
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                amount={item.amount}
+                deadline={item.deadline}
+                done={item.done}
+                permanent={item.permanent}
+              />
+            )),
+            donePermanentExpenses.map((item) => (
+              <Item
+                type="expense-sim"
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                amount={item.amount}
+                deadline={item.deadline}
+                done={item.done}
+                permanent={item.permanent}
+              />
+            )),
+          ]}
         />
         <Accordion
           title={t("Accordions.TemporaryExpenses")}
           amount={temporaryExpensesAmount}
           type={"expense"}
           addType={"temporary-expenses-sim"}
-          content={temporaryExpenses.map((item) => (
-            <Item
-              type="expense-sim"
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              amount={item.amount}
-              deadline={item.deadline}
-              done={item.done}
-            />
-          ))}
+          content={[
+            undoneTemporaryExpenses.map((item) => (
+              <Item
+                type="expense-sim"
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                amount={item.amount}
+                deadline={item.deadline}
+                done={item.done}
+              />
+            )),
+            doneTemporaryExpenses.map((item) => (
+              <Item
+                type="expense-sim"
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                amount={item.amount}
+                deadline={item.deadline}
+                done={item.done}
+              />
+            )),
+          ]}
         />
         <Footer
           type="budget"

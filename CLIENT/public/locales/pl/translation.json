@@ -50,7 +50,8 @@
     },
 
     "Menu": {
-        "Monthly": "Budżet miesięczny",
+        "Monthly": "Miesięczny",
+        "MonthlyLong": "Budżet miesięczny",
         "Savings": "Oszczędności",
         "Simulator": "Symulator",
         "Settings": "Ustawienia"
