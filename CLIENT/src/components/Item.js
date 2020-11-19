@@ -7,12 +7,14 @@ import Delete from "./Delete";
 import Done from "./Done";
 import Renew from "./Renew";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Item = (props) => {
   const [isDescription, setIsDescription] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDate, setIsDate] = useState(false);
   const [isDateAnimating, setIsDateAnimating] = useState(false);
+  const theme = useSelector((state) => state.theme.theme);
 
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
@@ -79,7 +81,9 @@ const Item = (props) => {
             </div>
           </div>
         ) : (
-          <div className="item__amount">{props.amount}</div>
+          <div className={theme === "dark" ? "item__amount dark" : "item__amount"}>
+            {props.amount}
+          </div>
         )}
         {props.type === "income" ||
         props.type === "income-sim" ||
@@ -152,14 +156,34 @@ const Item = (props) => {
         </div>
       </>
     );
-  }, [props, isDate, isDateAnimating, isDescription, isAnimating, language]);
+  }, [props, isDate, isDateAnimating, isDescription, isAnimating, language, theme]);
 
   return (
     <div
       className={
-        props.type === "income" ||
-        props.type === "income-sim" ||
-        props.type === "savings_income"
+        theme === "dark"
+          ? props.type === "income" ||
+            props.type === "income-sim" ||
+            props.type === "savings_income"
+            ? "item income dark"
+            : props.type === "savings_goal"
+            ? props.done
+              ? "item goal finished dark"
+              : daysToDeadline < 0 && props.deadline
+              ? "item goal expired dark"
+              : daysToDeadline >= 0 && daysToDeadline <= 3 && props.deadline
+              ? "item goal close dark"
+              : "item goal dark"
+            : props.done
+            ? "item finished dark"
+            : daysToDeadline < 0 && props.deadline
+            ? "item expired dark"
+            : daysToDeadline >= 0 && daysToDeadline <= 3 && props.deadline
+            ? "item close dark"
+            : "item dark"
+          : props.type === "income" ||
+            props.type === "income-sim" ||
+            props.type === "savings_income"
           ? "item income"
           : props.type === "savings_goal"
           ? props.done

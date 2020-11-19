@@ -1,11 +1,13 @@
 import React, { useMemo } from "react";
 import "./Footer.scss";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Footer = (props) => {
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
   const monthlyResult = props.incomesValue - props.expensesValue;
+  const theme = useSelector((state) => state.theme.theme);
 
   const memoFooter = useMemo(() => {
     return (
@@ -23,9 +25,9 @@ const Footer = (props) => {
   }, [props, language]);
 
   return props.type === "budget" ? (
-    <div className="footer">{memoFooter}</div>
+    <div className={theme === "dark" ? "footer dark" : "footer"}>{memoFooter}</div>
   ) : (
-    <div className="footer__info">
+    <div className={theme === "dark" ? "footer__info dark" : "footer__info"}>
       <span>{t("Footer.Rights")}</span>
     </div>
   );

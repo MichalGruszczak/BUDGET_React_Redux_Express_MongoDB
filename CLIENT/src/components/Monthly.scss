@@ -1,9 +1,9 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .monthly {
   width: 100%;
   height: 100%;
-  // background-color: lightgray;
   margin-top: 55px;
 
   .monthly__noAuthMessage {
@@ -14,5 +14,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .monthly__noAuthMessage.dark {
+    color: $light-gray-lighter;
   }
 }

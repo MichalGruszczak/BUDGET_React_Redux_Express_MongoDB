@@ -65,10 +65,14 @@
 
   .item__amount {
     grid-area: amount;
-    border: 2px solid $light-gray-darken;
+    border: 2px solid $light-gray-mid;
     border-radius: 5px;
     font-weight: bold;
     @include div-center;
+  }
+
+  .item__amount.dark {
+    border: 2px solid $light-gray-mid;
   }
 
   .item__goalValues {
@@ -138,7 +142,6 @@
 
   .item__deadline.close {
     box-sizing: border-box;
-    border: 3px solid fuchsia;
   }
 
   .item__deadline.expired {
@@ -176,6 +179,16 @@
   }
 }
 
+.item.dark {
+  color: $light-gray-lighter;
+  background-color: $dark-gray-ultradark;
+  box-shadow: 0 0 5px 0px $light-gray-darken;
+
+  .item__deadlineContainer.active {
+    animation: rotateTitleDivDeadlineDark 0.3s 1 linear both;
+  }
+}
+
 .item.income {
   grid-template-columns: 50% 10% 10% 30%;
   grid-template-areas: "title amount empty options";
@@ -185,10 +198,16 @@
   grid-template-columns: 30% 30% 10% 30%;
   grid-template-areas: "title values deadline options";
 }
+
+.item.goal.dark {
+  .item__goalTitle {
+    color: $light-gray-lighter;
+  }
+}
+
 // DONE EXPENSE
 .item.finished {
-  background: rgba(0, 153, 0, 0.7);
-  background: linear-gradient(45deg, rgba(0, 153, 0, 0.7) 0%, rgba(0, 230, 0, 0.7) 100%);
+  background-color: $green-btn;
   border: 2px solid $light-gray-lighter;
 
   .item__goalValues {
@@ -208,6 +227,11 @@
   .item__titleText.active {
     animation-name: rotateTitleDivFinished;
   }
+}
+
+// DONE EXPENSE DARK
+.item.finished.dark {
+  background-color: $green-done;
 }
 
 .item.close {
@@ -219,8 +243,7 @@
 
 // EXPENSE EXPIRED
 .item.expired {
-  background: rgb(204, 0, 0);
-  background: linear-gradient(45deg, rgba(204, 0, 0, 0.7) 0%, rgba(255, 0, 0, 0.7) 100%);
+  background-color: $red-expired;
   border: 2px solid $light-gray-lighter;
 
   .item__goalValues {
@@ -239,6 +262,15 @@
 
   .item__titleText.active {
     animation-name: rotateTitleDivFinished;
+  }
+}
+
+// EXPENSE EXPIRED DARK
+.item.expired.dark {
+  background-color: $red-expired-dark;
+
+  .item__deadlineContainer.active {
+    animation: rotateTitleDivDeadline 0.3s 1 linear both;
   }
 }
 
@@ -258,6 +290,21 @@
 }
 
 @keyframes rotateTitleDivDeadline {
+  0% {
+    transform: rotateX(0deg);
+    background-color: $light-gray-lighter;
+  }
+
+  50% {
+    background-color: $light-gray-lighter;
+  }
+
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes rotateTitleDivDeadlineDark {
   0% {
     transform: rotateX(0deg);
     background-color: $light-gray-darken;

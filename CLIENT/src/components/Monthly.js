@@ -18,6 +18,7 @@ const Monthly = () => {
   const userToken = useSelector((state) => state.user.token);
   const items = useSelector((state) => state.items.monthly);
   const flag = useSelector((state) => state.items.flag);
+  const theme = useSelector((state) => state.theme.theme);
 
   // FILTERING MONTHLY BUDGET ITEMS
   const permanentIncomes = items.incomes.filter((item) => item.permanent === true);
@@ -192,7 +193,11 @@ const Monthly = () => {
             />
           </>
         ) : (
-          <span className="monthly__noAuthMessage">
+          <span
+            className={
+              theme === "dark" ? "monthly__noAuthMessage dark" : "monthly__noAuthMessage"
+            }
+          >
             {t("NoAuth.Main1")}
             <br />
             {t("NoAuth.Main2")}
@@ -207,7 +212,7 @@ const Monthly = () => {
         />
       </>
     );
-  }, [isAuthenticated, items, flag, language]);
+  }, [isAuthenticated, items, flag, language, theme]);
 
   return <div className="monthly">{memoMonthly}</div>;
 };

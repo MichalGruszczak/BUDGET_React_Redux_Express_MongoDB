@@ -10,17 +10,15 @@ export default function (state = initialState, action) {
       localStorage.setItem("theme", "light");
       return {
         ...state,
-        theme: "light",
+        theme: localStorage.getItem("theme"),
       };
     case THEME_DARK:
       localStorage.setItem("theme", "dark");
       return {
         ...state,
-        theme: "dark",
+        theme: localStorage.getItem("theme"),
       };
     default:
-      return {
-        state,
-      };
+      return state;
   }
 }

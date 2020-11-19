@@ -8,6 +8,7 @@ import { GrClose } from "react-icons/gr";
 const Register = () => {
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
+  const theme = useSelector((state) => state.theme.theme);
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -174,15 +175,38 @@ const Register = () => {
     return (
       <div className="logReg__login">
         {isAuthenticated ? (
-          <span className="logReg__name">{`${userName}`}</span>
+          <span
+            className={theme === "dark" ? "logReg__name dark" : "logReg__name"}
+          >{`${userName}`}</span>
         ) : (
-          <button onClick={toggleLogin} className="logReg__btn">
+          <button
+            onClick={toggleLogin}
+            className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
+          >
             {t("LogReg.NavLogin")}
           </button>
         )}
-        <div className={isLoginOpen ? "logReg__loginModal active" : "logReg__loginModal"}>
+        <div
+          className={
+            theme === "dark"
+              ? isLoginOpen
+                ? "logReg__loginModal active dark"
+                : "logReg__loginModal dark"
+              : isLoginOpen
+              ? "logReg__loginModal active"
+              : "logReg__loginModal"
+          }
+        >
           <div
-            className={isLoginOpen ? "logReg__background active" : "logReg__background"}
+            className={
+              theme === "dark"
+                ? isLoginOpen
+                  ? "logReg__background active dark"
+                  : "logReg__background dark"
+                : isLoginOpen
+                ? "logReg__background active"
+                : "logReg__background"
+            }
           >
             <button onClick={toggleLogin} className="logReg__modalClose">
               <GrClose />
@@ -195,7 +219,13 @@ const Register = () => {
               )}
             </div>
             <div className="logReg__modalMain">
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 {/* Email */}
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.Email")}</label>
@@ -217,7 +247,13 @@ const Register = () => {
                 </div>
               </div>
               {/* Password */}
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.Password")}</label>
                 </div>
@@ -271,6 +307,7 @@ const Register = () => {
     loginFailed,
     isAuthenticated,
     language,
+    theme,
   ]);
 
   // REGISTER
@@ -278,22 +315,40 @@ const Register = () => {
     return (
       <div className="logReg__register">
         {isAuthenticated ? (
-          <button onClick={logout} className="logReg__btn">
+          <button
+            onClick={logout}
+            className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
+          >
             {t("LogReg.Logout")}
           </button>
         ) : (
-          <button onClick={toggleRegister} className="logReg__btn">
+          <button
+            onClick={toggleRegister}
+            className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
+          >
             {t("LogReg.NavRegister")}
           </button>
         )}
         <div
           className={
-            isRegisterOpen ? "logReg__registerModal active" : "logReg__registerModal"
+            theme === "dark"
+              ? isRegisterOpen
+                ? "logReg__registerModal active dark"
+                : "logReg__registerModal dark"
+              : isRegisterOpen
+              ? "logReg__registerModal active"
+              : "logReg__registerModal"
           }
         >
           <div
             className={
-              isRegisterOpen ? "logReg__background active" : "logReg__background"
+              theme === "dark"
+                ? isRegisterOpen
+                  ? "logReg__background active dark"
+                  : "logReg__background dark"
+                : isRegisterOpen
+                ? "logReg__background active"
+                : "logReg__background"
             }
           >
             {/*  */}
@@ -303,7 +358,13 @@ const Register = () => {
             <div className="logReg__modalLoading"></div>
             <div className="logReg__modalMain">
               {/* Name */}
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.Name")}</label>
                 </div>
@@ -321,7 +382,13 @@ const Register = () => {
                 </div>
               </div>
               {/* Email */}
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.Email")}</label>
                 </div>
@@ -342,7 +409,13 @@ const Register = () => {
                 </div>
               </div>
               {/* Password */}
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.Password")}</label>
                 </div>
@@ -360,7 +433,13 @@ const Register = () => {
                 </div>
               </div>
               {/* Confirm password */}
-              <div className="logReg__fieldContainer">
+              <div
+                className={
+                  theme === "dark"
+                    ? "logReg__fieldContainer dark"
+                    : "logReg__fieldContainer"
+                }
+              >
                 <div className="logReg__labelContainer">
                   <label className="logReg__label">{t("LogReg.ConfirmPassword")}</label>
                 </div>
@@ -419,6 +498,7 @@ const Register = () => {
     registerFailed,
     isAuthenticated,
     language,
+    theme,
   ]);
 
   return (

@@ -2,9 +2,11 @@ import React, { useState, useMemo } from "react";
 import "./Accordion.scss";
 import { AiOutlineDown } from "react-icons/ai";
 import Add from "./Add";
+import { useSelector } from "react-redux";
 
 const Accordion = (props) => {
   const [isOpen, setIsOpen] = useState(true);
+  const theme = useSelector((state) => state.theme.theme);
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -16,7 +18,13 @@ const Accordion = (props) => {
       <>
         <div
           className={
-            props.type === "income" ? "accordion__bar" : "accordion__bar expense"
+            theme === "dark"
+              ? props.type === "income"
+                ? "accordion__bar dark"
+                : "accordion__bar expense dark"
+              : props.type === "income"
+              ? "accordion__bar"
+              : "accordion__bar expense"
           }
         >
           <div onClick={toggleAccordion} className="accordion__title">
@@ -39,7 +47,7 @@ const Accordion = (props) => {
         </div>
       </>
     );
-  }, [isOpen, props.amount, props.content]);
+  }, [isOpen, props.amount, props.content, theme]);
 
   return <div className="accordion">{memoAccordion}</div>;
 };

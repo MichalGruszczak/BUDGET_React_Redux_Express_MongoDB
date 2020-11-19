@@ -15,27 +15,40 @@
     transition: 0.1s linear;
   }
 
-  .theme__btn.dark {
-    background-color: black;
+  .theme__btn.darkTheme {
+    @include dark-gray-bgc;
+    border: 2px solid $dark-gray-darken;
 
     &:hover {
-      box-shadow: 0 0 3px 1px white;
+      box-shadow: 0 0 2px 1px $dark-gray-darken;
     }
   }
 
-  .theme__btn.light {
-    background: rgb(103, 103, 103);
-    background: linear-gradient(
-      45deg,
-      rgba(103, 103, 103, 1) 0%,
-      rgba(205, 205, 205, 1) 100%
-    );
-    border: 2px solid white;
+  .theme__btn.darkTheme.dark {
+    border: 2px solid $light-gray-lighter;
 
     &:hover {
-      box-shadow: 0 0 3px 1px $light-gray-darken;
+      box-shadow: 0 0 2px 1px $light-gray-lighter;
     }
   }
+
+  .theme__btn.lightTheme {
+    @include light-gray-bgc;
+    border: 2px solid $dark-gray-darken;
+
+    &:hover {
+      box-shadow: 0 0 2px 1px $dark-gray-darken;
+    }
+  }
+
+  .theme__btn.lightTheme.dark {
+    border: 2px solid $light-gray-lighter;
+
+    &:hover {
+      box-shadow: 0 0 2px 1px $light-gray-lighter;
+    }
+  }
+
   .theme__title {
     @include div-center;
     grid-area: title;

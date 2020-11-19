@@ -23,11 +23,19 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-color: transparent;
-      box-shadow: 0 0 3px 0 $light-gray-darken inset, 0 0 3px 0 $light-gray-darken;
+      box-shadow: 0 0 2px 1px $dark-gray-darken inset, 0 0 3px 0 $dark-gray-darken;
       transition: 0.1s linear;
 
       &:hover {
-        box-shadow: 0 0 3px 0 $light-gray-darken inset, 0 0 4px 1px $light-gray-darken;
+        box-shadow: 0 0 2px 1px $dark-gray-darken inset, 0 0 3px 1px $dark-gray-darken;
+      }
+    }
+
+    .language__btnFlag.dark {
+      box-shadow: 0 0 2px 1px $light-gray-lighter inset, 0 0 3px 0 $light-gray-lighter;
+
+      &:hover {
+        box-shadow: 0 0 2px 1px $light-gray-lighter inset, 0 0 3px 1px $light-gray-lighter;
       }
     }
 

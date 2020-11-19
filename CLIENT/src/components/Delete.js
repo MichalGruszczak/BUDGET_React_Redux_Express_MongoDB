@@ -11,6 +11,7 @@ const Delete = (props) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
+  const theme = useSelector((state) => state.theme.theme);
 
   // FETCH API DELETE
   const deleteAPI = () => {
@@ -88,13 +89,13 @@ const Delete = (props) => {
         <button
           disabled={isOpenModal ? true : ""}
           onClick={handleDelete}
-          className="delete__btn"
+          className={theme === "dark" ? "delete__btn dark" : "delete__btn"}
         >
           <AiFillDelete />
         </button>
       </>
     );
-  }, [isOpenModal]);
+  }, [isOpenModal, theme]);
 
   return <div className="delete">{memoDelete}</div>;
 };

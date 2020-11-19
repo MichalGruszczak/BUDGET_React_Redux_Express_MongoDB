@@ -3,18 +3,23 @@ import { NavLink } from "react-router-dom";
 import "./Menu.scss";
 import { useTranslation } from "react-i18next";
 import { AiOutlineDown } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState("");
   const { t } = useTranslation();
+  const theme = useSelector((state) => state.theme.theme);
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
   return (
     <div className="menu">
-      <button className="menu__btn" onClick={toggle}>
+      <button
+        className={theme === "dark" ? "menu__btn dark" : "menu__btn"}
+        onClick={toggle}
+      >
         <div className="menu__btnText">
           {option === "monthly"
             ? t("Menu.Monthly")
@@ -30,7 +35,17 @@ const Menu = () => {
           <AiOutlineDown className={isOpen ? "menu__icon active" : "menu__icon"} />
         </div>
       </button>
-      <div className={isOpen ? "menu__drop menu__active" : "menu__drop"}>
+      <div
+        className={
+          theme === "dark"
+            ? isOpen
+              ? "menu__drop menu__active dark"
+              : "menu__drop dark"
+            : isOpen
+            ? "menu__drop menu__active"
+            : "menu__drop"
+        }
+      >
         <div className="menu__itemMonthly">
           <NavLink
             onClick={() => {

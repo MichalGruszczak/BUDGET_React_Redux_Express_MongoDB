@@ -12,6 +12,7 @@ const Done = (props) => {
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
   const id = props.id;
+  const theme = useSelector((state) => state.theme.theme);
 
   // DONE REST API function
 
@@ -70,13 +71,13 @@ const Done = (props) => {
         <button
           onClick={handleDoneData}
           disabled={isOpenModal ? true : ""}
-          className="done__btn"
+          className={theme === "dark" ? "done__btn dark" : "done__btn"}
         >
           <GoCheck />
         </button>
       </>
     );
-  }, [isOpenModal, props.done]);
+  }, [isOpenModal, props.done, theme]);
 
   return <div className="done">{memoDone}</div>;
 };

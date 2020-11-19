@@ -8,7 +8,7 @@ const ThemeSwitcher = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
 
   const memoTheme = useMemo(() => {
@@ -26,7 +26,9 @@ const ThemeSwitcher = () => {
                 type: THEME_DARK,
               })
             }
-            className="theme__btn dark"
+            className={
+              theme === "dark" ? "theme__btn darkTheme dark" : "theme__btn darkTheme"
+            }
           ></button>
         </div>
         <div className="theme__opt2">
@@ -36,7 +38,9 @@ const ThemeSwitcher = () => {
                 type: THEME_LIGHT,
               })
             }
-            className="theme__btn light"
+            className={
+              theme === "dark" ? "theme__btn lightTheme dark" : "theme__btn lightTheme"
+            }
           ></button>
         </div>
       </>

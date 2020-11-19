@@ -18,6 +18,7 @@ const Savings = () => {
   const userToken = useSelector((state) => state.user.token);
   const items = useSelector((state) => state.items.savings);
   const savingsFlag = useSelector((state) => state.items.savingsFlag);
+  const theme = useSelector((state) => state.theme.theme);
 
   const undoneSavingsGoals = items.expenses.filter((item) => item.done === false);
 
@@ -119,7 +120,11 @@ const Savings = () => {
             />
           </>
         ) : (
-          <span className="savings__noAuthMessage">
+          <span
+            className={
+              theme === "dark" ? "savings__noAuthMessage dark" : "savings__noAuthMessage"
+            }
+          >
             {t("NoAuth.Main1")}
             <br />
             {t("NoAuth.Main2")}
@@ -134,7 +139,7 @@ const Savings = () => {
         />
       </>
     );
-  }, [isAuthenticated, items, savingsFlag, language]);
+  }, [isAuthenticated, items, savingsFlag, language, theme]);
 
   return <div className="savings">{memoSavings}</div>;
 };

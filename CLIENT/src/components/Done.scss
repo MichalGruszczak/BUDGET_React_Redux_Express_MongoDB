@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .done {
   width: 100%;
@@ -11,6 +12,15 @@
     box-shadow: 0 0 2px 0px $green-btn;
     &:hover {
       box-shadow: 0 0 3px 0.5px $green-btn;
+    }
+  }
+
+  .done__btn.dark {
+    background-color: $green-done;
+    color: $light-gray-lighter;
+    box-shadow: 0 0 2px 0px $green-done;
+    &:hover {
+      box-shadow: 0 0 3px 0.5px $green-done;
     }
   }
 }

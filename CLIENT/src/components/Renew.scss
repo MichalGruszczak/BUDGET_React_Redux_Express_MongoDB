@@ -14,4 +14,13 @@
       box-shadow: 0 0 3px 0.5px #ffcf40;
     }
   }
+
+  .renew__btn.dark {
+    background-color: #b57310;
+    color: $light-gray-lighter;
+    box-shadow: 0 0 2px 0px #b57310;
+    &:hover {
+      box-shadow: 0 0 3px 0.5px #b57310;
+    }
+  }
 }

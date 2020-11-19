@@ -32,3 +32,22 @@
     color: $red-darken;
   }
 }
+
+.field.dark {
+  .field__input {
+    @include modal-input-dark;
+    color: $light-gray-lighter;
+  }
+
+  .field__textarea {
+    @include modal-input-dark;
+    color: $light-gray-lighter;
+  }
+
+  .field__error {
+    color: $red-btn;
+  }
+  .field__input::-webkit-calendar-picker-indicator {
+    background-color: $light-gray-lighter;
+  }
+}

@@ -1,9 +1,11 @@
 import React from "react";
 import "./FieldContainer.scss";
+import { useSelector } from "react-redux";
 
 const FieldContainer = (props) => {
+  const theme = useSelector((state) => state.theme.theme);
   return (
-    <div className="field">
+    <div className={theme === "dark" ? "field dark" : "field"}>
       <div className="field__labelContainer">
         <label className="field__label">{props.title}</label>
       </div>

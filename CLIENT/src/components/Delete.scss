@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .delete {
   width: 100%;
@@ -11,6 +12,14 @@
     box-shadow: 0 0 2px 0px $red-btn;
     &:hover {
       box-shadow: 0 0 3px 0.5px $red-btn;
+    }
+  }
+
+  .delete__btn.dark {
+    background-color: $red-delete;
+    color: $light-gray-lighter;
+    &:hover {
+      box-shadow: 0 0 3px 0.5px $red-expired-dark;
     }
   }
 }

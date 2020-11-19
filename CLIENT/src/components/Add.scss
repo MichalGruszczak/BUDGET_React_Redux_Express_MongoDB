@@ -27,6 +27,11 @@
     }
   }
 
+  .add__btn.dark {
+    color: $light-gray-lighter;
+    border-color: $light-gray-lighter;
+  }
+
   .add__btn.active {
     font-size: 40px;
   }
@@ -65,8 +70,20 @@
     }
   }
 
+  .add__modal.dark {
+    @include modalBasicWithoutMessageDark;
+
+    .add__submitBtn {
+      @include modal-btn-dark;
+    }
+  }
+
   .add__modal.active {
     height: 500px;
     box-shadow: 0 0 5px 1px $light-gray-darken, 0 0 50px 30px black;
+  }
+
+  .add__modal.active.dark {
+    box-shadow: 0 0 5px 1px black, 0 0 50px 30px $light-gray-mid;
   }
 }

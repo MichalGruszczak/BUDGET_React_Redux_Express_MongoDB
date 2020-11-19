@@ -11,6 +11,7 @@ const Renew = (props) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
+  const theme = useSelector((state) => state.theme.theme);
 
   // RENEW REST API FUNCTION
   const renewAPI = () => {
@@ -83,13 +84,13 @@ const Renew = (props) => {
         <button
           onClick={handleRenewItem}
           disabled={isOpenModal ? true : ""}
-          className="renew__btn"
+          className={theme === "dark" ? "renew__btn dark" : "renew__btn"}
         >
           <FiRefreshCcw />
         </button>
       </>
     );
-  }, [isOpenModal, props.done]);
+  }, [isOpenModal, props.done, theme]);
   return <div className="renew">{memoRenew}</div>;
 };
 

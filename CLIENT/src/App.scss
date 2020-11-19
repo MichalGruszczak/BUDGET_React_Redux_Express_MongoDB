@@ -9,10 +9,12 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  // grid-template-rows: 6% 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas:
-    // "navbar"
-    "main";
+  grid-template-areas: "main";
   overflow: hidden;
+}
+
+// Dark theme
+.App.dark {
+  @include dark-gray-bgc;
 }

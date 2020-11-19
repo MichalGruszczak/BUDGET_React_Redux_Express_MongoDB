@@ -17,8 +17,16 @@
       margin: 0 auto;
     }
 
+    .logReg__name.dark {
+      color: $light-gray-lighter;
+    }
+
     .logReg__btn {
       @include nav-btn;
+    }
+
+    .logReg__btn.dark {
+      @include nav-btn-dark;
     }
 
     .logReg__loginModal {
@@ -35,9 +43,17 @@
       overflow: hidden;
     }
 
+    .logReg__loginModal.dark {
+      @include dark-gray-bgc;
+    }
+
     .logReg__loginModal.active {
       transform: scale(1);
       box-shadow: 0 0 30px 10px $light-gray-darken;
+    }
+
+    .logReg__loginModal.active.dark {
+      box-shadow: 0 0 5px 1px black, 0 0 50px 30px $light-gray-mid;
     }
 
     .logReg__background {
@@ -86,6 +102,18 @@
       }
     }
 
+    .logReg__background.dark {
+      @include dark-gray-bgc;
+
+      .logReg__modalMessage {
+        color: $light-gray-lighter;
+      }
+
+      .logReg__modalBtn {
+        @include modal-btn-dark;
+      }
+    }
+
     .logReg__background.active {
       opacity: 1;
     }
@@ -106,6 +134,14 @@
     .logReg__registerModal.active {
       transform: scale(1);
       box-shadow: 0 0 30px 10px $light-gray-darken;
+    }
+
+    .logReg__registerModal.dark {
+      @include dark-gray-bgc;
+    }
+
+    .logReg__registerModal.active.dark {
+      box-shadow: 0 0 5px 1px black, 0 0 50px 30px $light-gray-mid;
     }
   }
 
@@ -142,6 +178,21 @@
       display: flex;
       margin-top: 10px;
       color: $red-darken;
+    }
+  }
+
+  .logReg__fieldContainer.dark {
+    .logReg__labelContainer {
+      color: $light-gray-lighter;
+    }
+
+    .logReg__input {
+      @include modal-input-dark;
+      color: $light-gray-lighter;
+    }
+
+    .logReg__errorContainer {
+      color: $red-btn;
     }
   }
 }

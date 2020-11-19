@@ -14,9 +14,24 @@
       box-shadow: 0 0 3px 0.5px $light-gray-mid;
     }
   }
+  // DARK
+  .edit__btn.dark {
+    background-color: $dark-gray-lighter;
+    color: $light-gray-lighter;
+    box-shadow: 0 0 2px 0px $dark-gray-lighter;
+
+    &:hover {
+      box-shadow: 0 0 3px 0.5px $dark-gray-lighter;
+    }
+  }
 
   .edit__btn.active {
     box-shadow: 0 0 3px 1.5px $light-gray-mid;
+    font-size: 25px;
+  }
+  // DARK
+  .edit__btn.active.dark {
+    box-shadow: 0 0 3px 1.5px $dark-gray-lighter;
     font-size: 25px;
   }
 
@@ -52,8 +67,20 @@
     }
   }
 
+  .edit__modal.dark {
+    @include modalBasicWithoutMessageDark;
+
+    .edit__submitBtn {
+      @include modal-btn-dark;
+    }
+  }
+
   .edit__modal.active {
     height: 500px;
     box-shadow: 0 0 5px 1px $light-gray-darken, 0 0 50px 30px black;
+  }
+
+  .edit__modal.active.dark {
+    box-shadow: 0 0 5px 1px black, 0 0 50px 30px $light-gray-mid;
   }
 }

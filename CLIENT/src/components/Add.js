@@ -18,6 +18,7 @@ const Add = (props) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
+  const theme = useSelector((state) => state.theme.theme);
 
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
@@ -241,11 +242,29 @@ const Add = (props) => {
         <button
           disabled={isOpenModal && !isOpen ? true : false}
           onClick={toggleOpen}
-          className={isOpen ? "add__btn active" : "add__btn"}
+          className={
+            theme === "dark"
+              ? isOpen
+                ? "add__btn active dark"
+                : "add__btn dark"
+              : isOpen
+              ? "add__btn active"
+              : "add__btn"
+          }
         >
           <FiPlus />
         </button>
-        <div className={isOpen ? "add__modal active" : "add__modal"}>
+        <div
+          className={
+            theme === "dark"
+              ? isOpen
+                ? "add__modal active dark"
+                : "add__modal dark"
+              : isOpen
+              ? "add__modal active"
+              : "add__modal"
+          }
+        >
           <div className="add__modalLoading"></div>
           <div className="add__modalClose">
             <button onClick={toggleOpen} className="add__closeBtn">
@@ -326,6 +345,7 @@ const Add = (props) => {
     amountError,
     priceError,
     language,
+    theme,
   ]);
 
   return <div className="add">{memoAdd}</div>;

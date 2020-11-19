@@ -32,6 +32,10 @@
       }
     }
   }
+
+  .menu__btn.dark {
+    @include nav-btn-dark;
+  }
   .menu__drop {
     position: absolute;
     width: 150%;
@@ -81,6 +85,26 @@
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .menu__drop.dark {
+    @include dark-gray-bgc;
+    box-shadow: 0 0 30px 10px $light-gray-mid;
+    z-index: -1;
+    border-left: 2px solid $light-gray-lighter;
+    border-right: 2px solid $light-gray-lighter;
+
+    .menu__itemSettings {
+      border-bottom: 2px solid $light-gray-lighter;
+    }
+
+    .menu__link {
+      color: $light-gray-lighter;
+      border-top: 2px solid $light-gray-lighter;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
       }
     }
   }

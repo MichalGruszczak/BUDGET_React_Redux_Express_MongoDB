@@ -22,6 +22,12 @@
   }
 }
 
+@mixin nav-btn-dark {
+  @include nav-btn;
+  border-color: $light-gray-lighter;
+  color: $light-gray-lighter;
+}
+
 // Buttons in modals
 @mixin modal-btn {
   position: relative;
@@ -54,6 +60,15 @@
 
   &:active {
     transform: scale(0.95);
+  }
+}
+
+@mixin modal-btn-dark {
+  border: 2px solid $light-gray-lighter;
+  color: $light-gray-lighter;
+
+  &::after {
+    background-color: $light-gray-lighter;
   }
 }
 
@@ -113,6 +128,19 @@
   }
 }
 
+@mixin modal-input-dark {
+  border: 1px solid $light-gray-lighter;
+  box-shadow: 0 0 2px 0 $light-gray-lighter;
+
+  &:hover {
+    box-shadow: 0 0 4px 0 $light-gray-lighter;
+  }
+
+  &:focus {
+    box-shadow: 0 0 4px 0 $light-gray-lighter;
+  }
+}
+
 // Close modal button
 @mixin close-btn {
   width: 100%;
@@ -151,9 +179,15 @@
   background: rgb(103, 103, 103);
   background: linear-gradient(
     45deg,
-    rgba(103, 103, 103, 1) 0%,
+    rgba(164, 164, 164, 1) 0%,
     rgba(205, 205, 205, 1) 100%
   );
+}
+
+// Dark theme gray background
+@mixin dark-gray-bgc {
+  background: rgb(82, 82, 82);
+  background: linear-gradient(45deg, rgba(82, 82, 82, 1) 0%, rgba(41, 41, 41, 1) 100%);
 }
 
 // Modal basic
@@ -176,6 +210,11 @@
     "main main"
     "button button";
   transition: 0.2s linear;
+}
+
+@mixin modalBasicWithoutMessageDark {
+  @include modalBasicWithoutMessage;
+  @include dark-gray-bgc;
 }
 
 // Field in modal/main

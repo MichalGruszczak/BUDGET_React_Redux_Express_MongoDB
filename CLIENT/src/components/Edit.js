@@ -16,6 +16,7 @@ const Edit = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
+  const theme = useSelector((state) => state.theme.theme);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -220,11 +221,29 @@ const Edit = (props) => {
         <button
           disabled={(isOpenModal && !isOpen) || props.done === true ? true : ""}
           onClick={toggleOpen}
-          className={isOpen ? "edit__btn active" : "edit__btn"}
+          className={
+            theme === "dark"
+              ? isOpen
+                ? "edit__btn active dark"
+                : "edit__btn dark"
+              : isOpen
+              ? "edit__btn active"
+              : "edit__btn"
+          }
         >
           <AiFillEdit />
         </button>
-        <div className={isOpen ? "edit__modal active" : "edit__modal"}>
+        <div
+          className={
+            theme === "dark"
+              ? isOpen
+                ? "edit__modal active dark"
+                : "edit__modal dark"
+              : isOpen
+              ? "edit__modal active"
+              : "edit__modal"
+          }
+        >
           <div className="edit__modalLoading"></div>
           <div className="edit__modalClose">
             <button onClick={toggleOpen} className="edit__closeBtn">
@@ -304,6 +323,7 @@ const Edit = (props) => {
     priceError,
     language,
     props.done,
+    theme,
   ]);
 
   return <div className="edit">{memoEdit}</div>;

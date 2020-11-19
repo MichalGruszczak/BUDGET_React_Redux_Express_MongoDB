@@ -13,3 +13,7 @@ select,
 textarea {
   outline: none;
 }
+
+button:disabled {
+  opacity: 0.4;
+}

@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variables.scss";
 
 .savings {
   position: relative;
@@ -6,7 +7,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  // background-color: lightgray;
   margin-top: 50px;
 
   .savings__noAuthMessage {
@@ -17,5 +17,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .savings__noAuthMessage.dark {
+    color: $light-gray-lighter;
   }
 }
