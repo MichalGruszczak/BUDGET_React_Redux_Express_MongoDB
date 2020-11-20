@@ -1,0 +1,30 @@
+@import "../mixins.scss";
+
+.suspense {
+  @include light-gray-bgc;
+  width: 100%;
+  height: 100%;
+  @include div-center;
+
+  .suspense__container {
+    display: flex;
+    flex-direction: column;
+
+    .suspense__item.loading {
+      margin-bottom: 30px;
+    }
+
+    .suspense__item.title {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.suspense.index {
+  width: 100vw;
+  height: 100vh;
+}
+
+.suspense.dark {
+  @include dark-gray-bgc;
+}

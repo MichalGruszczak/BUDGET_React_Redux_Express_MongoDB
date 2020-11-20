@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./Renew.scss";
 import { FiRefreshCcw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { TOGGLE_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
+import Loading from "./Loading";
 
 const Renew = (props) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Renew = (props) => {
   const userEmail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
   const theme = useSelector((state) => state.theme.theme);
+  const [isLoading, setIsLoading] = useState(false);
 
   // RENEW REST API FUNCTION
   const renewAPI = () => {
@@ -29,6 +31,7 @@ const Renew = (props) => {
     const simExpenses = JSON.parse(localStorage.getItem("simExpenses"));
 
     if (props.type === "expense-sim") {
+      setIsLoading(true);
       let selectedExpense = simExpenses.find((item) => item.id === props.id);
       selectedExpense.done = false;
 
@@ -43,6 +46,8 @@ const Renew = (props) => {
 
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
       setTimeout(() => {
+        setIsLoading(false);
+
         dispatch({
           type: TOGGLE_SIM_FLAG,
         });
@@ -51,6 +56,7 @@ const Renew = (props) => {
 
     // USER - PERSONAL
     else if (isAuthenticated) {
+      setIsLoading(true);
       fetch(
         `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/renew`,
         {
@@ -81,16 +87,20 @@ const Renew = (props) => {
   const memoRenew = useMemo(() => {
     return (
       <>
-        <button
-          onClick={handleRenewItem}
-          disabled={isOpenModal ? true : ""}
-          className={theme === "dark" ? "renew__btn dark" : "renew__btn"}
-        >
-          <FiRefreshCcw />
-        </button>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <button
+            onClick={handleRenewItem}
+            disabled={isOpenModal ? true : ""}
+            className={theme === "dark" ? "renew__btn dark" : "renew__btn"}
+          >
+            <FiRefreshCcw />
+          </button>
+        )}
       </>
     );
-  }, [isOpenModal, props.done, theme]);
+  }, [isOpenModal, props.done, theme, isLoading]);
   return <div className="renew">{memoRenew}</div>;
 };
 

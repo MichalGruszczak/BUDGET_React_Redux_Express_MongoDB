@@ -1,0 +1,90 @@
+@import "../mixins.scss";
+@import "../variables.scss";
+
+.loading {
+  @include div-center;
+
+  .loading__dotTyping {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $dark-gray-darken;
+    color: $dark-gray-darken;
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+    animation: dotTypingLight 1.5s infinite linear;
+  }
+}
+
+.loading.dark {
+  .loading__dotTyping {
+    color: $light-gray-lighter;
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+    animation: dotTypingDark 1.5s infinite linear;
+  }
+}
+
+@keyframes dotTypingLight {
+  0% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px -10px 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px -10px 0 0 $dark-gray-darken;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 $dark-gray-darken, 9999px 0 0 0 $dark-gray-darken,
+      10014px 0 0 0 $dark-gray-darken;
+  }
+}
+
+@keyframes dotTypingDark {
+  0% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px -10px 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px -10px 0 0 $light-gray-lighter;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 $light-gray-lighter, 9999px 0 0 0 $light-gray-lighter,
+      10014px 0 0 0 $light-gray-lighter;
+  }
+}

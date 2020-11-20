@@ -77,6 +77,10 @@
       }
 
       .logReg__modalLoading {
+        @include div-center;
+      }
+
+      .logReg__modalLoading {
         grid-area: loading;
       }
 

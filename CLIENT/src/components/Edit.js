@@ -11,12 +11,14 @@ import {
 import FieldContainer from "./FieldContainer";
 import { useTranslation } from "react-i18next";
 import { GrClose } from "react-icons/gr";
+import Loading from "./Loading";
 
 const Edit = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
   const theme = useSelector((state) => state.theme.theme);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -77,6 +79,7 @@ const Edit = (props) => {
     // CASES
     // SIMULATOR
     if (props.type === "income-sim") {
+      setIsLoading(true);
       let selectedIncome = simIncomes.find((item) => item.id === props.id);
       selectedIncome.title = title;
       selectedIncome.description = description;
@@ -85,11 +88,13 @@ const Edit = (props) => {
 
       setTimeout(() => {
         toggleOpen();
+        setIsLoading(false);
         dispatch({
           type: TOGGLE_SIM_FLAG,
         });
       }, 50);
     } else if (props.type === "expense-sim") {
+      setIsLoading(true);
       let selectedExpense = simExpenses.find((item) => item.id === props.id);
       selectedExpense.title = title;
       selectedExpense.description = description;
@@ -98,12 +103,14 @@ const Edit = (props) => {
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
       setTimeout(() => {
         toggleOpen();
+        setIsLoading(false);
         dispatch({
           type: TOGGLE_SIM_FLAG,
         });
       }, 50);
       // USER - PERSONAL
     } else if (isAuthenticated) {
+      setIsLoading(true);
       if (props.type === "income") {
         fetch(
           `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/edit`,
@@ -122,6 +129,7 @@ const Edit = (props) => {
           });
         setTimeout(() => {
           toggleOpen();
+          setIsLoading(false);
           dispatch({
             type: TOGGLE_FLAG,
           });
@@ -143,6 +151,7 @@ const Edit = (props) => {
             console.log(data);
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_FLAG,
               });
@@ -165,6 +174,7 @@ const Edit = (props) => {
             console.log(data);
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_SAVINGS_FLAG,
               });
@@ -187,6 +197,7 @@ const Edit = (props) => {
             console.log(data);
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_SAVINGS_FLAG,
               });
@@ -244,7 +255,7 @@ const Edit = (props) => {
               : "edit__modal"
           }
         >
-          <div className="edit__modalLoading"></div>
+          <div className="edit__modalLoading">{isLoading ? <Loading /> : ""}</div>
           <div className="edit__modalClose">
             <button onClick={toggleOpen} className="edit__closeBtn">
               <GrClose />
@@ -324,6 +335,7 @@ const Edit = (props) => {
     language,
     props.done,
     theme,
+    isLoading,
   ]);
 
   return <div className="edit">{memoEdit}</div>;

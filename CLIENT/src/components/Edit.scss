@@ -40,6 +40,7 @@
 
     .edit__modalLoading {
       grid-area: loading;
+      @include div-center;
     }
 
     .edit__modalClose {

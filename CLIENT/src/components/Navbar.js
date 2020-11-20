@@ -13,7 +13,7 @@ const Navbar = () => {
         <Menu />
       </div>
       <div className="nav__title">
-        <Title />
+        <Title type="navbar" />
       </div>
       <div className="nav__logReg">
         <LogReg />

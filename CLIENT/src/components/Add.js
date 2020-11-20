@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FieldContainer from "./FieldContainer";
 import { useTranslation } from "react-i18next";
 import { GrClose } from "react-icons/gr";
+import Loading from "./Loading";
 
 const Add = (props) => {
   const dispatch = useDispatch();
@@ -22,8 +23,8 @@ const Add = (props) => {
 
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
-
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // INPUT STATE
   const [title, setTitle] = useState("");
@@ -91,6 +92,7 @@ const Add = (props) => {
     ) {
       simIncomes.push(incomeToAdd);
       localStorage.setItem("simIncomes", JSON.stringify(simIncomes));
+      setIsLoading(true);
       setTitle("");
       setDescription("");
       setAmount(null);
@@ -98,6 +100,7 @@ const Add = (props) => {
       setDeadline("");
       setTimeout(() => {
         toggleOpen();
+        setIsLoading(false);
         dispatch({
           type: TOGGLE_SIM_FLAG,
         });
@@ -108,12 +111,14 @@ const Add = (props) => {
     ) {
       simExpenses.push(expenseToAdd);
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
+      setIsLoading(true);
       setTitle("");
       setDescription("");
       setAmount(null);
       setPrice(null);
       setDeadline("");
       setTimeout(() => {
+        setIsLoading(false);
         toggleOpen();
         dispatch({
           type: TOGGLE_SIM_FLAG,
@@ -121,6 +126,7 @@ const Add = (props) => {
       }, 50);
       // USER - PERSONAL
     } else if (isAuthenticated) {
+      setIsLoading(true);
       if (props.type === "permanently-incomes" || props.type === "temporary-incomes") {
         fetch(`http://localhost:5000/api/budget/${userEmail}/monthly/incomes/add`, {
           method: "PATCH",
@@ -137,6 +143,7 @@ const Add = (props) => {
             setDescription("");
             setAmount(null);
             setTimeout(() => {
+              setIsLoading(false);
               toggleOpen();
               dispatch({
                 type: TOGGLE_FLAG,
@@ -164,6 +171,7 @@ const Add = (props) => {
             setDeadline("");
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_FLAG,
               });
@@ -186,6 +194,7 @@ const Add = (props) => {
             setAmount(null);
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_SAVINGS_FLAG,
               });
@@ -210,6 +219,7 @@ const Add = (props) => {
             setDeadline("");
             setTimeout(() => {
               toggleOpen();
+              setIsLoading(false);
               dispatch({
                 type: TOGGLE_SAVINGS_FLAG,
               });
@@ -265,7 +275,7 @@ const Add = (props) => {
               : "add__modal"
           }
         >
-          <div className="add__modalLoading"></div>
+          <div className="add__modalLoading">{isLoading ? <Loading /> : ""}</div>
           <div className="add__modalClose">
             <button onClick={toggleOpen} className="add__closeBtn">
               <GrClose />
@@ -346,6 +356,7 @@ const Add = (props) => {
     priceError,
     language,
     theme,
+    isLoading,
   ]);
 
   return <div className="add">{memoAdd}</div>;

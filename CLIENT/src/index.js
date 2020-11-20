@@ -5,17 +5,19 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
+import SuspenseLoading from "./components/SuspenseLoading";
 
 import "./i18next";
+const theme = localStorage.getItem("theme");
 
 ReactDOM.render(
-  <Suspense fallback={"loading ..."}>
-    <React.StrictMode>
-      <Provider store={store}>
+  <Provider store={store}>
+    <Suspense fallback={<SuspenseLoading type="index" />}>
+      <React.StrictMode>
         <App />
-      </Provider>
-    </React.StrictMode>
-  </Suspense>,
+      </React.StrictMode>
+    </Suspense>
+  </Provider>,
   document.getElementById("root")
 );
 

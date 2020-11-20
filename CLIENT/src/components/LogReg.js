@@ -4,6 +4,7 @@ import { USER_LOGIN, USER_LOGOUT } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { GrClose } from "react-icons/gr";
+import Loading from "./Loading";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -212,11 +213,7 @@ const Register = () => {
               <GrClose />
             </button>
             <div className="logReg__modalLoading">
-              {acceptedLoginProcessing ? (
-                <span className="logReg__loading">LOADING .... </span>
-              ) : (
-                ""
-              )}
+              {acceptedLoginProcessing ? <Loading /> : ""}
             </div>
             <div className="logReg__modalMain">
               <div
@@ -355,7 +352,9 @@ const Register = () => {
             <button onClick={toggleRegister} className="logReg__modalClose">
               <GrClose />
             </button>
-            <div className="logReg__modalLoading"></div>
+            <div className="logReg__modalLoading">
+              {acceptedRegisterProcessing ? <Loading /> : ""}
+            </div>
             <div className="logReg__modalMain">
               {/* Name */}
               <div

@@ -41,6 +41,7 @@
 
     .add__modalLoading {
       grid-area: loading;
+      @include div-center;
     }
 
     .add__modalClose {

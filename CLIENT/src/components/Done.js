@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./Done.scss";
 import { GoCheck } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
+import Loading from "./Loading";
 
 const Done = (props) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Done = (props) => {
   const token = useSelector((state) => state.user.token);
   const id = props.id;
   const theme = useSelector((state) => state.theme.theme);
+  const [isLoading, setIsLoading] = useState(false);
 
   // DONE REST API function
 
@@ -23,10 +25,12 @@ const Done = (props) => {
     // SIMULATOR
 
     if (props.type === "expense-sim") {
+      setIsLoading(true);
       let selectedExpense = simExpenses.find((item) => item.id === props.id);
       selectedExpense.done = true;
       localStorage.setItem("simExpenses", JSON.stringify(simExpenses));
       setTimeout(() => {
+        setIsLoading(false);
         dispatch({
           type: TOGGLE_SIM_FLAG,
         });
@@ -34,6 +38,7 @@ const Done = (props) => {
     }
     // USER - PERSONAL
     else if (isAuthenticated) {
+      setIsLoading(true);
       fetch(
         props.type === "expense"
           ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/done`
@@ -68,16 +73,20 @@ const Done = (props) => {
   const memoDone = useMemo(() => {
     return (
       <>
-        <button
-          onClick={handleDoneData}
-          disabled={isOpenModal ? true : ""}
-          className={theme === "dark" ? "done__btn dark" : "done__btn"}
-        >
-          <GoCheck />
-        </button>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <button
+            onClick={handleDoneData}
+            disabled={isOpenModal ? true : ""}
+            className={theme === "dark" ? "done__btn dark" : "done__btn"}
+          >
+            <GoCheck />
+          </button>
+        )}
       </>
     );
-  }, [isOpenModal, props.done, theme]);
+  }, [isOpenModal, props.done, theme, isLoading]);
 
   return <div className="done">{memoDone}</div>;
 };

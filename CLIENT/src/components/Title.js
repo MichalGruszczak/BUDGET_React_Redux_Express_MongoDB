@@ -3,7 +3,7 @@ import "./Title.scss";
 import { FaCommentDollar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const Title = () => {
+const Title = (props) => {
   const theme = useSelector((state) => state.theme.theme);
 
   return (
