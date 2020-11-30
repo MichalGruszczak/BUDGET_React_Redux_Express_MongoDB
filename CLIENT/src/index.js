@@ -8,7 +8,6 @@ import store from "./store";
 import SuspenseLoading from "./components/SuspenseLoading";
 
 import "./i18next";
-const theme = localStorage.getItem("theme");
 
 ReactDOM.render(
   <Provider store={store}>

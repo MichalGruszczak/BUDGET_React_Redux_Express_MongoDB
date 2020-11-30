@@ -1,0 +1,47 @@
+@import "../variables.scss";
+
+.click {
+  background-color: black;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  animation: clickMove 20s infinite linear;
+}
+
+.click.dark {
+  background-color: $light-gray-lighter;
+}
+
+@keyframes clickMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  97% {
+    transform: translateX(0);
+  }
+
+  97.5% {
+    transform: translateX(-2px);
+  }
+
+  98% {
+    transform: translateX(2px);
+  }
+
+  98.5% {
+    transform: translateX(-1px);
+  }
+
+  99% {
+    transform: translateX(1px);
+  }
+
+  99.5% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}

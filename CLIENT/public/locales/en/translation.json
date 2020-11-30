@@ -5,7 +5,7 @@
          "ConfirmError": "Passwords are not the same!",
          "ModalTitle": "Title",
          "ModalDescription": "Description",
-         "ModalPrice": "Price",
+         "ModalPrice": "Target",
          "ModalCollected": "Collected",
          "ModalAmount": "Amount",
          "ModalDeadline": "Deadline",

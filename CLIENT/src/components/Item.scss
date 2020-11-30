@@ -18,6 +18,7 @@
     position: relative;
     @include div-center;
     cursor: pointer;
+    padding-left: 30px;
 
     .item__titleWithoutDescr {
       grid-area: text;
@@ -42,8 +43,8 @@
 
     .item__click {
       position: absolute;
-      bottom: 5px;
-      left: 5px;
+      bottom: 10px;
+      left: 10px;
       font-size: 18px;
       @include div-center;
     }
@@ -57,7 +58,7 @@
       transform: scale(1);
 
       .item__descriptionIcon.active {
-        transform: scale(1.3);
+        color: yellow;
         transition: 0.2s linear;
       }
     }
@@ -69,6 +70,7 @@
     border-radius: 5px;
     font-weight: bold;
     @include div-center;
+    word-wrap: break-word;
   }
 
   .item__amount.dark {
@@ -81,10 +83,62 @@
     grid-area: values;
     display: flex;
 
+    .item__goalInfo {
+      position: fixed;
+      overflow: hidden;
+      top: 50vh;
+      left: 50vw;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      height: 0;
+      transition: 0.2s linear;
+      @include light-gray-bgc;
+      z-index: 7;
+      display: flex;
+
+      .item__goalClose {
+        position: absolute;
+        top: 0;
+        right: 0;
+        @include close-btn;
+        width: 30px;
+        height: 30px;
+      }
+
+      .item__goalPrice,
+      .item__goalAmount,
+      .item__goalAmountResult {
+        flex-basis: 33.33333%;
+        margin-top: 35px;
+      }
+    }
+
+    .item__goalInfo.active {
+      height: 100px;
+      box-shadow: 0 0 5px 1px $light-gray-darken, 0 0 40px 20px black;
+    }
+
     .item__goalPrice {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+    }
+
+    .item__goalPrice.btn {
+      position: relative;
+      flex-grow: 1;
+      background-color: transparent;
+      border: none;
+      @include div-center;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+
+      .item__goalBtnClick {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
     }
 
     .item__goalAmount {
@@ -125,14 +179,14 @@
 
       .item__clickSign {
         position: absolute;
-        top: 2px;
-        right: 0;
+        top: 4px;
+        right: 2px;
         font-size: 18px;
       }
     }
 
     .item__deadlineContainer.active {
-      animation: rotateTitleDivDeadline 0.3s 1 linear both;
+      animation: rotateTitleDiv 0.3s 1 linear both;
     }
 
     .item__deadlineText.active {
@@ -185,7 +239,7 @@
   box-shadow: 0 0 5px 0px $light-gray-darken;
 
   .item__deadlineContainer.active {
-    animation: rotateTitleDivDeadlineDark 0.3s 1 linear both;
+    animation: rotateTitleDiv 0.3s 1 linear both;
   }
 }
 
@@ -202,6 +256,21 @@
 .item.goal.dark {
   .item__goalTitle {
     color: $light-gray-lighter;
+  }
+
+  .item__goalInfo.active {
+    box-shadow: 0 0 5px 1px black, 0 0 40px 20px $light-gray-mid;
+  }
+
+  .item__goalPrice.btn {
+    color: $light-gray-lighter;
+  }
+
+  // INFO MODAL - SAVINGS GOALS
+  .item__goalInfo {
+    @include dark-gray-bgc;
+    color: $light-gray-lighter;
+    display: flex;
   }
 }
 
@@ -225,7 +294,7 @@
   }
 
   .item__titleText.active {
-    animation-name: rotateTitleDivFinished;
+    animation-name: rotateTitleDiv;
   }
 }
 
@@ -261,7 +330,7 @@
   }
 
   .item__titleText.active {
-    animation-name: rotateTitleDivFinished;
+    animation-name: rotateTitleDiv;
   }
 }
 
@@ -270,48 +339,111 @@
   background-color: $red-expired-dark;
 
   .item__deadlineContainer.active {
-    animation: rotateTitleDivDeadline 0.3s 1 linear both;
+    animation: rotateTitleDiv 0.3s 1 linear both;
+  }
+}
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
+@media (max-width: 749.98px) {
+  .item.goal {
+    grid-template-columns: 45% 15% 10% 30%;
+    grid-template-areas: "title values deadline options";
+  }
+}
+
+@media (max-width: 599.98px) {
+  .item {
+    width: 99%;
+    .item.income {
+      grid-template-columns: 50% 15% 5% 30%;
+      grid-template-areas: "title amount empty options";
+    }
+  }
+}
+
+@media (max-width: 539.98px) {
+  .item.income {
+    grid-template-columns: 50% 18% 2% 30%;
+    grid-template-areas: "title amount empty options";
+  }
+  .item.goal {
+    grid-template-columns: 50% 20% 30%;
+    grid-template-areas: "title values options";
+    .item__goalInfo {
+      width: 90%;
+      .item__goalPrice,
+      .item__goalAmount,
+      .item__goalAmountResult,
+      .item__deadline {
+        flex-basis: 25%;
+        margin-top: 35px;
+      }
+    }
+  }
+  .item {
+    grid-template-columns: 50% 20% 20% 10%;
+    grid-template-areas: "title amount deadline options";
+  }
+
+  // .monthly .item.income,
+  // .simulator .item.income
+  .monthly .item,
+  .simulator .item {
+    grid-template-columns: 50% 15% 15% 20%;
+    grid-template-areas: "title amount deadline options";
+
+    // SLOT 1
+    .item__done,
+    .item__empty {
+      flex-basis: 0;
+    }
+
+    // SLOT 2,3
+    .item__edit,
+    .item__delete {
+      flex-basis: 50%;
+    }
+
+    // .item__options {
+    //   justify-content: space-around;
+
+    //   .item__empty {
+    //     flex-basis: 0;
+    //   }
+
+    //   .item__edit {
+    //     flex-basis: 50%;
+    //   }
+
+    //   .options {
+    //     flex-basis: 50%;
+    //   }
+
+    //   .delete {
+    //     flex-basis: 50%;
+    //   }
+
+    //   .item__delete {
+    //     flex-basis: 50%;
+    //   }
+    // }
+  }
+}
+
+@media (max-width: 419.98px) {
+  .item.goal {
+    grid-template-columns: 50% 20% 30%;
+    grid-template-areas: "title values options";
   }
 }
 
 @keyframes rotateTitleDiv {
   0% {
     transform: rotateX(0deg);
-    background-color: $light-gray-darken;
-  }
-
-  50% {
-    background-color: $light-gray-darken;
-  }
-
-  100% {
-    transform: rotateX(180deg);
-  }
-}
-
-@keyframes rotateTitleDivDeadline {
-  0% {
-    transform: rotateX(0deg);
-    background-color: $light-gray-lighter;
-  }
-
-  50% {
-    background-color: $light-gray-lighter;
-  }
-
-  100% {
-    transform: rotateX(360deg);
-  }
-}
-
-@keyframes rotateTitleDivDeadlineDark {
-  0% {
-    transform: rotateX(0deg);
-    background-color: $light-gray-darken;
-  }
-
-  50% {
-    background-color: $light-gray-darken;
   }
 
   100% {
@@ -334,21 +466,6 @@
 
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes rotateTitleDivFinished {
-  0% {
-    transform: rotateX(0deg);
-    background-color: $light-gray-lighter;
-  }
-
-  50% {
-    background-color: $light-gray-lighter;
-  }
-
-  100% {
-    transform: rotateX(180deg);
   }
 }
 

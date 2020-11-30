@@ -23,7 +23,7 @@ const SuspenseLoading = (props) => {
           <Loading />
         </div>
         <div className="suspense__item title">
-          <Title type="suspense" />
+          <Title />
         </div>
       </div>
     </div>

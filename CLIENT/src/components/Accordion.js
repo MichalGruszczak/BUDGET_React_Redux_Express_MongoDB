@@ -5,7 +5,7 @@ import Add from "./Add";
 import { useSelector } from "react-redux";
 
 const Accordion = (props) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const theme = useSelector((state) => state.theme.theme);
 
   const toggleAccordion = () => {
@@ -28,7 +28,7 @@ const Accordion = (props) => {
           }
         >
           <div onClick={toggleAccordion} className="accordion__title">
-            <span>{props.title}</span>
+            <span className="accordion__titleText">{props.title}</span>
           </div>
           <div onClick={toggleAccordion} className="accordion__amount">
             <span>{props.amount}</span>

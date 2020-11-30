@@ -85,3 +85,46 @@
     box-shadow: 0 0 5px 1px black, 0 0 50px 30px $light-gray-mid;
   }
 }
+
+@media (max-height: 629.98px) {
+  .edit {
+    .edit__modal.active {
+      height: 80vh;
+    }
+  }
+}
+
+@media (max-height: 539.98px) {
+  .edit {
+    .edit__modal.active {
+      height: 90vh;
+      z-index: 50;
+    }
+  }
+}
+
+@media (max-height: 479.98px) {
+  .edit {
+    .edit__modal.active {
+      height: 95vh;
+    }
+  }
+}
+
+@media (max-height: 449.98px) {
+  .edit {
+    .edit__modal.active {
+      width: 600px;
+      .edit__modalMain {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          ". ."
+          ". ."
+          ". .";
+      }
+    }
+  }
+}

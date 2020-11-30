@@ -17,25 +17,20 @@
     border: none;
 
     .language__btnFlag {
-      width: 85px;
+      width: 100%;
       height: 100%;
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
       background-color: transparent;
-      box-shadow: 0 0 2px 1px $dark-gray-darken inset, 0 0 3px 0 $dark-gray-darken;
+      background-color: $light-gray-darken;
+      box-shadow: 0 0 2px 1px $light-gray-darken inset, 0 0 3px 0 $light-gray-darken;
+      border: 2px solid $light-gray-darken;
+      box-sizing: border-box;
       transition: 0.1s linear;
 
       &:hover {
-        box-shadow: 0 0 2px 1px $dark-gray-darken inset, 0 0 3px 1px $dark-gray-darken;
-      }
-    }
-
-    .language__btnFlag.dark {
-      box-shadow: 0 0 2px 1px $light-gray-lighter inset, 0 0 3px 0 $light-gray-lighter;
-
-      &:hover {
-        box-shadow: 0 0 2px 1px $light-gray-lighter inset, 0 0 3px 1px $light-gray-lighter;
+        box-shadow: 0 0 2px 1px $light-gray-darken inset, 0 0 3px 1px $light-gray-darken;
       }
     }
 
@@ -61,5 +56,20 @@
   .language__opt2 {
     @include div-center;
     grid-area: opt2;
+  }
+}
+
+@media (max-width: 539.98px) {
+  .language {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr;
+    grid-template-areas:
+      "title title"
+      "opt1 opt2";
+
+    .language__btn {
+      width: 50%;
+      height: 70%;
+    }
   }
 }

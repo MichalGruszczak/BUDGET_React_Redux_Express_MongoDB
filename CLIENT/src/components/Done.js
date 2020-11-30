@@ -2,7 +2,12 @@ import React, { useMemo, useState } from "react";
 import "./Done.scss";
 import { GoCheck } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
-import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
+import {
+  TOGGLE_FLAG,
+  TOGGLE_SAVINGS_FLAG,
+  TOGGLE_SIM_FLAG,
+  TOGGLE_MODAL,
+} from "../actionTypes";
 import Loading from "./Loading";
 
 const Done = (props) => {
@@ -66,6 +71,11 @@ const Done = (props) => {
   // MAIN FUNCTION TO MARK AS DONE
   const handleDoneData = () => {
     doneAPI();
+    if (props.inModal) {
+      dispatch({
+        type: TOGGLE_MODAL,
+      });
+    } else return;
   };
 
   // MEMOIZED DONE COMPONENT
@@ -78,7 +88,7 @@ const Done = (props) => {
         ) : (
           <button
             onClick={handleDoneData}
-            disabled={isOpenModal ? true : ""}
+            disabled={isOpenModal && !props.inModal ? true : ""}
             className={theme === "dark" ? "done__btn dark" : "done__btn"}
           >
             <GoCheck />

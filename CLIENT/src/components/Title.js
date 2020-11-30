@@ -3,7 +3,7 @@ import "./Title.scss";
 import { FaCommentDollar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const Title = (props) => {
+const Title = () => {
   const theme = useSelector((state) => state.theme.theme);
 
   return (
@@ -17,7 +17,8 @@ const Title = (props) => {
         ></div>
       </div>
       <div className="title__text">
-        Budget by <span className="title__mg">M.G.</span>
+        <span className="title__budget">{"Budget "}</span>
+        <span className="title__by">{"by "}</span> <span className="title__mg">M.G.</span>
       </div>
     </div>
   );

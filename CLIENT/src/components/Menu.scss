@@ -113,3 +113,19 @@
     transform: scale(1);
   }
 }
+
+@media (max-width: 589.98px) {
+  .menu {
+    justify-content: flex-start;
+
+    .menu__btn {
+      margin-left: 5px;
+      width: 156px;
+    }
+
+    .menu__btn.dark {
+      margin-left: 5px;
+      width: 156px;
+    }
+  }
+}

@@ -2,7 +2,12 @@ import React, { useMemo, useState } from "react";
 import "./Delete.scss";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { TOGGLE_FLAG, TOGGLE_SAVINGS_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
+import {
+  TOGGLE_FLAG,
+  TOGGLE_SAVINGS_FLAG,
+  TOGGLE_SIM_FLAG,
+  TOGGLE_MODAL,
+} from "../actionTypes";
 import Loading from "./Loading";
 
 const Delete = (props) => {
@@ -87,6 +92,11 @@ const Delete = (props) => {
   // MAIN FUNCTION TO DELETE ITEMS
   const handleDelete = () => {
     deleteAPI();
+    if (props.inModal) {
+      dispatch({
+        type: TOGGLE_MODAL,
+      });
+    } else return;
   };
 
   // MEMOIZED DELETE COMPONENT
@@ -97,7 +107,7 @@ const Delete = (props) => {
           <Loading />
         ) : (
           <button
-            disabled={isOpenModal ? true : ""}
+            disabled={isOpenModal && !props.inModal ? true : ""}
             onClick={handleDelete}
             className={theme === "dark" ? "delete__btn dark" : "delete__btn"}
           >

@@ -32,7 +32,8 @@
     .logReg__loginModal {
       position: absolute;
       top: 100%;
-      left: 0%;
+      // left: 0%;
+      right: 0;
       width: 100%;
       height: 40vh;
       transform-origin: 0 0;
@@ -197,6 +198,104 @@
 
     .logReg__errorContainer {
       color: $red-btn;
+    }
+  }
+}
+
+@media (max-width: 589.98px) {
+  .logReg {
+    .logReg__login,
+    .logReg__register {
+      .logReg__btn {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: 549.98px) {
+  .logReg {
+    .logReg__login {
+      .logReg__loginModal {
+        width: 130%;
+      }
+    }
+    .logReg__register {
+      .logReg__registerModal {
+        width: 130%;
+      }
+    }
+  }
+}
+
+@media (max-width: 449.98px) {
+  .logReg {
+    .logReg__login,
+    .logReg__register {
+      @include div-center;
+      .logReg__btn {
+        width: 70px;
+        font-size: 23px;
+        @include div-center;
+      }
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .logReg {
+    .logReg__login {
+      .logReg__loginModal {
+        width: 170%;
+      }
+    }
+    .logReg__register {
+      .logReg__registerModal {
+        width: 170%;
+      }
+    }
+  }
+}
+
+@media (max-height: 669.98px) {
+  .logReg {
+    .logReg__login {
+      .logReg__loginModal {
+        height: 60vh;
+      }
+    }
+    .logReg__register {
+      .logReg__registerModal {
+        height: 80vh;
+      }
+    }
+  }
+}
+
+@media (max-height: 539.98px) {
+  .logReg {
+    .logReg__register {
+      .logReg__registerModal {
+        height: 75vh;
+        width: 130%;
+        .logReg__modalMain {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          grid-template-areas:
+            ". ."
+            ". .";
+        }
+      }
+    }
+  }
+}
+@media (max-height: 459.98px) {
+  .logReg {
+    .logReg__login {
+      .logReg__loginModal {
+        height: 75vh;
+      }
     }
   }
 }

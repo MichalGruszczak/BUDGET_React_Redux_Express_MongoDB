@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./Renew.scss";
 import { FiRefreshCcw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { TOGGLE_FLAG, TOGGLE_SIM_FLAG } from "../actionTypes";
+import { TOGGLE_FLAG, TOGGLE_SIM_FLAG, TOGGLE_MODAL } from "../actionTypes";
 import Loading from "./Loading";
 
 const Renew = (props) => {
@@ -81,6 +81,11 @@ const Renew = (props) => {
   // MAIN FUNCTION TO RENEW ITEM
   const handleRenewItem = () => {
     renewAPI();
+    if (props.inModal) {
+      dispatch({
+        type: TOGGLE_MODAL,
+      });
+    } else return;
   };
 
   // MEMOIZED RENEW COMPONENT
@@ -92,7 +97,7 @@ const Renew = (props) => {
         ) : (
           <button
             onClick={handleRenewItem}
-            disabled={isOpenModal ? true : ""}
+            disabled={isOpenModal && !props.inModal ? true : ""}
             className={theme === "dark" ? "renew__btn dark" : "renew__btn"}
           >
             <FiRefreshCcw />

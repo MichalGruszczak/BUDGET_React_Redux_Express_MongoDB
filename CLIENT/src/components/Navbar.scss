@@ -9,7 +9,7 @@
   background-color: rgba(205, 205, 205, 0.8);
   backdrop-filter: blur(50px);
   display: grid;
-  grid-template-columns: 20% 1fr 40%;
+  grid-template-columns: 0.5fr 0.5fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "menu" "title" "logReg";
   z-index: 1;
@@ -28,4 +28,11 @@
 .nav.dark {
   background-color: rgba(41, 41, 41, 0.8);
   box-shadow: 0 0 2px 1px rgba(41, 41, 41, 0.8);
+}
+
+@media (max-width: 749.98px) {
+  .nav {
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-areas: "menu" "logReg";
+  }
 }

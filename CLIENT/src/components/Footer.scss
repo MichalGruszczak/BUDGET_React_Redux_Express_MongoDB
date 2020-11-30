@@ -76,6 +76,129 @@
   position: fixed;
   bottom: 0;
   @include div-center;
+  display: flex;
+
+  .footer__infoName,
+  .footer__infoPhone,
+  .footer__infoEmail {
+    flex-basis: 33.333333333%;
+    @include div-center;
+  }
+
+  .footer__infoName {
+    justify-content: flex-start;
+    margin-left: 20px;
+  }
+  .footer__infoEmail {
+    justify-content: flex-end;
+    margin-right: 20px;
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
+@media (max-width: 749.98px) {
+  .footer {
+    grid-template-columns: 1fr 70px 30px 1fr 70px 30px 1fr 70px 30px;
+  }
+
+  .footer__info {
+    margin-top: 120px;
+    height: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "title name"
+      "title mail"
+      "title phone";
+
+    .footer__infoName,
+    .footer__infoEmail,
+    .footer__infoPhone {
+      justify-content: flex-start;
+      margin-left: 20px;
+    }
+
+    .footer__infoTitle {
+      grid-area: title;
+      @include div-center;
+    }
+
+    .footer__infoName {
+      grid-area: name;
+    }
+
+    .footer__infoEmail {
+      grid-area: mail;
+    }
+
+    .footer__infoPhone {
+      grid-area: phone;
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .footer {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "incValue expValue resValue";
+
+    .footer__incValue {
+      color: $green-darken;
+    }
+
+    .footer__expValue {
+      color: $red-darken;
+    }
+
+    .footer__resValue {
+      border: 2px solid $light-gray-darken;
+      border-radius: 5px;
+      margin: 1px;
+    }
+  }
+  .footer.dark {
+    .footer__incValue {
+      color: $green-lighter;
+    }
+
+    .footer__expValue {
+      color: $red-lighter;
+    }
+
+    .footer__resValue {
+      color: $green-lighter;
+      border: 2px solid $light-gray-lighter;
+    }
+
+    .footer__resValue.red {
+      color: $red-lighter;
+    }
+  }
+}
+
+@media (max-width: 499.98px) {
+  .footer__info {
+    height: 100px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.5fr 0.5fr 0.5fr;
+    grid-template-areas:
+      "title"
+      "name"
+      "mail"
+      "phone";
+
+    .footer__infoName,
+    .footer__infoEmail,
+    .footer__infoPhone {
+      @include div-center;
+    }
+  }
 }
 
 .footer.dark {
@@ -104,4 +227,9 @@
   background-color: rgba(41, 41, 41, 0.8);
   box-shadow: 0 0 2px 0px rgba(41, 41, 41, 0.8);
   color: $light-gray-lighter;
+  .footer__infoEmail {
+    a {
+      color: $light-gray-lighter;
+    }
+  }
 }

@@ -1,15 +1,26 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./LogReg.scss";
 import { USER_LOGIN, USER_LOGOUT } from "../actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { GrClose } from "react-icons/gr";
+import { FiLogIn } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
+import { FiUserPlus } from "react-icons/fi";
 import Loading from "./Loading";
 
 const Register = () => {
   const { t } = useTranslation();
   const language = localStorage.getItem("i18nextLng");
   const theme = useSelector((state) => state.theme.theme);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+  }, [width]);
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -184,7 +195,7 @@ const Register = () => {
             onClick={toggleLogin}
             className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
           >
-            {t("LogReg.NavLogin")}
+            {width < 449.98 ? <FiLogIn /> : t("LogReg.NavLogin")}
           </button>
         )}
         <div
@@ -305,6 +316,7 @@ const Register = () => {
     isAuthenticated,
     language,
     theme,
+    width,
   ]);
 
   // REGISTER
@@ -316,14 +328,14 @@ const Register = () => {
             onClick={logout}
             className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
           >
-            {t("LogReg.Logout")}
+            {width < 449.98 ? <FiLogOut /> : t("LogReg.Logout")}
           </button>
         ) : (
           <button
             onClick={toggleRegister}
             className={theme === "dark" ? "logReg__btn dark" : "logReg__btn"}
           >
-            {t("LogReg.NavRegister")}
+            {width < 449.98 ? <FiUserPlus /> : t("LogReg.NavRegister")}
           </button>
         )}
         <div
@@ -498,6 +510,7 @@ const Register = () => {
     isAuthenticated,
     language,
     theme,
+    width,
   ]);
 
   return (

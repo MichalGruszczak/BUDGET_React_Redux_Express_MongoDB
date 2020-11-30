@@ -11,7 +11,7 @@
 
   .settings__container {
     width: 80%;
-    height: 20%;
+    height: 120px;
     margin: 0 auto;
     margin-top: 30px;
     border: 2px solid black;
@@ -21,5 +21,21 @@
   .settings__container.dark {
     border: 2px solid $light-gray-lighter;
     color: $light-gray-lighter;
+  }
+}
+
+@media (max-height: 449.98px) {
+  .settings {
+    .settings__container {
+      height: 100px;
+    }
+  }
+}
+
+@media (max-height: 399.98px) {
+  .settings {
+    .settings__container {
+      height: 80px;
+    }
   }
 }

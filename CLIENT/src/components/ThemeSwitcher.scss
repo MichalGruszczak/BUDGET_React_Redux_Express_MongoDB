@@ -64,3 +64,18 @@
     grid-area: opt2;
   }
 }
+
+@media (max-width: 539.98px) {
+  .theme {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr;
+    grid-template-areas:
+      "title title"
+      "opt1 opt2";
+
+    .theme__btn {
+      width: 50%;
+      height: 70%;
+    }
+  }
+}

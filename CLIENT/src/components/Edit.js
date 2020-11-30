@@ -44,6 +44,7 @@ const Edit = (props) => {
   // OPEN / CLOSE MODAL
   const toggleOpen = () => {
     setIsOpen(!isOpen);
+
     dispatch({
       type: TOGGLE_MODAL,
     });
@@ -230,7 +231,7 @@ const Edit = (props) => {
     return (
       <>
         <button
-          disabled={(isOpenModal && !isOpen) || props.done === true ? true : ""}
+          disabled={isOpenModal && !isOpen ? true : ""}
           onClick={toggleOpen}
           className={
             theme === "dark"
