@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "./Item.scss";
 import { MdDescription } from "react-icons/md";
-import { HiCursorClick } from "react-icons/hi";
 import Click from "./Click";
 import Edit from "./Edit";
 import Delete from "./Delete";

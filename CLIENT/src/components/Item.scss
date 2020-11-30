@@ -343,11 +343,6 @@
   }
 }
 
-////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-
 @media (max-width: 749.98px) {
   .item.goal {
     grid-template-columns: 45% 15% 10% 30%;
@@ -389,8 +384,6 @@
     grid-template-areas: "title amount deadline options";
   }
 
-  // .monthly .item.income,
-  // .simulator .item.income
   .monthly .item,
   .simulator .item {
     grid-template-columns: 50% 15% 15% 20%;
@@ -407,30 +400,6 @@
     .item__delete {
       flex-basis: 50%;
     }
-
-    // .item__options {
-    //   justify-content: space-around;
-
-    //   .item__empty {
-    //     flex-basis: 0;
-    //   }
-
-    //   .item__edit {
-    //     flex-basis: 50%;
-    //   }
-
-    //   .options {
-    //     flex-basis: 50%;
-    //   }
-
-    //   .delete {
-    //     flex-basis: 50%;
-    //   }
-
-    //   .item__delete {
-    //     flex-basis: 50%;
-    //   }
-    // }
   }
 }
 
