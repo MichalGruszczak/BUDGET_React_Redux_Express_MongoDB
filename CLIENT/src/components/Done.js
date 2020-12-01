@@ -46,9 +46,9 @@ const Done = (props) => {
       setIsLoading(true);
       fetch(
         props.type === "expense"
-          ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/done`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/expenses/${id}/done`
           : props.type === "savings_goal"
-          ? `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/done`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/expenses/${id}/done`
           : "",
         {
           method: "PATCH",

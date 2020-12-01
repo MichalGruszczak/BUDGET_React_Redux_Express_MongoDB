@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -23,6 +24,14 @@ app.use(function (req, res, next) {
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/budget", require("./routes/items"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("CLIENT/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "CLIENT", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000;
 

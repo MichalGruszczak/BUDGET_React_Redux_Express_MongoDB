@@ -60,13 +60,13 @@ const Delete = (props) => {
       setIsLoading(true);
       fetch(
         props.type === "income"
-          ? `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/delete`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/incomes/${id}/delete`
           : props.type === "expense"
-          ? `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/delete`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/expenses/${id}/delete`
           : props.type === "savings_income"
-          ? `http://localhost:5000/api/budget/${userEmail}/savings/incomes/${id}/delete`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/incomes/${id}/delete`
           : props.type === "savings_goal"
-          ? `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/delete`
+          ? `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/expenses/${id}/delete`
           : "",
         {
           method: "PATCH",

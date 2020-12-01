@@ -78,7 +78,7 @@ const Register = () => {
       password: loginPassword,
     };
 
-    fetch("http://localhost:5000/api/users/login", {
+    fetch("https://budgetmg.herokuapp.com/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const Register = () => {
       password: registerPassword,
     };
 
-    fetch("http://localhost:5000/api/users/register", {
+    fetch("https://budgetmg.herokuapp.com/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

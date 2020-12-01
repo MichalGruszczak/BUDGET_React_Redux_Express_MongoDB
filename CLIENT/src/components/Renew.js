@@ -58,7 +58,7 @@ const Renew = (props) => {
     else if (isAuthenticated) {
       setIsLoading(true);
       fetch(
-        `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/renew`,
+        `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/expenses/${id}/renew`,
         {
           method: "PATCH",
           headers: {

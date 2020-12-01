@@ -63,7 +63,7 @@ const Monthly = () => {
   // GET USER BUDGET DATA
   const getItems = () => {
     if (isAuthenticated) {
-      fetch(`http://localhost:5000/api/budget/${userEmail}`, {
+      fetch(`https://budgetmg.herokuapp.com/api/budget/${userEmail}`, {
         method: "GET",
         headers: {
           "x-auth-token": `${userToken}`,

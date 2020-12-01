@@ -128,14 +128,17 @@ const Add = (props) => {
     } else if (isAuthenticated) {
       setIsLoading(true);
       if (props.type === "permanently-incomes" || props.type === "temporary-incomes") {
-        fetch(`http://localhost:5000/api/budget/${userEmail}/monthly/incomes/add`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          body: JSON.stringify(incomeToAdd),
-        })
+        fetch(
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/incomes/add`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(incomeToAdd),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -154,14 +157,17 @@ const Add = (props) => {
         props.type === "permanently-expenses" ||
         props.type === "temporary-expenses"
       ) {
-        fetch(`http://localhost:5000/api/budget/${userEmail}/monthly/expenses/add`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          body: JSON.stringify(expenseToAdd),
-        })
+        fetch(
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/expenses/add`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(expenseToAdd),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -178,14 +184,17 @@ const Add = (props) => {
             }, 50);
           });
       } else if (props.type === "savings-incomes") {
-        fetch(`http://localhost:5000/api/budget/${userEmail}/savings/incomes/add`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          body: JSON.stringify(incomeToAdd),
-        })
+        fetch(
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/incomes/add`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(incomeToAdd),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -201,14 +210,17 @@ const Add = (props) => {
             }, 50);
           });
       } else if (props.type === "savings-goals") {
-        fetch(`http://localhost:5000/api/budget/${userEmail}/savings/expenses/add`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          body: JSON.stringify(expenseToAdd),
-        })
+        fetch(
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/expenses/add`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": `${token}`,
+            },
+            body: JSON.stringify(expenseToAdd),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

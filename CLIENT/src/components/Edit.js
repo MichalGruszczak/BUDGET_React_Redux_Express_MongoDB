@@ -114,7 +114,7 @@ const Edit = (props) => {
       setIsLoading(true);
       if (props.type === "income") {
         fetch(
-          `http://localhost:5000/api/budget/${userEmail}/monthly/incomes/${id}/edit`,
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/incomes/${id}/edit`,
           {
             method: "PATCH",
             headers: {
@@ -137,7 +137,7 @@ const Edit = (props) => {
         }, 50);
       } else if (props.type === "expense") {
         fetch(
-          `http://localhost:5000/api/budget/${userEmail}/monthly/expenses/${id}/edit`,
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/monthly/expenses/${id}/edit`,
           {
             method: "PATCH",
             headers: {
@@ -160,7 +160,7 @@ const Edit = (props) => {
           });
       } else if (props.type === "savings_income") {
         fetch(
-          `http://localhost:5000/api/budget/${userEmail}/savings/incomes/${id}/edit`,
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/incomes/${id}/edit`,
           {
             method: "PATCH",
             headers: {
@@ -183,7 +183,7 @@ const Edit = (props) => {
           });
       } else if (props.type === "savings_goal") {
         fetch(
-          `http://localhost:5000/api/budget/${userEmail}/savings/expenses/${id}/edit`,
+          `https://budgetmg.herokuapp.com/api/budget/${userEmail}/savings/expenses/${id}/edit`,
           {
             method: "PATCH",
             headers: {
